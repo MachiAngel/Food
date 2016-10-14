@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="TzE-Rb-hUy">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--Delegate-->
         <scene sceneID="eTw-r8-COR">
             <objects>
                 <viewController id="TzE-Rb-hUy" customClass="LoginViewController" sceneMemberID="viewController">
@@ -31,6 +31,9 @@
                                 <state key="normal" title="Create">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="createAccBtn:" destination="TzE-Rb-hUy" eventType="touchUpInside" id="WLt-0y-41V"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="92B-X5-evo">
                                 <frame key="frameInset" minX="81" minY="163" width="200" height="30"/>
@@ -38,11 +41,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6VH-L9-7Sg">
-                                <frame key="frameInset" minX="153" minY="318" width="68" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="FaceBook"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ud4-ks-hku">
                                 <frame key="frameInset" minX="81" minY="239" width="80" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -50,14 +48,32 @@
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="emailLoginBtn:" destination="TzE-Rb-hUy" eventType="touchUpInside" id="USy-7i-pBE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6VH-L9-7Sg" customClass="FBSDKLoginButton">
+                                <state key="normal" title="FaceBook"/>
+                                <connections>
+                                    <outlet property="delegate" destination="TzE-Rb-hUy" id="LZb-Q9-nTu"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lut-cG-kin" firstAttribute="top" secondItem="6VH-L9-7Sg" secondAttribute="bottom" constant="20" id="0yK-zr-atr"/>
+                            <constraint firstItem="6VH-L9-7Sg" firstAttribute="centerX" secondItem="hUA-KJ-OeW" secondAttribute="centerX" id="EVY-wy-3gz"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="FbLoginView" destination="6VH-L9-7Sg" id="jVR-zt-jIh"/>
+                        <outlet property="emailTextField" destination="92B-X5-evo" id="8ry-Fm-Z7l"/>
+                        <outlet property="passwordTextField" destination="DbY-dd-JqX" id="hiQ-vc-0aH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Chh-rm-rqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-276" y="-209"/>
+            <point key="canvasLocation" x="-188" y="-215"/>
         </scene>
         <!--Restaurants Table View Controller-->
         <scene sceneID="KEk-tI-kfa">
@@ -199,6 +215,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="D1m-z1-uXh" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="12s-zw-aTz">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
