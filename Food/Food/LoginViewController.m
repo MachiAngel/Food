@@ -32,6 +32,33 @@
     
 }
 
+
+-(void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+    
+    if ([FBSDKAccessToken currentAccessToken].tokenString) {
+        
+        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+        
+        [self presentViewController:tabVC animated:true completion:nil];
+    }
+    
+    
+//    if ([_helper uidOfCurrentUser]) {
+//        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+//        
+//        [self presentViewController:tabVC animated:true completion:nil];
+//        
+//    }
+    
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

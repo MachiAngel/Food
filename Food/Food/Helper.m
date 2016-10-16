@@ -31,38 +31,7 @@ static Helper * _helper;
 
 #pragma mark - Login to Firebase
 
-//-(void)loginAnonymously:(UIViewController*)view{
-//    
-//    NSLog(@"按了登入");
-//    
-//    [[FIRAuth auth] signInAnonymouslyWithCompletion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
-//        
-//        if (error) {
-//            NSLog(@"%@",error.localizedDescription);
-//            return ;
-//        }else{
-//           
-//           
-//            NSString * currentUserUid = [[[FIRAuth auth]currentUser]uid];
-//            NSLog(@"%@",currentUserUid);
-//            
-//           
-//            
-//            
-//            
-//            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            
-//            UITabBarController * myTabBarVC = [storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
-//            
-//           
-//
-//            
-//        } //end if
-//        
-//        
-//    }]; //end sign in
-//    
-//}
+
 
 -(void)loginWithCredential:(NSString *)loginCredential{
     
@@ -75,7 +44,7 @@ static Helper * _helper;
             NSLog(@"%@",error.description);
             return ;
         }else{
-            NSLog(@"credential  ok");
+            NSLog(@"Firebase credential  ok");
             
            
             
@@ -89,25 +58,19 @@ static Helper * _helper;
                     NSLog(@"%@", [error localizedDescription]);
                     
                 }else{
-                    NSLog(@"11111111111111");
+                     //result 一個字典 , 可拿 id ,name , email
                     NSLog(@"%@",result);
                     NSString * name = [result objectForKey:@"name"];
                     
-                    NSLog(@"11111111111111");
                     NSLog(@"name:%@",name);
-                    NSLog(@"name:%@",name);
-                    NSLog(@"name:%@",name);
-                    NSLog(@"name:%@",name);
+                    
+           
                     
                 }
                 
             }];
 
-            
-            
-            
-            
-            
+
             
         }
     
@@ -119,13 +82,13 @@ static Helper * _helper;
 
 -(void)switchToMainView:(UIViewController *)view{
     
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
     
-    UITabBarController * myTabBarVC = [storyboard instantiateViewControllerWithIdentifier:@"tabBarController"];
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
     
-   
+    [view presentViewController:tabVC animated:true completion:nil];
     
-    //[view presentViewController:myTabBarVC animated:true completion:nil];
     
 }
 
@@ -148,20 +111,140 @@ static Helper * _helper;
 #pragma mark - upload to Firebase
 
 
--(void)setDataToDatabase:(NSString *)key andValue:(NSString *)value{
-    NSString * userInfo = @"userInfo";
-    NSString * currentUserUid = [[[FIRAuth auth]currentUser]uid];
-    NSLog(@"%@",currentUserUid);
+//可能還要存放使用者資訊的方法
+//還要改 存放餐廳資訊之類的參數
+
+
+
+-(void)uploadRestaurantData:(NSDictionary*)RestaurantInfo
+                  mainImage:(NSData*) mainImageData
+                      child:(NSString*)childString{
     
-    //設定到firebase
     
-    [[[[[[FIRDatabase database] reference]child:userInfo]child:currentUserUid]child:key ] setValue:value];
+    [[[self getDatabaseRefOfRestaurants]child:childString]updateChildValues:RestaurantInfo withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        if (error) {
+            NSLog(@"%@",error);
+            return ;
+        }
+        
+        NSLog(@"down Info upload");
+    }];
+    
+    
+    [self uploadMainImageToStorage:mainImageData child:childString];
+    
+    
+    
+}
+
+//inside method
+-(void)uploadMainImageToStorage:(NSData*) mainImageData
+                          child:(NSString*)childString{
+    
+    
+    
+    
+    //ref restaurant
+    
+    FIRStorageReference *storageRef = [[self getStorageRefOfRestaurant]child:childString];
+    
+    
+    
+    //main pic position
+    FIRStorageReference *mainPicRef = [storageRef child:@"MainPic.jpg"];
+    
+    //main pic update
+    [mainPicRef putData:mainImageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+        
+        
+        //拿到下載字串
+        NSString * MainUrlstring = [metadata.downloadURL absoluteString];
+        NSDictionary * mainImageDict = @{@"MainImage":MainUrlstring};
+        
+        //下載網址放到 database
+        
+        [[[self getDatabaseRefOfRestaurants]child:childString]updateChildValues:mainImageDict withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+            
+            
+            if (error) {
+                NSLog(@"%@",error);
+                return ;
+            }
+            
+            NSLog(@"down Main imageString upload");
+            
+            
+        }];
+        
+       
+    }];
+}
+
+
+
+-(void)uploadFoodItemsImageToStorage:(NSMutableArray*)imageDataArray child:(NSString*)childString{
+    
+    
+    
+    //ref restaurant
+    
+    FIRStorageReference *storageRef = [[self getStorageRefOfRestaurant]child:childString];
+    
+   
+    for (int i = 0; i < imageDataArray.count; i ++) {
+        
+        NSDictionary * eachItem = imageDataArray[i];
+        
+        NSData * eachImageData = eachItem[DICT_FOOD_IMAGE_KEY];
+        NSString * eachItemName = eachItem[DICT_FOOD_NAME_KEY];
+        NSString * eachItemPrice = eachItem[DICT_FOOD_PRICE_KEY];
+        
+        NSString * fileName = [NSString stringWithFormat:@"%d.jpg",i+1];
+        
+        FIRStorageReference *nameRef =  [storageRef child:fileName];
+        
+        [nameRef putData:eachImageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+            
+            NSString * foodItemImageString = [metadata.downloadURL absoluteString];
+            
+            NSDictionary * FoodItemDict = @{@"FoodImageString":foodItemImageString,@"FoodName":eachItemName,@"FoodPrice":eachItemPrice};
+            
+           [[[[self getDatabaseRefOfFoodItems]child:childString]childByAutoId]updateChildValues:FoodItemDict withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+               
+               if (error) {
+                   NSLog(@"%@",error);
+                   return ;
+               }
+               
+               NSLog(@"down each imageString upload");
+               
+               
+           }];
+            
+            
+        }];
+        
+    
+        
+        
+    }
+    
+    
+    
     
 }
 
 
 
 
+
+
+
+
+
+
+
+//還要改 存放地點改參數  才能存不同區圖片
 -(void)putImageToStorage:(NSData*)imageData{
     
     
@@ -189,11 +272,7 @@ static Helper * _helper;
 
 
 
--(void)setUserLoginWay:(NSString*)loginWay{
-    
-   
-  
-}
+
 
 
 #pragma mark - Delete anonymous user acc or logout
@@ -213,85 +292,6 @@ static Helper * _helper;
 }
 
 
--(void)logoutWithAnonymously:(UIViewController*)view{
-    
-    UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"警告" message:@"登出後你所儲存的資料將會消失" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction * okAction = [UIAlertAction actionWithTitle:@"確定登出" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        
-        [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"Group"];
-        //移除觀察 , 不然會當機
-        [[_helper getDatabaseRefOfCurrentUser]removeAllObservers];
-        
-        //移除匿名使用者資料
-        [[_helper getDatabaseRefOfCurrentUser] removeValueWithCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
-            NSLog(@"remove ok");
-        }];
-        
-        //移除照片
-        [[_helper getStorageRefOfCurrentUser] deleteWithCompletion:^(NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"%@",error.description);
-                return ;
-            }
-            
-        }];
-        
-        
-        
-        //移除匿名使用者帳號並跳回畫面
-        [[FIRAuth auth].currentUser deleteWithCompletion:^(NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"%@",error.description);
-                return ;
-            }else{
-                [_helper switchToLoginView:nil];
-            }
-            
-        }];
-        
-        
-    }];
-    //取消action
-    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    
-    [alertVC addAction:okAction];
-    [alertVC addAction:cancelAction];
-    [view presentViewController:alertVC animated:true completion:nil];
-    
-    
-}
-
-
--(void)logoutWithFacebook{
-    
-    
-    [_helper setDataToDatabase:@"IsOnline" andValue:@"0"];
-    
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (error) {
-        NSLog(@"%@",error.description);
-        return;
-        
-        
-    }else{
-        NSLog(@"登出");
-        
-    
-        
-        
-        //[[[_helper getDatabaseRefOfUsersInfo]child:@"IsOnline"]setValue:@"0"];
-        
-        [FBSDKAccessToken setCurrentAccessToken:nil];
-        
-        [_helper switchToLoginView:nil];
-        
-    }
-    
-    
-}
-
 
 #pragma mark - Get Firebase Ref
 
@@ -302,6 +302,8 @@ static Helper * _helper;
 
 }
 
+
+
 -(FIRDatabaseReference *)getDatabaseRefOfUsersInfo{
     
     return [[[FIRDatabase database]reference]child:@"userInfo"];
@@ -309,17 +311,37 @@ static Helper * _helper;
 
 
 
--(FIRStorageReference *)getStorageRefOfCurrentUser{
+
+-(FIRDatabaseReference *)getDatabaseRefOfRestaurants{
+    
+    
+    return [[[FIRDatabase database]reference]child:@"Restaurants"];
+    
+}
+
+         
+-(FIRDatabaseReference *)getDatabaseRefOfFoodItems{
+
+    return [[[FIRDatabase database]reference]child:@"FoodItems"];
+    
+}
+         
+
+         
+         
+         
+
+//storge
+
+-(FIRStorageReference *)getStorageRefOfRestaurant{
     
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage reference];
     
+    FIRStorageReference *ref = [storageRef child:@"Restaurant"];
     
-    FIRStorageReference *ref = [storageRef child:[FIRAuth auth].currentUser.uid];
     
-    FIRStorageReference *picRef = [ref child:@"image/pic.jpg"];
-    
-    return picRef;
+    return ref;
     
 }
 
@@ -327,6 +349,13 @@ static Helper * _helper;
 -(NSString *)uidOfCurrentUser{
     
     return [[[FIRAuth auth]currentUser]uid];
+}
+
+-(NSString *)getRandomChild{
+    
+    NSString *child = [[[FIRDatabase database]reference]childByAutoId].key;
+    
+    return child;
 }
 
 @end

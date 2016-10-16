@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11085A661DB3595000C79F44 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11085A651DB3595000C79F44 /* Photos.framework */; };
+		110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6A481DB20DD7009CC9F7 /* TabBarViewController.m */; };
+		110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */; };
+		110B6ACA1DB2447B009CC9F7 /* FoodItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */; };
 		113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */; };
 		113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */; };
 		113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */; };
@@ -19,6 +23,7 @@
 		113BFFE41DAEA74000E2B58D /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFE31DAEA74000E2B58D /* Helper.m */; };
 		113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */; };
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
+		1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1179DC591DB3AF640016BF70 /* unknow.png */; };
 		11EA3F101DAD80AA00C5E4FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F0F1DAD80AA00C5E4FA /* main.m */; };
 		11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F121DAD80AA00C5E4FA /* AppDelegate.m */; };
 		11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F171DAD80AA00C5E4FA /* Main.storyboard */; };
@@ -31,6 +36,13 @@
 
 /* Begin PBXFileReference section */
 		1101F2B31DB15C4D00747C41 /* Food.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Food.entitlements; sourceTree = "<group>"; };
+		11085A651DB3595000C79F44 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		110B6A471DB20DD7009CC9F7 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
+		110B6A481DB20DD7009CC9F7 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		110B6AC51DB241FB009CC9F7 /* AddShopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddShopViewController.h; sourceTree = "<group>"; };
+		110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShopViewController.m; sourceTree = "<group>"; };
+		110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodItemTableViewCell.h; sourceTree = "<group>"; };
+		110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodItemTableViewCell.m; sourceTree = "<group>"; };
 		113BFFBE1DAEA0E600E2B58D /* RestaurantsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsTableViewController.h; sourceTree = "<group>"; };
 		113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsTableViewController.m; sourceTree = "<group>"; };
 		113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewController.h; sourceTree = "<group>"; };
@@ -51,6 +63,7 @@
 		113BFFE31DAEA74000E2B58D /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		1179DC591DB3AF640016BF70 /* unknow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknow.png; sourceTree = "<group>"; };
 		11EA3F0B1DAD80AA00C5E4FA /* Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Food.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EA3F0F1DAD80AA00C5E4FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11EA3F111DAD80AA00C5E4FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11085A661DB3595000C79F44 /* Photos.framework in Frameworks */,
 				4B277E86DE33CD5D88D41459 /* Pods_Food.framework in Frameworks */,
 				113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */,
 				113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */,
@@ -86,8 +100,12 @@
 			children = (
 				11EA3F281DAD8D7700C5E4FA /* LoginViewController.h */,
 				11EA3F291DAD8D7700C5E4FA /* LoginViewController.m */,
+				110B6A471DB20DD7009CC9F7 /* TabBarViewController.h */,
+				110B6A481DB20DD7009CC9F7 /* TabBarViewController.m */,
 				113BFFBE1DAEA0E600E2B58D /* RestaurantsTableViewController.h */,
 				113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */,
+				110B6AC51DB241FB009CC9F7 /* AddShopViewController.h */,
+				110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */,
 				113BFFCD1DAEA2B900E2B58D /* DetailsViewController.h */,
 				113BFFCE1DAEA2B900E2B58D /* DetailsViewController.m */,
 				113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */,
@@ -118,6 +136,8 @@
 				113BFFD81DAEA4F700E2B58D /* OrderTableViewCell.h */,
 				113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */,
 				113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */,
+				110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */,
+				110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -163,6 +183,7 @@
 				11EA3F1C1DAD80AA00C5E4FA /* LaunchScreen.storyboard */,
 				11EA3F2B1DAD8DC700C5E4FA /* GoogleService-Info.plist */,
 				11EA3F1F1DAD80AA00C5E4FA /* Info.plist */,
+				1179DC591DB3AF640016BF70 /* unknow.png */,
 				11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */,
 				11EA3F0F1DAD80AA00C5E4FA /* main.m */,
 			);
@@ -172,6 +193,7 @@
 		4706E9813EF0A3076F91DCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				11085A651DB3595000C79F44 /* Photos.framework */,
 				4C4C1078F52F3F7618C2BAD1 /* Pods_Food.framework */,
 			);
 			name = Frameworks;
@@ -253,6 +275,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
 				113BFFDC1DAEA4F700E2B58D /* OrderTableViewCell.xib in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
@@ -321,12 +344,15 @@
 				11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */,
 				113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */,
 				11EA3F101DAD80AA00C5E4FA /* main.m in Sources */,
+				110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */,
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
 				113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */,
 				11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */,
 				113BFFDB1DAEA4F700E2B58D /* OrderTableViewCell.m in Sources */,
+				110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */,
 				113BFFE41DAEA74000E2B58D /* Helper.m in Sources */,
 				113BFFE01DAEA54000E2B58D /* RestaurantTableViewCell.m in Sources */,
+				110B6ACA1DB2447B009CC9F7 /* FoodItemTableViewCell.m in Sources */,
 				113BFFCF1DAEA2B900E2B58D /* DetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+//shop info dict
+#define DICT_SHOP_NAME_KEY  @"FoodName"
+#define DICT_SHOP_ADDRESS_KEY  @"ShopAddress"
+#define DICT_SHOP_PHONE_KEY  @"ShopPhone"
+
+
+
+//food dict
+#define DICT_FOOD_NAME_KEY  @"FoodName"
+#define DICT_FOOD_PRICE_KEY  @"FoodPrice"
+#define DICT_FOOD_IMAGE_KEY  @"FoodImage"
 
 @import Firebase;
 
@@ -22,9 +33,23 @@
 
 +(instancetype)sharedInstance;
 
--(void)setDataToDatabase:(NSString*)key andValue:(NSString*)value;
+
+-(void)loginWithCredential:(NSString *)loginCredential;
 
 
+-(void)uploadRestaurantData:(NSDictionary*)RestaurantInfo
+                  mainImage:(NSData*) mainImageData
+                      child:(NSString*)childString;
+
+
+
+-(void)uploadFoodItemsImageToStorage:(NSMutableArray *)imageDataArray
+                               child:(NSString*)childString;
+
+-(NSString *)getRandomChild;
+
+
+//--------------------------------------------------------------//
 
 
 -(void)switchToMainView:(UIViewController*)view;
@@ -40,20 +65,13 @@
     
 -(FIRDatabaseReference *)getDatabaseRefOfCurrentUser;
 
--(FIRStorageReference *)getStorageRefOfCurrentUser;
+
 
 -(FIRDatabaseReference *)getDatabaseRefOfUsersInfo;
 
 
 -(NSString*)uidOfCurrentUser;
 
-
-
--(void)loginWithCredential:(NSString *)loginCredential;
-
--(void)logoutWithAnonymously:(UIViewController*)view;
-
--(void)logoutWithFacebook;
 
 
 

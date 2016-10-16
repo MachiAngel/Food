@@ -1,0 +1,26 @@
+//
+//  AddShopViewController.h
+//  Food
+//
+//  Created by Shiang-Yu Huang on 2016/10/15.
+//  Copyright © 2016年 Shiang-Yu Huang. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+//shop info dict
+#define DICT_SHOP_NAME_KEY  @"FoodName"
+#define DICT_SHOP_ADDRESS_KEY  @"ShopAddress"
+#define DICT_SHOP_PHONE_KEY  @"ShopPhone"
+
+
+
+//food dict
+#define DICT_FOOD_NAME_KEY  @"FoodName"
+#define DICT_FOOD_PRICE_KEY  @"FoodPrice"
+#define DICT_FOOD_IMAGE_KEY  @"FoodImage"
+
+
+@interface AddShopViewController : UIViewController
+
+@end
