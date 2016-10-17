@@ -32,6 +32,74 @@ static Helper * _helper;
 #pragma mark - Login to Firebase
 
 
+-(void)uploadUserData:(NSDictionary*)info{
+    
+    NSString * userInfo = @"userInfo";
+    NSString * currentUserUid = [[[FIRAuth auth]currentUser]uid];
+    
+    [[[[[FIRDatabase database] reference]child:userInfo]child:currentUserUid]updateChildValues:info withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        if (error) {
+            NSLog(@"%@",error);
+            return ;
+        }
+        
+        NSLog(@"down upload userInfo");
+    }];
+    
+    
+}
+
+
+
+//直接登入
+
+-(void)signInWithEmail:(NSString *)email
+              password:(NSString*)password{
+    
+    [[FIRAuth auth]signInWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+        
+        
+        if (error) {
+            NSLog(@"Email sign error");
+            return ;
+        }
+        
+        
+        NSLog(@"Email sign in success");
+        
+        [self switchToMainView:nil];
+        
+        
+    }];
+    
+}
+
+
+
+
+//創帳號
+
+-(void)signUpWithEmail:(NSString*)email
+              password:(NSString*)password{
+    
+    
+    
+    [[FIRAuth auth]createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+        
+        if (error) {
+            //可以讓使用者知道為何失敗
+            NSLog(@"%@",error);
+            return ;
+        }
+        
+        
+        NSDictionary * userInfo = @{@"Email":email,@"Password":password};
+        
+        [self uploadUserData:userInfo];
+        
+    }];
+    
+}
 
 -(void)loginWithCredential:(NSString *)loginCredential{
     
@@ -61,10 +129,17 @@ static Helper * _helper;
                      //result 一個字典 , 可拿 id ,name , email
                     NSLog(@"%@",result);
                     NSString * name = [result objectForKey:@"name"];
+                    NSString * email = [result objectForKey:@"email"];
                     
-                    NSLog(@"name:%@",name);
+                    [[NSUserDefaults standardUserDefaults]setObject:name forKey:@"userName"];
+                    [[NSUserDefaults standardUserDefaults]synchronize];
                     
-           
+                    
+                    NSDictionary * userInfo = @{@"UserName":name,@"Email":email};
+                    
+                    [self uploadUserData:userInfo];
+                    
+                    
                     
                 }
                 
@@ -205,7 +280,14 @@ static Helper * _helper;
         
         [nameRef putData:eachImageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
             
+            if (error) {
+                NSLog(@"上傳照片失敗:%@",error);
+                return ;
+            }
+            
+            
             NSString * foodItemImageString = [metadata.downloadURL absoluteString];
+            
             
             NSDictionary * FoodItemDict = @{@"FoodImageString":foodItemImageString,@"FoodName":eachItemName,@"FoodPrice":eachItemPrice};
             

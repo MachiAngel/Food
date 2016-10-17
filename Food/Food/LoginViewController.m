@@ -10,11 +10,15 @@
 #import "LoginViewController.h"
 #import "Helper.h"
 
-@interface LoginViewController ()< FBSDKLoginButtonDelegate>
+@interface LoginViewController ()< FBSDKLoginButtonDelegate,UITextFieldDelegate>
+{
+    Helper * helper;
+}
+
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *FbLoginView;
-@property (strong,nonatomic) Helper * helper;
+
 
 @end
 
@@ -24,7 +28,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _helper = [Helper sharedInstance];
+    
+    NSError *error;
+    [[FIRAuth auth] signOut:&error];
+    if (!error) {
+        // Sign-out succeeded
+    }
+    
+    
+    helper = [Helper sharedInstance];
     
     
     self.FbLoginView.readPermissions =
@@ -38,22 +50,22 @@
     [super viewDidAppear:animated];
     
     
-    if ([FBSDKAccessToken currentAccessToken].tokenString) {
-        
-        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
-        
-        [self presentViewController:tabVC animated:true completion:nil];
-    }
-    
-    
-//    if ([_helper uidOfCurrentUser]) {
+//    if ([FBSDKAccessToken currentAccessToken].tokenString) {
+//        
 //        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
 //        
 //        [self presentViewController:tabVC animated:true completion:nil];
-//        
 //    }
+    
+    
+    if ([helper uidOfCurrentUser]) {
+        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+        
+        [self presentViewController:tabVC animated:true completion:nil];
+        
+    }
     
 }
 
@@ -64,9 +76,47 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)emailLoginBtn:(id)sender {
+    
+    NSString * emailString = self.emailTextField.text;
+    NSString * passwordString = self.passwordTextField.text;
+    
+    [helper signInWithEmail:emailString password:passwordString];
+    
+    
 }
+
+
 - (IBAction)createAccBtn:(id)sender {
+    
+    NSString * emailString = self.emailTextField.text;
+    NSString * passwordString = self.passwordTextField.text;
+    
+    [helper signUpWithEmail:emailString password:passwordString];
+    
+    [self setNameAlert];
+    
 }
+
+-(void)setNameAlert{
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"設定" message:@"請輸入名字" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        textField.tag = 1;
+        textField.enablesReturnKeyAutomatically = true;
+        textField.returnKeyType = UIReturnKeyDone;
+        textField.placeholder = @"請輸入名字";
+        textField.delegate = self;
+        
+    }];
+    
+    [self presentViewController:alert animated:true completion:nil];
+    
+    
+    
+}
+
 
 /*
 #pragma mark - Navigation
@@ -97,7 +147,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
         NSLog(@"%@",[FBSDKAccessToken currentAccessToken].tokenString);
         
         
-        [_helper loginWithCredential:[FBSDKAccessToken currentAccessToken].tokenString];
+        [helper loginWithCredential:[FBSDKAccessToken currentAccessToken].tokenString];
         
                 //------------ for facebook------------//
        // self.FbLoginView.hidden = true;
@@ -113,6 +163,27 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     NSLog(@"did tapped fb log out");
     
 }
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+            //get new name
+        NSString * userName = textField.text;
+        
+        
+        [[NSUserDefaults standardUserDefaults]setObject:userName forKey:@"userName"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+    
+        [self dismissViewControllerAnimated:true completion:nil];
+    
+    
+    NSDictionary * userNameDict = @{@"UserName":userName};
+    [helper uploadUserData:userNameDict];
+    [helper switchToMainView:self];
+    
+}
+
 
 
 

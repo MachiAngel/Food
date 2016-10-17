@@ -7,8 +7,19 @@
 //
 
 #import "RestaurantsTableViewController.h"
+#import "Helper.h"
+#import "RestaurantInfo.h"  //for 網路 model
+#import "restaurantInfoCell.h"
+#import "RestaurantModel.h"
+
 
 @interface RestaurantsTableViewController ()
+{
+    RestaurantInfo * restaurantManager;
+    
+}
+
+@property (nonatomic, strong) NSArray *restaurants;
 
 @end
 
@@ -17,11 +28,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSLog(@"----------------------");
+    restaurantManager = [RestaurantInfo sharedInstance];
+    //去網路拿資料 並且會回傳一個array 餐廳到我的block
+    [restaurantManager getAllRestaurantArray:^(NSMutableArray *result) {
+        
+        
+        
+        
+        //字典轉模型 到新的array
+        NSMutableArray *models = [NSMutableArray arrayWithCapacity:result.count];
+        
+        for (NSDictionary *dict in result) {
+            RestaurantModel *tg = [RestaurantModel tgWithDict:dict];
+            [models addObject:tg];
+        }
+        //自己array
+        self.restaurants = [models copy];
+    
+        NSLog(@"%@",_restaurants);
+        
+        [self.tableView reloadData];
+        
+    }];
+   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,24 +64,34 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    
+    return _restaurants.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    
+    restaurantInfoCell *cell = [restaurantInfoCell cellWithTableView:tableView];
+    
+    // 取出對應模型
+    RestaurantModel *tg = self.restaurants[indexPath.row];
+    
+    
+    // 設置模型數據给cell 重寫set 方法
+    cell.tg = tg;
+    
+    
+    NSLog(@"%@",cell.tg);
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

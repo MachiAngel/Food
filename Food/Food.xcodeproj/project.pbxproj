@@ -18,12 +18,14 @@
 		113BFFCF1DAEA2B900E2B58D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFCE1DAEA2B900E2B58D /* DetailsViewController.m */; };
 		113BFFDB1DAEA4F700E2B58D /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */; };
 		113BFFDC1DAEA4F700E2B58D /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */; };
-		113BFFE01DAEA54000E2B58D /* RestaurantTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFDE1DAEA54000E2B58D /* RestaurantTableViewCell.m */; };
-		113BFFE11DAEA54000E2B58D /* RestaurantTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113BFFDF1DAEA54000E2B58D /* RestaurantTableViewCell.xib */; };
 		113BFFE41DAEA74000E2B58D /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFE31DAEA74000E2B58D /* Helper.m */; };
 		113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */; };
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
 		1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1179DC591DB3AF640016BF70 /* unknow.png */; };
+		117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */; };
+		117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */; };
+		117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117C1AAB1DB5208F004AB4F9 /* restaurantInfoCell.xib */; };
+		117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AB21DB52190004AB4F9 /* RestaurantModel.m */; };
 		11EA3F101DAD80AA00C5E4FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F0F1DAD80AA00C5E4FA /* main.m */; };
 		11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F121DAD80AA00C5E4FA /* AppDelegate.m */; };
 		11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F171DAD80AA00C5E4FA /* Main.storyboard */; };
@@ -56,14 +58,19 @@
 		113BFFD81DAEA4F700E2B58D /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
 		113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
-		113BFFDD1DAEA54000E2B58D /* RestaurantTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantTableViewCell.h; sourceTree = "<group>"; };
-		113BFFDE1DAEA54000E2B58D /* RestaurantTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantTableViewCell.m; sourceTree = "<group>"; };
-		113BFFDF1DAEA54000E2B58D /* RestaurantTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestaurantTableViewCell.xib; sourceTree = "<group>"; };
 		113BFFE21DAEA74000E2B58D /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		113BFFE31DAEA74000E2B58D /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1179DC591DB3AF640016BF70 /* unknow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknow.png; sourceTree = "<group>"; };
+		117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantInfo.h; sourceTree = "<group>"; };
+		117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfo.m; sourceTree = "<group>"; };
+		117C1AA91DB5208F004AB4F9 /* restaurantInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = restaurantInfoCell.h; sourceTree = "<group>"; };
+		117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = restaurantInfoCell.m; sourceTree = "<group>"; };
+		117C1AAB1DB5208F004AB4F9 /* restaurantInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = restaurantInfoCell.xib; sourceTree = "<group>"; };
+		117C1AB11DB52190004AB4F9 /* RestaurantModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantModel.h; sourceTree = "<group>"; };
+		117C1AB21DB52190004AB4F9 /* RestaurantModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantModel.m; sourceTree = "<group>"; };
+		117C1AB41DB5219A004AB4F9 /* NJGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NJGlobal.h; sourceTree = "<group>"; };
 		11EA3F0B1DAD80AA00C5E4FA /* Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Food.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EA3F0F1DAD80AA00C5E4FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11EA3F111DAD80AA00C5E4FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +130,11 @@
 			children = (
 				113BFFE21DAEA74000E2B58D /* Helper.h */,
 				113BFFE31DAEA74000E2B58D /* Helper.m */,
+				117C1AB41DB5219A004AB4F9 /* NJGlobal.h */,
+				117C1AB11DB52190004AB4F9 /* RestaurantModel.h */,
+				117C1AB21DB52190004AB4F9 /* RestaurantModel.m */,
+				117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */,
+				117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -130,12 +142,12 @@
 		113BFFD21DAEA47100E2B58D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				113BFFDD1DAEA54000E2B58D /* RestaurantTableViewCell.h */,
-				113BFFDE1DAEA54000E2B58D /* RestaurantTableViewCell.m */,
-				113BFFDF1DAEA54000E2B58D /* RestaurantTableViewCell.xib */,
 				113BFFD81DAEA4F700E2B58D /* OrderTableViewCell.h */,
 				113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */,
 				113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */,
+				117C1AA91DB5208F004AB4F9 /* restaurantInfoCell.h */,
+				117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */,
+				117C1AAB1DB5208F004AB4F9 /* restaurantInfoCell.xib */,
 				110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */,
 				110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */,
 			);
@@ -278,9 +290,9 @@
 				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
 				113BFFDC1DAEA4F700E2B58D /* OrderTableViewCell.xib in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
+				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
 				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
 				11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */,
-				113BFFE11DAEA54000E2B58D /* RestaurantTableViewCell.xib in Resources */,
 				11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,12 +358,14 @@
 				11EA3F101DAD80AA00C5E4FA /* main.m in Sources */,
 				110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */,
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
+				117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */,
 				113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */,
 				11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */,
+				117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */,
 				113BFFDB1DAEA4F700E2B58D /* OrderTableViewCell.m in Sources */,
+				117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */,
 				110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */,
 				113BFFE41DAEA74000E2B58D /* Helper.m in Sources */,
-				113BFFE01DAEA54000E2B58D /* RestaurantTableViewCell.m in Sources */,
 				110B6ACA1DB2447B009CC9F7 /* FoodItemTableViewCell.m in Sources */,
 				113BFFCF1DAEA2B900E2B58D /* DetailsViewController.m in Sources */,
 			);

@@ -156,8 +156,9 @@
     NSString * shopAddress = self.shopAddressTextField.text;
     NSString * shopPhone = self.shopPhoneTextField.text;
     
-    //先寫死
-    NSString * whichUser = @"unknow";
+    NSString * userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    
+
     
     
     if ([shopName isEqualToString:@""] || [shopAddress isEqualToString:@""] || [shopPhone isEqualToString:@""]) {
@@ -179,9 +180,9 @@
     NSDictionary * eachShopInfo = @{DICT_SHOP_NAME_KEY:shopName,
                                 DICT_SHOP_ADDRESS_KEY:shopAddress,
                                 DICT_SHOP_PHONE_KEY:shopPhone,
-                                DICT_SHOP_UPLOAD_USER_KEY:whichUser};
+                                DICT_SHOP_UPLOAD_USER_KEY:userName};
     
-     NSData * mainImageData = UIImageJPEGRepresentation(self.shopImageView.image, 0.5);
+     NSData * mainImageData = UIImageJPEGRepresentation(self.shopImageView.image, 0.8);
     
     
     [helper uploadRestaurantData:eachShopInfo mainImage:mainImageData child:uniqueId];
