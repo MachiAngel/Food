@@ -12,7 +12,7 @@
 #define DICT_SHOP_NAME_KEY  @"FoodName"
 #define DICT_SHOP_ADDRESS_KEY  @"ShopAddress"
 #define DICT_SHOP_PHONE_KEY  @"ShopPhone"
-
+#define DICT_SHOP_UPLOAD_USER_KEY  @"UploadUser"
 
 
 //food dict

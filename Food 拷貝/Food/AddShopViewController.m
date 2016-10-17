@@ -5,6 +5,7 @@
 //  Created by Shiang-Yu Huang on 2016/10/15.
 //  Copyright © 2016年 Shiang-Yu Huang. All rights reserved.
 //
+#import "Helper.h"
 #import <Photos/Photos.h>
 #import "AddShopViewController.h"
 #import "FoodItemTableViewCell.h"
@@ -18,16 +19,20 @@
 @interface AddShopViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 {
     
-    NSDictionary * shopInfo;
+    Helper * helper;
     
-    NSDictionary * foodItem;
+    NSMutableArray * shopInfo;
+    
+    
     
     NSMutableArray * foodItems;
     
     //判斷圖片放哪
     NSUInteger photoSavePlace;   // 1 = shop , 2 = foodItem
+    NSUInteger photoSave;
 }
 @property (weak, nonatomic) IBOutlet UITableView *fooditemsTableView;
+@property (weak, nonatomic) IBOutlet UIView *AddFoodItemView;
 
 //店家資訊
 @property (weak, nonatomic) IBOutlet UITextField *shopNameTextField;
@@ -54,6 +59,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    helper = [Helper sharedInstance];
+    
     foodItems = [NSMutableArray new];
     shopInfo =[NSMutableArray new];
     
@@ -67,6 +76,14 @@
 
 
 
+- (IBAction)popAddFoodItemViewBtn:(id)sender {
+    
+    [self.view endEditing:YES];
+    
+    self.AddFoodItemView.alpha = 1;
+    self.shopFoodIconView.image = [UIImage imageNamed:@"unknow.png"];
+    
+}
 
 - (IBAction)addFoodItemBtn:(id)sender {
     
@@ -79,42 +96,68 @@
         [alert addAction:ok];
         [self presentViewController:alert animated:true completion:nil];
         
+        
+    }else{
+        
+
+        
+        NSData *foodImageData = UIImageJPEGRepresentation(self.shopFoodIconView.image, 0.5);
+        
+        
+        
+        NSDictionary * TmpFoodItem = @{DICT_FOOD_NAME_KEY:_shopFoodItemTextField.text,
+                                       DICT_FOOD_PRICE_KEY:_foodItemPriceTextField.text,
+                                       DICT_FOOD_IMAGE_KEY:foodImageData};
+        
+        [foodItems addObject:TmpFoodItem];
+        
+        
+        //清空使用者輸入資料
+        _shopFoodItemTextField.text = @"";
+        _foodItemPriceTextField.text= @"";
+        
+        //self.shopFoodIconView.image = [UIImage imageNamed:@"unknow.png"];
+        
+        //跳開新增view
+        self.AddFoodItemView.alpha = 0;
+        
+        [self.fooditemsTableView reloadData];
+        
+        //
+        [self.view endEditing:YES];
+        
+        
     }
     
-    //沒給照片就給預設
-    if (self.shopFoodIconView.image == nil) {
-        self.shopFoodIconView.image = [UIImage imageNamed:@"unknow.png"];
-    }
-    
-     NSData *foodImageData = UIImageJPEGRepresentation(self.shopFoodIconView.image, 0.5);
     
     
-    
-    NSDictionary * TmpFoodItem = @{DICT_FOOD_NAME_KEY:_shopFoodItemTextField.text,
-                                   DICT_FOOD_PRICE_KEY:_foodItemPriceTextField.text,
-                                   DICT_FOOD_IMAGE_KEY:foodImageData};
-    
-    [foodItems addObject:TmpFoodItem];
-    
-    
-    //清空使用者輸入資料
-    _shopFoodItemTextField.text = @"";
-    _foodItemPriceTextField.text= @"";
-    self.shopFoodIconView.image = [UIImage imageNamed:@"unknow.png"];
-    
-    [self.fooditemsTableView reloadData];
     
     
 }
 
 
+
+- (IBAction)cancelAddFoodBtn:(id)sender {
+    
+    self.AddFoodItemView.alpha = 0;
+    
+    [self.view endEditing:YES];
+    
+}
+
+
+
+
 - (IBAction)okBtn:(id)sender {
     
-    //--------------------------店家資訊------------------------------------
+    //--------------------------店家資訊--含上傳者------------------------------
  
     NSString * shopName = self.shopNameTextField.text;
     NSString * shopAddress = self.shopAddressTextField.text;
     NSString * shopPhone = self.shopPhoneTextField.text;
+    
+    //先寫死
+    NSString * whichUser = @"unknow";
     
     
     if ([shopName isEqualToString:@""] || [shopAddress isEqualToString:@""] || [shopPhone isEqualToString:@""]) {
@@ -128,15 +171,27 @@
         
     }
     
-    NSDictionary * shopInfo = @{DICT_SHOP_NAME_KEY:shopName,
+    //prepare restaurant unique id
+    
+    NSString * uniqueId = [helper getRandomChild];
+    
+    //prepare shop info and main pic to upload
+    NSDictionary * eachShopInfo = @{DICT_SHOP_NAME_KEY:shopName,
                                 DICT_SHOP_ADDRESS_KEY:shopAddress,
-                                DICT_SHOP_PHONE_KEY:shopPhone};
+                                DICT_SHOP_PHONE_KEY:shopPhone,
+                                DICT_SHOP_UPLOAD_USER_KEY:whichUser};
+    
+     NSData * mainImageData = UIImageJPEGRepresentation(self.shopImageView.image, 0.5);
+    
+    
+    [helper uploadRestaurantData:eachShopInfo mainImage:mainImageData child:uniqueId];
+    
     
     
     //--------------------------餐點品項------------------------------------
     
     
-    
+    [helper uploadFoodItemsImageToStorage:foodItems child:uniqueId];
     
     
     
@@ -169,12 +224,15 @@
     
     NSDictionary * each = foodItems[indexPath.row];
     
-    cell.foodName.text = each[DICT_FOOD_NAME_KEY];
-    cell.foodPrice.text = each[DICT_FOOD_PRICE_KEY];
+    cell.queue.text = [NSString stringWithFormat:@"%2lu.",indexPath.row + 1];
+    
+    cell.foodName.text = [NSString stringWithFormat:@"品名:%@",each[DICT_FOOD_NAME_KEY]];
+    cell.foodPrice.text = [NSString stringWithFormat:@"價格:%@",each[DICT_FOOD_PRICE_KEY]];
+    
     
     NSData * imageData = each[DICT_FOOD_IMAGE_KEY];
     
-    cell.imageView.image = [UIImage imageWithData:imageData];
+    cell.foodImage.image = [UIImage imageWithData:imageData];
     
     
     
@@ -186,6 +244,7 @@
 
 //使用者按下店家照片
 - (IBAction)shopImageDidTapped:(id)sender {
+    
     
     photoSavePlace = 1;
     
@@ -217,6 +276,7 @@
 //使用者按下食物照片
 
 - (IBAction)foodItemImageDidTapped:(id)sender {
+    
     
     photoSavePlace = 2;
     
@@ -250,6 +310,16 @@
 - (void) launchImagePickerWithSourceType:
 (UIImagePickerControllerSourceType) soureceType{
     
+    //沒拍照就1
+    if (soureceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+        photoSave = 1;
+    }else{
+        photoSave = 2;
+    }
+    
+    
+    
+    
     if ([UIImagePickerController isSourceTypeAvailable:soureceType] == false) { //check sourceType is existence?
         NSLog(@"Invalid Source Type.");
         return;
@@ -277,6 +347,7 @@
         image = info[UIImagePickerControllerOriginalImage]; //照像時圖片為原圖
     }
     
+ 
     //拿到最後版本的image
     UIImage *resizeImage = [self resizeFromImage:image];
     
@@ -289,15 +360,17 @@
     }
     
     
+    if (photoSave == 1) {
+        NSLog(@"no Save to user's phone");
+    }else{
+        [self savaWithImage:resizeImage];
+    }
     
     
-    [self savaWithImage:resizeImage];
     
     
     //目前檢查用
     NSData *imageData = UIImageJPEGRepresentation(resizeImage, 0.5);
-    
-    
     
     NSLog(@"imageData: %fx%f (%lu bytes)",resizeImage.size.width,resizeImage.size.height,imageData.length);
     
@@ -317,7 +390,7 @@
         finalImage = sourceImage;
         
         // 解決圖片檔案很小無法上傳的問題
-        targetSize = sourceImage.size;
+        //targetSize = sourceImage.size;
         
     } else {
         // Will do resize here,and decide final size first.

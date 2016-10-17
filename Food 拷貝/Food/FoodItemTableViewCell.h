@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FoodItemTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *queue;
 @property (weak, nonatomic) IBOutlet UIImageView *foodImage;
 @property (weak, nonatomic) IBOutlet UILabel *foodName;
 @property (weak, nonatomic) IBOutlet UILabel *foodPrice;

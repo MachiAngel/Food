@@ -59,5 +59,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>app想取用你的照片以繼續服務</string>
+	<key>NSCameraUsageDescription</key>
+	<string>app想取用你的相機以繼續服務</string>
 </dict>
 </plist>
