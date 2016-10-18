@@ -14,7 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (weak, nonatomic) IBOutlet UILabel *telNumLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *uploaderLabel;
 
 
 @end
@@ -76,7 +77,7 @@
     // 設置餐廳地址
     self.addressLabel.text = [NSString stringWithFormat:@"地址:%@", tg.ShopAddress];
     // 設置餐廳電話
-    self.telNumLabel.text = [NSString stringWithFormat:@"電話:%@", tg.ShopPhone];
+    self.uploaderLabel.text = [NSString stringWithFormat:@"上傳者:%@", tg.UploadUser];
 }
 
 

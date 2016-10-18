@@ -20,10 +20,10 @@
 // 餐廳地址
 @property (nonatomic, copy) NSString *ShopAddress;
 
-// 餐廳電話
+// 餐廳電話 還沒用到
 @property (nonatomic, copy) NSString *ShopPhone;
 
-//餐廳上傳者 還沒用到
+//餐廳上傳者 
 @property (nonatomic, copy) NSString *UploadUser;
 
 
