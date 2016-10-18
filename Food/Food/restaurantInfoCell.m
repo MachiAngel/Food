@@ -7,7 +7,7 @@
 //
 
 #import "restaurantInfoCell.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @interface restaurantInfoCell()
@@ -42,7 +42,31 @@
     
     // 設置餐廳
     
-    self.iconView.image = [UIImage imageNamed:@"unknow.png"];
+//    [cell.imagePhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"unknow.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        cell.imagePhoto.image = image;
+    
+        
+        
+        
+//    }];
+    
+    NSURL * imageURL = [NSURL URLWithString:tg.MainImage];
+    
+    
+    [self.imageView sd_setImageWithURL:imageURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+        if (error) {
+            NSLog(@"image download fail");
+            NSLog(@"%@",error);
+        }
+        
+        
+        self.iconView.image = image;
+        
+    }];
+    
+    
     
     
    
