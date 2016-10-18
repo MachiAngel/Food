@@ -15,7 +15,6 @@
 		113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */; };
 		113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */; };
 		113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFCB1DAEA24600E2B58D /* SettingTableViewController.m */; };
-		113BFFCF1DAEA2B900E2B58D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFCE1DAEA2B900E2B58D /* DetailsViewController.m */; };
 		113BFFDB1DAEA4F700E2B58D /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */; };
 		113BFFDC1DAEA4F700E2B58D /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */; };
 		113BFFE41DAEA74000E2B58D /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFE31DAEA74000E2B58D /* Helper.m */; };
@@ -53,8 +52,6 @@
 		113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsTableViewController.m; sourceTree = "<group>"; };
 		113BFFCA1DAEA24600E2B58D /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		113BFFCB1DAEA24600E2B58D /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
-		113BFFCD1DAEA2B900E2B58D /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
-		113BFFCE1DAEA2B900E2B58D /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		113BFFD81DAEA4F700E2B58D /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
 		113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
@@ -113,8 +110,6 @@
 				113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */,
 				110B6AC51DB241FB009CC9F7 /* AddShopViewController.h */,
 				110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */,
-				113BFFCD1DAEA2B900E2B58D /* DetailsViewController.h */,
-				113BFFCE1DAEA2B900E2B58D /* DetailsViewController.m */,
 				113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */,
 				113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */,
 				113BFFC71DAEA21C00E2B58D /* RecordsTableViewController.h */,
@@ -367,7 +362,6 @@
 				110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */,
 				113BFFE41DAEA74000E2B58D /* Helper.m in Sources */,
 				110B6ACA1DB2447B009CC9F7 /* FoodItemTableViewCell.m in Sources */,
-				113BFFCF1DAEA2B900E2B58D /* DetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,9 +16,10 @@
                 <frame key="frameInset" width="320" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pne-e7-DfB">
-                        <frame key="frameInset" minX="14" minY="12" width="111" height="94"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pne-e7-DfB">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="111" id="xaT-sg-PkF"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="餐廳名稱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTL-8W-qMu">
                         <frame key="frameInset" minX="139" minY="12" width="166" height="21"/>
@@ -42,6 +44,11 @@
                     </label>
                 </subviews>
                 <color key="backgroundColor" red="0.99539839659999996" green="0.99539839659999996" blue="0.99539839659999996" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="pne-e7-DfB" secondAttribute="bottom" constant="5" id="6U5-et-hDf"/>
+                    <constraint firstItem="pne-e7-DfB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="fDD-0f-dV3"/>
+                    <constraint firstItem="pne-e7-DfB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="fcJ-M0-39k"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressLabel" destination="OPw-JF-e31" id="TV7-UA-wTX"/>

@@ -172,7 +172,7 @@ static Helper * _helper;
     
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    UIViewController * loginView = [storyboard instantiateViewControllerWithIdentifier:@"loginVeiw"];
+   // UIViewController * loginView = [storyboard instantiateViewControllerWithIdentifier:@"loginVeiw"];
     
     
     

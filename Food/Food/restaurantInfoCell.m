@@ -32,6 +32,11 @@
         // 如果找不到就從xib中創建cell
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"restaurantInfoCell" owner:nil options:nil] firstObject];
         NSLog(@"創建一個新的cell");
+    }else{
+        //如果是重用cell，则把cell中自己添加的subview清除掉，避免出现重叠问题
+        
+    
+        
     }
     return cell;
 }
@@ -41,36 +46,25 @@
 {
     _tg = tg;
     
-    // 設置餐廳
-    
-//    [cell.imagePhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"unknow.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//        cell.imagePhoto.image = image;
-    
-        
-        
-        
-//    }];
     
     NSURL * imageURL = [NSURL URLWithString:tg.MainImage];
     
     
-    [self.imageView sd_setImageWithURL:imageURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    
+    [self.iconView sd_setImageWithURL:imageURL placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
         if (error) {
             NSLog(@"image download fail");
             NSLog(@"%@",error);
         }
         
-        
-        self.iconView.image = image;
+
         
     }];
     
     
     
     
-   
     
     // 設置餐廳標題
     self.titleLabel.text = tg.ShopName;

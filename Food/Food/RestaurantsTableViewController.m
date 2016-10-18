@@ -13,13 +13,17 @@
 #import "RestaurantModel.h"
 
 
-@interface RestaurantsTableViewController ()
+@interface RestaurantsTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
+    //靠此manager 拿到網路資料
     RestaurantInfo * restaurantManager;
     
 }
 
 @property (nonatomic, strong) NSArray *restaurants;
+@property (weak, nonatomic) IBOutlet UITableView *myTableView;
+@property (weak, nonatomic) IBOutlet UIView *tmpView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *tmpAIV;
 
 @end
 
@@ -28,30 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    NSLog(@"----------------------");
-    restaurantManager = [RestaurantInfo sharedInstance];
-    //去網路拿資料 並且會回傳一個array 餐廳到我的block
-    [restaurantManager getAllRestaurantArray:^(NSMutableArray *result) {
-        
-        
-        
-        
-        //字典轉模型 到新的array
-        NSMutableArray *models = [NSMutableArray arrayWithCapacity:result.count];
-        
-        for (NSDictionary *dict in result) {
-            RestaurantModel *tg = [RestaurantModel tgWithDict:dict];
-            [models addObject:tg];
-        }
-        //自己array
-        self.restaurants = [models copy];
-    
-        NSLog(@"%@",_restaurants);
-        
-        [self.tableView reloadData];
-        
-    }];
    
     
 }
@@ -60,6 +40,63 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+    self.tmpView.alpha = 1;
+    [self.tmpAIV startAnimating];
+    
+    NSLog(@"----------------------");
+    restaurantManager = [RestaurantInfo sharedInstance];
+    //去網路拿資料 並且會回傳一個array 餐廳到我的block
+    [restaurantManager getAllRestaurantArray:^(NSMutableArray *result) {
+        
+               
+        //字典轉模型 到新的array
+        
+        NSMutableArray *models = [NSMutableArray arrayWithCapacity:result.count];
+        
+        for (NSDictionary *dict in result) {
+            RestaurantModel *tg = [RestaurantModel tgWithDict:dict];
+            [models addObject:tg];
+        }
+        //自己array
+        self.restaurants = [models copy];
+        
+        
+        
+        self.tmpView.alpha = 0;
+        [self.tmpAIV stopAnimating];
+        
+        [self.myTableView reloadData];
+        
+    }];
+        //z...
+    
+    
+    
+}
+
+
+- (IBAction)addOrderMenuBtn:(id)sender {
+    
+   // AddShopViewController
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController * addShopVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddShopViewController"];
+    
+    [self presentViewController:addShopVC animated:true completion:nil];
+
+    
+    
+    
+}
+
+
+
+
 
 #pragma mark - Table view data source
 
