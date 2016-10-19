@@ -15,8 +15,6 @@
 		113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */; };
 		113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */; };
 		113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFCB1DAEA24600E2B58D /* SettingTableViewController.m */; };
-		113BFFDB1DAEA4F700E2B58D /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */; };
-		113BFFDC1DAEA4F700E2B58D /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */; };
 		113BFFE41DAEA74000E2B58D /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFE31DAEA74000E2B58D /* Helper.m */; };
 		113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */; };
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
@@ -25,6 +23,8 @@
 		117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */; };
 		117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 117C1AAB1DB5208F004AB4F9 /* restaurantInfoCell.xib */; };
 		117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AB21DB52190004AB4F9 /* RestaurantModel.m */; };
+		1184CE421DB6254D009E2A3E /* FoodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1184CE411DB6254D009E2A3E /* FoodView.m */; };
+		1184CE451DB62576009E2A3E /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1184CE441DB62576009E2A3E /* DetailTableViewController.m */; };
 		11EA3F101DAD80AA00C5E4FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F0F1DAD80AA00C5E4FA /* main.m */; };
 		11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F121DAD80AA00C5E4FA /* AppDelegate.m */; };
 		11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F171DAD80AA00C5E4FA /* Main.storyboard */; };
@@ -52,9 +52,6 @@
 		113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsTableViewController.m; sourceTree = "<group>"; };
 		113BFFCA1DAEA24600E2B58D /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		113BFFCB1DAEA24600E2B58D /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
-		113BFFD81DAEA4F700E2B58D /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
-		113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
-		113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
 		113BFFE21DAEA74000E2B58D /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		113BFFE31DAEA74000E2B58D /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -68,6 +65,10 @@
 		117C1AB11DB52190004AB4F9 /* RestaurantModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantModel.h; sourceTree = "<group>"; };
 		117C1AB21DB52190004AB4F9 /* RestaurantModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantModel.m; sourceTree = "<group>"; };
 		117C1AB41DB5219A004AB4F9 /* NJGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NJGlobal.h; sourceTree = "<group>"; };
+		1184CE401DB6254D009E2A3E /* FoodView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodView.h; sourceTree = "<group>"; };
+		1184CE411DB6254D009E2A3E /* FoodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodView.m; sourceTree = "<group>"; };
+		1184CE431DB62576009E2A3E /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		1184CE441DB62576009E2A3E /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
 		11EA3F0B1DAD80AA00C5E4FA /* Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Food.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EA3F0F1DAD80AA00C5E4FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11EA3F111DAD80AA00C5E4FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -110,6 +111,8 @@
 				113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */,
 				110B6AC51DB241FB009CC9F7 /* AddShopViewController.h */,
 				110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */,
+				1184CE431DB62576009E2A3E /* DetailTableViewController.h */,
+				1184CE441DB62576009E2A3E /* DetailTableViewController.m */,
 				113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */,
 				113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */,
 				113BFFC71DAEA21C00E2B58D /* RecordsTableViewController.h */,
@@ -137,9 +140,8 @@
 		113BFFD21DAEA47100E2B58D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				113BFFD81DAEA4F700E2B58D /* OrderTableViewCell.h */,
-				113BFFD91DAEA4F700E2B58D /* OrderTableViewCell.m */,
-				113BFFDA1DAEA4F700E2B58D /* OrderTableViewCell.xib */,
+				1184CE401DB6254D009E2A3E /* FoodView.h */,
+				1184CE411DB6254D009E2A3E /* FoodView.m */,
 				117C1AA91DB5208F004AB4F9 /* restaurantInfoCell.h */,
 				117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */,
 				117C1AAB1DB5208F004AB4F9 /* restaurantInfoCell.xib */,
@@ -283,7 +285,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
-				113BFFDC1DAEA4F700E2B58D /* OrderTableViewCell.xib in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
 				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
@@ -347,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1184CE451DB62576009E2A3E /* DetailTableViewController.m in Sources */,
 				113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */,
 				11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */,
 				113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */,
@@ -355,9 +357,9 @@
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
 				117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */,
 				113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */,
+				1184CE421DB6254D009E2A3E /* FoodView.m in Sources */,
 				11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */,
 				117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */,
-				113BFFDB1DAEA4F700E2B58D /* OrderTableViewCell.m in Sources */,
 				117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */,
 				110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */,
 				113BFFE41DAEA74000E2B58D /* Helper.m in Sources */,

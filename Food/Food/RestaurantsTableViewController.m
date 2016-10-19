@@ -11,6 +11,7 @@
 #import "RestaurantInfo.h"  //for 網路 model
 #import "restaurantInfoCell.h"
 #import "RestaurantModel.h"
+#import "DetailTableViewController.h"
 
 
 @interface RestaurantsTableViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -21,6 +22,8 @@
 }
 
 @property (nonatomic, strong) NSArray *restaurants;
+@property (nonatomic, strong) NSArray *restaurantUids;
+
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIView *tmpView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *tmpAIV;
@@ -49,12 +52,16 @@
     self.tmpView.alpha = 1;
     [self.tmpAIV startAnimating];
     
-    NSLog(@"----------------------");
+    
     restaurantManager = [RestaurantInfo sharedInstance];
     //去網路拿資料 並且會回傳一個array 餐廳到我的block
     [restaurantManager getAllRestaurantArray:^(NSMutableArray *result) {
         
-               
+        _restaurantUids = [restaurantManager getAllRestaurantUids];
+       
+        NSLog(@"--------");
+        NSLog(@"%@",_restaurantUids);
+        
         //字典轉模型 到新的array
         
         NSMutableArray *models = [NSMutableArray arrayWithCapacity:result.count];
@@ -63,7 +70,7 @@
             RestaurantModel *tg = [RestaurantModel tgWithDict:dict];
             [models addObject:tg];
         }
-        //自己array
+        //自己array, 已經都是模型
         self.restaurants = [models copy];
         
         
@@ -74,7 +81,7 @@
         [self.myTableView reloadData];
         
     }];
-        //z...
+    
     
     
     
@@ -127,6 +134,34 @@
     NSLog(@"%@",cell.tg);
     
     return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
+    RestaurantModel *forDetail = self.restaurants[indexPath.row];
+    
+    NSString * selectedUid = self.restaurantUids[indexPath.row];
+    
+    
+    
+    DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+    
+    detailVC.detail = forDetail;
+    detailVC.selectedUid = selectedUid;
+    
+   
+    
+    [self showViewController:detailVC sender:nil];
+    
+    
+    
+    
+    
+    
 }
 
 

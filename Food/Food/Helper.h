@@ -62,6 +62,7 @@
 
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;
 
+-(FIRDatabaseReference *)getDatabaseRefOfFoodItems;
 
 -(FIRDatabaseReference *)getDatabaseRefOfCurrentUser;
 //--------------------------------------------------------------//

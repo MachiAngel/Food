@@ -16,6 +16,15 @@ typedef void (^DoneHandler)(NSMutableArray * result);
 
 +(instancetype)sharedInstance;
 
+
+//for main view
 -(void)getAllRestaurantArray:(DoneHandler)done;
+
+//for detail view
+
+-(void)getRestaurantFoodItemArrayWithUid:(NSString*)uid handler:(DoneHandler)done;
+
+
+-(NSMutableArray *)getAllRestaurantUids;
 
 @end

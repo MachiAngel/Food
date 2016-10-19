@@ -134,10 +134,18 @@ static Helper * _helper;
                     [[NSUserDefaults standardUserDefaults]setObject:name forKey:@"userName"];
                     [[NSUserDefaults standardUserDefaults]synchronize];
                     
+                    if (!email) {
+                        email = @"nil";
+                    }
+                    
                     
                     NSDictionary * userInfo = @{@"UserName":name,@"Email":email};
                     
                     [self uploadUserData:userInfo];
+                    
+                    
+                    
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"doneLogin" object:nil];;
                     
                     
                     

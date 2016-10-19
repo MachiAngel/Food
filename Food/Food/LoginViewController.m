@@ -42,7 +42,21 @@
     self.FbLoginView.readPermissions =
     @[@"public_profile", @"email", @"user_friends"];
     
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goMainView) name:@"doneLogin" object:nil];
+    
+    
+    
 }
+
+
+-(void)goMainView{
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+    
+    [self presentViewController:tabVC animated:true completion:nil];
+}
+
 
 
 -(void)viewDidAppear:(BOOL)animated{

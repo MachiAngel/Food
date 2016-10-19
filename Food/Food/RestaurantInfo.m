@@ -15,6 +15,10 @@ static RestaurantInfo* _restaurantManager;
 {
     // 拿到資料裝在這邊
     NSMutableArray * restaurantArray;
+    NSMutableArray * restaurantUidArray;
+    
+    //for detail
+    NSMutableArray * foodItems;
     
 }
 
@@ -39,7 +43,11 @@ static RestaurantInfo* _restaurantManager;
     //拿到餐聽的ref 並觀察他底下的東西
     [[helper getDatabaseRefOfRestaurants]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
+        //each restaurant value
         restaurantArray = [NSMutableArray new];
+        
+        //each restaurant key (aka uid)
+        restaurantUidArray = [NSMutableArray new];
         
         NSDictionary * restaurantInfo = snapshot.value;
         
@@ -50,9 +58,43 @@ static RestaurantInfo* _restaurantManager;
             
             [restaurantArray addObject:eachRestaurant];
             
+            [restaurantUidArray addObject:uid];
+        }
+        //when finish for loop , go block
+        done(restaurantArray);
+        
+    }];
+    
+
+    
+}
+
+
+-(void)getRestaurantFoodItemArrayWithUid:(NSString*)uid handler:(DoneHandler)done{
+    
+    Helper * helper = [Helper sharedInstance];
+    
+    foodItems = [NSMutableArray new];
+    
+    [[[helper getDatabaseRefOfFoodItems]child:uid]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        // restaurant of uid -> food item dict
+        
+        
+        
+        NSDictionary * foodItemsDict = snapshot.value;
+        
+        for (NSString * foodItemUid in foodItemsDict) {
+            
+            NSDictionary * fooditem = foodItemsDict[foodItemUid];
+            
+            [foodItems addObject:fooditem];
+            
         }
         
-        done(restaurantArray);
+       
+        
+        done(foodItems);
         
     }];
     
@@ -60,6 +102,19 @@ static RestaurantInfo* _restaurantManager;
     
     
     
+    
+    
 }
+
+
+
+
+
+-(NSMutableArray *)getAllRestaurantUids{
+    
+    NSLog(@"all restaurant uid : %@",restaurantUidArray);
+    return restaurantUidArray;
+}
+
 
 @end
