@@ -10,10 +10,14 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "FoodView.h"
 #import "RestaurantInfo.h"
+#import "Helper.h"
 
 @interface DetailTableViewController ()
 {
+    Helper * helper;
     RestaurantInfo * restaurantManager;
+    
+    //傳送給 新增餐廳  先沒用
     //NSArray * foodItemsArray;
 }
 
@@ -30,12 +34,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    helper = [Helper sharedInstance];
     restaurantManager = [RestaurantInfo sharedInstance];
+    
+    //觀察創造菜單上傳成功時
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Created" object:nil];
     
     //拿到foodItem 列表
     [restaurantManager getRestaurantFoodItemArrayWithUid:self.selectedUid handler:^(NSMutableArray *result) {
         
-        //NSLog(@"%@",result);
         
         //------------------------------------------
         CGFloat width = 130;
@@ -133,10 +140,42 @@
     
     
 }
+- (IBAction)addMenuBtnPressed:(id)sender {
+    
+   NSString *user = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    
+    NSString * menuUid = [helper getRandomChild];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:menuUid forKey:@"menuUid"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    
+    NSDictionary * menu = @{@"Creater":user,
+                            @"SelectedRestaurant":self.selectedUid,
+                            @"TotalPrice":@"0",
+                            @"MyPrice":@"0"};
+    
+    
+    [helper createMenuWith:menuUid menuItialize:menu];
+    //if ok , execute goAddMenu method
+    
+    
+}
+
+-(void)goAddMenu{
+    
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
+    
+    [self presentViewController:addMenuVC animated:true completion:nil];
+    
+    
+}
+
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: forIndexPath:indexPath];
     
     // Configure the cell...
     

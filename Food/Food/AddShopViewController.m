@@ -11,11 +11,6 @@
 #import "FoodItemTableViewCell.h"
 
 
-
-
-
-
-
 @interface AddShopViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 {
     
@@ -23,9 +18,7 @@
     
     NSMutableArray * shopInfo;
     
-    
-    
-    NSMutableArray * foodItems;
+        NSMutableArray * foodItems;
     
     //判斷圖片放哪
     NSUInteger photoSavePlace;   // 1 = shop , 2 = foodItem
@@ -128,10 +121,6 @@
         
         
     }
-    
-    
-    
-    
     
 }
 

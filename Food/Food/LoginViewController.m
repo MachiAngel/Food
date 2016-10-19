@@ -28,12 +28,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    NSError *error;
-    [[FIRAuth auth] signOut:&error];
-    if (!error) {
-        // Sign-out succeeded
-    }
+    //登出用  還要改
+//    NSError *error;
+//    [[FIRAuth auth] signOut:&error];
+//    if (!error) {
+//        // Sign-out succeeded
+//    }
     
     
     helper = [Helper sharedInstance];
@@ -63,14 +63,6 @@
     
     [super viewDidAppear:animated];
     
-    
-//    if ([FBSDKAccessToken currentAccessToken].tokenString) {
-//        
-//        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
-//        
-//        [self presentViewController:tabVC animated:true completion:nil];
-//    }
     
     
     if ([helper uidOfCurrentUser]) {
@@ -164,6 +156,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
         [helper loginWithCredential:[FBSDKAccessToken currentAccessToken].tokenString];
         
                 //------------ for facebook------------//
+        //可在這邊貼一個veiw?
        // self.FbLoginView.hidden = true;
         
     }

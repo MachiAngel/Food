@@ -355,11 +355,80 @@ static Helper * _helper;
         NSString * picUrlstring = [metadata.downloadURL absoluteString];
         
         //下載網址放到 database
-        [[[self getDatabaseRefOfCurrentUser]child:@"pic" ] setValue:picUrlstring];
+        [[[self getDatabaseRefOfCurrentUser]child:@"pic"] setValue:picUrlstring];
     
     }];
 }
 
+#pragma mark - Create Menu Method
+
+
+-(void)createMenuWith:(NSString*)menuUid menuItialize:(NSDictionary *)menu{
+    
+    [[[self getDatabaseRefOfMenus]child:menuUid]updateChildValues:menu withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        
+        if (error) {
+            NSLog(@"create menu error:%@",error);
+            return ;
+        }
+        
+        [self createMenuUsersWith:menuUid];
+        
+        
+    }];
+    
+    
+}
+
+
+-(void)changeStatusWithMenuUid:(NSString*)menuUid status:(NSString*)status{
+    
+    
+    NSString * currentUserUid = [self uidOfCurrentUser];
+    
+    NSDictionary * userInfo = @{@"SelfStatus":status};
+    
+    
+    
+    [[[[self getDatabaseRefOfMenuUsers]child:menuUid]child:currentUserUid]updateChildValues:userInfo withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if (error) {
+            NSLog(@"create menu error:%@",error);
+            return ;
+        }
+        
+        
+        
+    }];
+    
+    
+    
+}
+
+-(void)createMenuUsersWith:(NSString*)menuUid{
+    
+    NSString * currentUserUid = [self uidOfCurrentUser];
+    
+    NSString * userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    NSDictionary * userInfo = @{@"UserName":userName,@"SelfStatus":@"0"};
+    
+    
+    
+    [[[[self getDatabaseRefOfMenuUsers]child:menuUid]child:currentUserUid]updateChildValues:userInfo withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if (error) {
+            NSLog(@"create menu error:%@",error);
+            return ;
+        }
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"Created" object:nil];
+        
+        
+    }];
+    
+    
+}
 
 
 
@@ -415,7 +484,20 @@ static Helper * _helper;
     return [[[FIRDatabase database]reference]child:@"FoodItems"];
     
 }
-         
+
+
+-(FIRDatabaseReference *)getDatabaseRefOfMenus{
+    
+    
+    return [[[FIRDatabase database]reference]child:@"Menus"];
+    
+}
+-(FIRDatabaseReference *)getDatabaseRefOfMenuUsers{
+    
+    
+    return [[[FIRDatabase database]reference]child:@"MenuUsers"];
+    
+}
 
          
          

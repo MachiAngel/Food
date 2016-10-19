@@ -25,6 +25,9 @@
 		117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AB21DB52190004AB4F9 /* RestaurantModel.m */; };
 		1184CE421DB6254D009E2A3E /* FoodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1184CE411DB6254D009E2A3E /* FoodView.m */; };
 		1184CE451DB62576009E2A3E /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1184CE441DB62576009E2A3E /* DetailTableViewController.m */; };
+		1192A88B1DB776FE0034237F /* UserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */; };
+		1192A88E1DB777460034237F /* AddMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1192A88D1DB777460034237F /* AddMenuViewController.m */; };
+		1192A8901DB77C860034237F /* user1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1192A88F1DB77C860034237F /* user1.jpeg */; };
 		11EA3F101DAD80AA00C5E4FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F0F1DAD80AA00C5E4FA /* main.m */; };
 		11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F121DAD80AA00C5E4FA /* AppDelegate.m */; };
 		11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F171DAD80AA00C5E4FA /* Main.storyboard */; };
@@ -69,6 +72,11 @@
 		1184CE411DB6254D009E2A3E /* FoodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodView.m; sourceTree = "<group>"; };
 		1184CE431DB62576009E2A3E /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
 		1184CE441DB62576009E2A3E /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		1192A8891DB776FE0034237F /* UserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCollectionViewCell.h; sourceTree = "<group>"; };
+		1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCollectionViewCell.m; sourceTree = "<group>"; };
+		1192A88C1DB777460034237F /* AddMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMenuViewController.h; sourceTree = "<group>"; };
+		1192A88D1DB777460034237F /* AddMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMenuViewController.m; sourceTree = "<group>"; };
+		1192A88F1DB77C860034237F /* user1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user1.jpeg; sourceTree = "<group>"; };
 		11EA3F0B1DAD80AA00C5E4FA /* Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Food.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EA3F0F1DAD80AA00C5E4FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11EA3F111DAD80AA00C5E4FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -113,6 +121,8 @@
 				110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */,
 				1184CE431DB62576009E2A3E /* DetailTableViewController.h */,
 				1184CE441DB62576009E2A3E /* DetailTableViewController.m */,
+				1192A88C1DB777460034237F /* AddMenuViewController.h */,
+				1192A88D1DB777460034237F /* AddMenuViewController.m */,
 				113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */,
 				113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */,
 				113BFFC71DAEA21C00E2B58D /* RecordsTableViewController.h */,
@@ -142,13 +152,31 @@
 			children = (
 				1184CE401DB6254D009E2A3E /* FoodView.h */,
 				1184CE411DB6254D009E2A3E /* FoodView.m */,
+				1192A8891DB776FE0034237F /* UserCollectionViewCell.h */,
+				1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */,
+				1192A8861DB76CAD0034237F /* mainPageView */,
+				1192A8851DB76C8A0034237F /* addPageView */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		1192A8851DB76C8A0034237F /* addPageView */ = {
+			isa = PBXGroup;
+			children = (
+				110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */,
+				110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */,
+			);
+			name = addPageView;
+			sourceTree = "<group>";
+		};
+		1192A8861DB76CAD0034237F /* mainPageView */ = {
+			isa = PBXGroup;
+			children = (
 				117C1AA91DB5208F004AB4F9 /* restaurantInfoCell.h */,
 				117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */,
 				117C1AAB1DB5208F004AB4F9 /* restaurantInfoCell.xib */,
-				110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */,
-				110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */,
 			);
-			name = View;
+			name = mainPageView;
 			sourceTree = "<group>";
 		};
 		11EA3F021DAD80AA00C5E4FA = {
@@ -192,6 +220,7 @@
 				11EA3F1C1DAD80AA00C5E4FA /* LaunchScreen.storyboard */,
 				11EA3F2B1DAD8DC700C5E4FA /* GoogleService-Info.plist */,
 				11EA3F1F1DAD80AA00C5E4FA /* Info.plist */,
+				1192A88F1DB77C860034237F /* user1.jpeg */,
 				1179DC591DB3AF640016BF70 /* unknow.png */,
 				11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */,
 				11EA3F0F1DAD80AA00C5E4FA /* main.m */,
@@ -285,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
+				1192A8901DB77C860034237F /* user1.jpeg in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
 				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
@@ -351,7 +381,9 @@
 				1184CE451DB62576009E2A3E /* DetailTableViewController.m in Sources */,
 				113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */,
 				11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */,
+				1192A88E1DB777460034237F /* AddMenuViewController.m in Sources */,
 				113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */,
+				1192A88B1DB776FE0034237F /* UserCollectionViewCell.m in Sources */,
 				11EA3F101DAD80AA00C5E4FA /* main.m in Sources */,
 				110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */,
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,

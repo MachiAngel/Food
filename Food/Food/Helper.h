@@ -60,11 +60,24 @@
 
 -(void)uploadUserData:(NSDictionary*)info;
 
+
+//for add menu
+-(void)createMenuWith:(NSString*)menuUid menuItialize:(NSDictionary *)menu;
+
+//for  add menu btn
+-(void)changeStatusWithMenuUid:(NSString*)menuUid status:(NSString*)status;
+
+
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;
 
 -(FIRDatabaseReference *)getDatabaseRefOfFoodItems;
 
 -(FIRDatabaseReference *)getDatabaseRefOfCurrentUser;
+
+-(FIRDatabaseReference *)getDatabaseRefOfMenus;
+
+-(FIRDatabaseReference *)getDatabaseRefOfMenuUsers;
+
 //--------------------------------------------------------------//
 
 
