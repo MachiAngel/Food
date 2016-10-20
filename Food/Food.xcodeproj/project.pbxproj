@@ -11,6 +11,10 @@
 		110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6A481DB20DD7009CC9F7 /* TabBarViewController.m */; };
 		110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */; };
 		110B6ACA1DB2447B009CC9F7 /* FoodItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */; };
+		113983AD1DB917AD0080AAB5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113983AC1DB917AD0080AAB5 /* QuartzCore.framework */; };
+		113983B01DB92CA80080AAB5 /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113983AF1DB92CA80080AAB5 /* OrdersTableViewCell.m */; };
+		113983B21DB92EB20080AAB5 /* order.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 113983B11DB92EB20080AAB5 /* order.jpg */; };
+		113983B51DB93B510080AAB5 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 113983B41DB93B510080AAB5 /* OrderModel.m */; };
 		113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */; };
 		113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */; };
 		113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */; };
@@ -47,6 +51,12 @@
 		110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShopViewController.m; sourceTree = "<group>"; };
 		110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodItemTableViewCell.h; sourceTree = "<group>"; };
 		110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodItemTableViewCell.m; sourceTree = "<group>"; };
+		113983AC1DB917AD0080AAB5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		113983AE1DB92CA80080AAB5 /* OrdersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewCell.h; sourceTree = "<group>"; };
+		113983AF1DB92CA80080AAB5 /* OrdersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewCell.m; sourceTree = "<group>"; };
+		113983B11DB92EB20080AAB5 /* order.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = order.jpg; sourceTree = "<group>"; };
+		113983B31DB93B510080AAB5 /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		113983B41DB93B510080AAB5 /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		113BFFBE1DAEA0E600E2B58D /* RestaurantsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsTableViewController.h; sourceTree = "<group>"; };
 		113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsTableViewController.m; sourceTree = "<group>"; };
 		113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewController.h; sourceTree = "<group>"; };
@@ -98,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				113983AD1DB917AD0080AAB5 /* QuartzCore.framework in Frameworks */,
 				11085A661DB3595000C79F44 /* Photos.framework in Frameworks */,
 				4B277E86DE33CD5D88D41459 /* Pods_Food.framework in Frameworks */,
 				113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */,
@@ -143,6 +154,8 @@
 				117C1AB21DB52190004AB4F9 /* RestaurantModel.m */,
 				117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */,
 				117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */,
+				113983B31DB93B510080AAB5 /* OrderModel.h */,
+				113983B41DB93B510080AAB5 /* OrderModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -154,19 +167,21 @@
 				1184CE411DB6254D009E2A3E /* FoodView.m */,
 				1192A8891DB776FE0034237F /* UserCollectionViewCell.h */,
 				1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */,
+				113983AE1DB92CA80080AAB5 /* OrdersTableViewCell.h */,
+				113983AF1DB92CA80080AAB5 /* OrdersTableViewCell.m */,
 				1192A8861DB76CAD0034237F /* mainPageView */,
-				1192A8851DB76C8A0034237F /* addPageView */,
+				1192A8851DB76C8A0034237F /* addRestaurantPageView */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		1192A8851DB76C8A0034237F /* addPageView */ = {
+		1192A8851DB76C8A0034237F /* addRestaurantPageView */ = {
 			isa = PBXGroup;
 			children = (
 				110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */,
 				110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */,
 			);
-			name = addPageView;
+			name = addRestaurantPageView;
 			sourceTree = "<group>";
 		};
 		1192A8861DB76CAD0034237F /* mainPageView */ = {
@@ -222,6 +237,7 @@
 				11EA3F1F1DAD80AA00C5E4FA /* Info.plist */,
 				1192A88F1DB77C860034237F /* user1.jpeg */,
 				1179DC591DB3AF640016BF70 /* unknow.png */,
+				113983B11DB92EB20080AAB5 /* order.jpg */,
 				11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */,
 				11EA3F0F1DAD80AA00C5E4FA /* main.m */,
 			);
@@ -231,6 +247,7 @@
 		4706E9813EF0A3076F91DCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				113983AC1DB917AD0080AAB5 /* QuartzCore.framework */,
 				11085A651DB3595000C79F44 /* Photos.framework */,
 				4C4C1078F52F3F7618C2BAD1 /* Pods_Food.framework */,
 			);
@@ -253,12 +270,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11EA3F221DAD80AA00C5E4FA /* Build configuration list for PBXNativeTarget "Food" */;
 			buildPhases = (
+				CE8B3B9E13EF497BC27B3B50 /* 📦 Check Pods Manifest.lock */,
 				404812A9B30A7D1E51DFAA72 /* [CP] Check Pods Manifest.lock */,
 				11EA3F071DAD80AA00C5E4FA /* Sources */,
 				11EA3F081DAD80AA00C5E4FA /* Frameworks */,
 				11EA3F091DAD80AA00C5E4FA /* Resources */,
 				96B1427F8053959D84AB9D2F /* [CP] Embed Pods Frameworks */,
 				3C623319E4E4390BE69BBA0C /* [CP] Copy Pods Resources */,
+				D047A8BFB13FC87F4D29A78C /* 📦 Embed Pods Frameworks */,
+				8231928B122DEB0543C97F48 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -317,6 +337,7 @@
 				1192A8901DB77C860034237F /* user1.jpeg in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
+				113983B21DB92EB20080AAB5 /* order.jpg in Resources */,
 				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
 				11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */,
 				11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */,
@@ -356,6 +377,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		8231928B122DEB0543C97F48 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Food/Pods-Food-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		96B1427F8053959D84AB9D2F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,6 +407,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Food/Pods-Food-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CE8B3B9E13EF497BC27B3B50 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D047A8BFB13FC87F4D29A78C /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Food/Pods-Food-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -378,6 +444,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				113983B01DB92CA80080AAB5 /* OrdersTableViewCell.m in Sources */,
 				1184CE451DB62576009E2A3E /* DetailTableViewController.m in Sources */,
 				113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */,
 				11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */,
@@ -389,6 +456,7 @@
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
 				117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */,
 				113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */,
+				113983B51DB93B510080AAB5 /* OrderModel.m in Sources */,
 				1184CE421DB6254D009E2A3E /* FoodView.m in Sources */,
 				11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */,
 				117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */,

@@ -52,7 +52,6 @@
             [usersArray addObject:eachUser];
             
             
-            
         }
         
         [self.usersCollectionView reloadData];

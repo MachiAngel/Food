@@ -7,8 +7,19 @@
 //
 
 #import "OrdersTableViewController.h"
+#import "OrdersTableViewCell.h"
+#import "Helper.h"
+#import "OrderModel.h"
+
 
 @interface OrdersTableViewController ()
+{
+    OrderModel * orderManager;
+    Helper *helper;
+    
+    NSMutableArray * ordersArray;
+    NSMutableArray * ordersKeyArray;
+}
 
 @end
 
@@ -17,12 +28,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    orderManager = [OrderModel sharedInstance];
+    helper = [Helper sharedInstance];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [orderManager getOrdersArray:^(NSMutableArray *result) {
+        
+        ordersArray = result;
+        ordersKeyArray = [orderManager getOrdersKeyArray];
+        
+        [self.tableView reloadData];
+        
+    }];
+    
+    
+    
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+//    // get Current orders
+//    
+//    [[helper getDatabaseRefOfMenus]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//        
+//        NSDictionary * orders = snapshot.value;
+//        
+//        ordersArray = [NSMutableArray new];
+//        ordersKeyArray = [NSMutableArray new];
+//        
+//        for (NSString * orderKey in orders) {
+//            
+//            NSDictionary * eachOrder = orders[orderKey];
+//            
+//            [ordersKeyArray addObject:orderKey];
+//            [ordersArray addObject:eachOrder];
+//            
+//            
+//        }
+//        [self.tableView reloadData];
+//        
+//        NSLog(@"TT:%@",ordersArray);
+//        NSLog(@"CC:%@",ordersKeyArray);
+//        
+//    }];
+//    
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -32,24 +86,69 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    
+    return ordersArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    OrdersTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OrderCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSDictionary * eachOrderDict = ordersArray[indexPath.row];
+    
+    cell.orderRestaurantName.textColor = [UIColor orangeColor];
+    cell.orderRestaurantName.text = eachOrderDict[@"ShopName"];
+    
+    NSString * nameString = [NSString stringWithFormat:@"創建者:%@",eachOrderDict[@"Creater"]];
+    
+    cell.createrName.text = nameString;
+    
+    cell.orderImageView.image = [UIImage imageNamed:@"order.jpg"];
+    
     
     return cell;
 }
-*/
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
+    
+    
+    
+    
+}
+
+-(void)goAddMenu{
+    
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
+    
+    [self presentViewController:addMenuVC animated:true completion:nil];
+    
+    
+}
+
+
+// 再判斷是否需要
+//-(void)viewDidDisappear:(BOOL)animated{
+//    [super viewDidDisappear:animated];
+//    
+//    [[helper getDatabaseRefOfMenus]removeAllObservers];
+//    
+//}
+
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -94,5 +193,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
 
 @end

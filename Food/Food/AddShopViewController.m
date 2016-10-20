@@ -9,6 +9,7 @@
 #import <Photos/Photos.h>
 #import "AddShopViewController.h"
 #import "FoodItemTableViewCell.h"
+#import "SVProgressHUD.h"
 
 
 @interface AddShopViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
@@ -53,6 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+   
     
     helper = [Helper sharedInstance];
     
@@ -164,39 +166,60 @@
         [alert addAction:ok];
         [self presentViewController:alert animated:true completion:nil];
         
+    }else if (foodItems.count < 1){
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:@"餐點至少新增一項" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * ok = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
+        
+        [alert addAction:ok];
+        [self presentViewController:alert animated:true completion:nil];
+        
+        
+    }else{
+        
+        
+        //prepare restaurant unique id
+        
+        NSString * uniqueId = [helper getRandomChild];
+        
+        //prepare shop info and main pic to upload
+        NSDictionary * eachShopInfo = @{DICT_SHOP_NAME_KEY:shopName,
+                                        DICT_SHOP_ADDRESS_KEY:shopAddress,
+                                        DICT_SHOP_PHONE_KEY:shopPhone,
+                                        DICT_SHOP_UPLOAD_USER_KEY:userName};
+        
+        NSData * mainImageData = UIImageJPEGRepresentation(self.shopImageView.image, 0.8);
+        
+        //秀出等待
+        [SVProgressHUD show];
+        
+        [helper uploadRestaurantData:eachShopInfo mainImage:mainImageData child:uniqueId];
+        
+        //--------------------------餐點品項------------------------------------
+        
+        
+        [helper uploadFoodItemsImageToStorage:foodItems child:uniqueId];
+        
+        
+        
     }
     
-    //prepare restaurant unique id
-    
-    NSString * uniqueId = [helper getRandomChild];
-    
-    //prepare shop info and main pic to upload
-    NSDictionary * eachShopInfo = @{DICT_SHOP_NAME_KEY:shopName,
-                                DICT_SHOP_ADDRESS_KEY:shopAddress,
-                                DICT_SHOP_PHONE_KEY:shopPhone,
-                                DICT_SHOP_UPLOAD_USER_KEY:userName};
-    
-     NSData * mainImageData = UIImageJPEGRepresentation(self.shopImageView.image, 0.8);
-    
-    
-    [helper uploadRestaurantData:eachShopInfo mainImage:mainImageData child:uniqueId];
-    
-    //--------------------------餐點品項------------------------------------
-    
-    
-    [helper uploadFoodItemsImageToStorage:foodItems child:uniqueId];
     
     
     
 }
 
 -(void)goMainView{
+    
+     [SVProgressHUD dismiss];
+    
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (IBAction)cancelBtn:(id)sender {
     
-    [self goMainView];
+    [self dismissViewControllerAnimated:true completion:nil];
     
 }
 
@@ -364,10 +387,9 @@
     
     
     
-    //目前檢查用
-    NSData *imageData = UIImageJPEGRepresentation(resizeImage, 0.5);
+   
     
-    NSLog(@"imageData: %fx%f (%lu bytes)",resizeImage.size.width,resizeImage.size.height,imageData.length);
+   
     
     [picker dismissViewControllerAnimated:true completion:nil]; //記得加否則選下一張照片時會沒有反應(imagepicker會沒反應)
     

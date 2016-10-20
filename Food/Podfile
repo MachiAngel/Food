@@ -13,5 +13,6 @@ target 'Food' do
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'SDWebImage'
+  pod 'SVProgressHUD'
 
 end

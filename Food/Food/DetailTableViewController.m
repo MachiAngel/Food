@@ -11,6 +11,7 @@
 #import "FoodView.h"
 #import "RestaurantInfo.h"
 #import "Helper.h"
+#import "SVProgressHUD.h"
 
 @interface DetailTableViewController ()
 {
@@ -144,26 +145,37 @@
     
    NSString *user = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
     
+    NSLog(@"DDDDDDDD%@",user);
+    NSLog(@"DDDDDDDD%@",user);
+    
     NSString * menuUid = [helper getRandomChild];
     
     [[NSUserDefaults standardUserDefaults]setObject:menuUid forKey:@"menuUid"];
     [[NSUserDefaults standardUserDefaults]synchronize];
     
     
+
+    
+    
     NSDictionary * menu = @{@"Creater":user,
                             @"SelectedRestaurant":self.selectedUid,
+                            @"ShopName":self.detail.ShopName,
+                            @"ShopPhone":self.detail.ShopPhone,
                             @"TotalPrice":@"0",
                             @"MyPrice":@"0"};
     
     
     [helper createMenuWith:menuUid menuItialize:menu];
     //if ok , execute goAddMenu method
+    [SVProgressHUD show];
+    
     
     
 }
 
 -(void)goAddMenu{
     
+    [SVProgressHUD dismiss];
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
     
@@ -171,6 +183,9 @@
     
     
 }
+
+
+
 
 
 /*

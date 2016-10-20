@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 //shop info dict
 #define DICT_SHOP_NAME_KEY  @"ShopName"
 #define DICT_SHOP_ADDRESS_KEY  @"ShopAddress"

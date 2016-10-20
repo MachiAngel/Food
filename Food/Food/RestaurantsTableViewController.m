@@ -157,12 +157,8 @@
     
     [self showViewController:detailVC sender:nil];
     
-    
-    
-    
-    
-    
 }
+
 
 
 /*
