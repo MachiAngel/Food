@@ -18,7 +18,7 @@
     
     NSMutableArray * shopInfo;
     
-        NSMutableArray * foodItems;
+    NSMutableArray * foodItems;
     
     //判斷圖片放哪
     NSUInteger photoSavePlace;   // 1 = shop , 2 = foodItem
@@ -58,6 +58,11 @@
     
     foodItems = [NSMutableArray new];
     shopInfo =[NSMutableArray new];
+    
+    self.shopFoodIconView.contentMode = UIViewContentModeScaleAspectFill;
+    self.shopImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goMainView) name:@"doneAddShop" object:nil];
     
     
 }
@@ -176,8 +181,6 @@
     
     [helper uploadRestaurantData:eachShopInfo mainImage:mainImageData child:uniqueId];
     
-    
-    
     //--------------------------餐點品項------------------------------------
     
     
@@ -185,13 +188,15 @@
     
     
     
-    
-    
+}
+
+-(void)goMainView{
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (IBAction)cancelBtn:(id)sender {
     
-    [self dismissViewControllerAnimated:true completion:nil];
+    [self goMainView];
     
 }
 
@@ -380,7 +385,7 @@
         finalImage = sourceImage;
         
         // 解決圖片檔案很小無法上傳的問題
-        //targetSize = sourceImage.size;
+        targetSize = sourceImage.size;
         
     } else {
         // Will do resize here,and decide final size first.

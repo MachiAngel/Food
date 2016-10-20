@@ -307,7 +307,7 @@ static Helper * _helper;
                }
                
                NSLog(@"down each imageString upload");
-               
+               [[NSNotificationCenter defaultCenter]postNotificationName:@"doneAddShop" object:nil];
                
            }];
             
