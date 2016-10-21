@@ -423,11 +423,29 @@ static Helper * _helper;
         }
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"Created" object:nil];
-        
-        
+  
     }];
     
     
+}
+
+
+-(void)quitAndDeleteDataFromSelector:(NSString*)menuUid{
+    
+    NSString * currentUserUid = [self uidOfCurrentUser];
+    
+    [[[[self getDatabaseRefOfMenuUsers]child:menuUid]child:currentUserUid]removeValue];
+    
+}
+
+
+-(void)quitAndDeleteDataFromCreater:(NSString*)menuUid{
+    
+//    NSString * currentUserUid = [self uidOfCurrentUser];
+    
+    [[[self getDatabaseRefOfMenuUsers]child:menuUid]removeValue];
+    [[[self getDatabaseRefOfMenus]child:menuUid]removeValue];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"createrLeave" object:nil];
 }
 
 

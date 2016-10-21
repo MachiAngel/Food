@@ -10,6 +10,7 @@
 #import "OrdersTableViewCell.h"
 #import "Helper.h"
 #import "OrderModel.h"
+#import "AddMenuViewController.h"
 
 
 @interface OrdersTableViewController ()
@@ -21,6 +22,8 @@
     NSMutableArray * ordersKeyArray;
 }
 
+@property (nonatomic ,strong)NSString * selectedOrderKeyString;
+
 @end
 
 @implementation OrdersTableViewController
@@ -28,10 +31,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Created" object:nil];
+    
     orderManager = [OrderModel sharedInstance];
     helper = [Helper sharedInstance];
     
-    
+    //會持續監聽 有nil判斷
     [orderManager getOrdersArray:^(NSMutableArray *result) {
         
         ordersArray = result;
@@ -47,33 +52,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    
-//    // get Current orders
-//    
-//    [[helper getDatabaseRefOfMenus]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//        
-//        NSDictionary * orders = snapshot.value;
-//        
-//        ordersArray = [NSMutableArray new];
-//        ordersKeyArray = [NSMutableArray new];
-//        
-//        for (NSString * orderKey in orders) {
-//            
-//            NSDictionary * eachOrder = orders[orderKey];
-//            
-//            [ordersKeyArray addObject:orderKey];
-//            [ordersArray addObject:eachOrder];
-//            
-//            
-//        }
-//        [self.tableView reloadData];
-//        
-//        NSLog(@"TT:%@",ordersArray);
-//        NSLog(@"CC:%@",ordersKeyArray);
-//        
-//    }];
-//    
     
 }
 
@@ -119,8 +97,10 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
+    self.selectedOrderKeyString = ordersKeyArray[indexPath.row];
     
-    
+   
+    [helper createMenuUsersWith:self.selectedOrderKeyString];
     
     
 }
@@ -128,7 +108,9 @@
 -(void)goAddMenu{
     
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
+    AddMenuViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
+    
+    addMenuVC.selectedOrderKeyString = self.selectedOrderKeyString;
     
     [self presentViewController:addMenuVC animated:true completion:nil];
     

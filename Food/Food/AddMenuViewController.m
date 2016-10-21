@@ -20,7 +20,13 @@
     NSMutableArray * usersArray;
     Helper * helper;
     RestaurantInfo * restaurantManager;
+    
+    //未用
+    //FIRDatabaseHandle * _refHandle;
 }
+
+@property (nonatomic,assign) ToThisViewType typeVar;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *usersCollectionView;
 
 @end
@@ -30,33 +36,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // selecter listen if creater leave
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(quitThisPage) name:@"noUser" object:nil];
+    //creater leave
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(quitThisPage) name:@"createrLeave" object:nil];
     
-    
-    NSString * createdMenuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
     
     restaurantManager = [RestaurantInfo sharedInstance];
     helper = [Helper sharedInstance];
     
+    //判斷從哪邊進來的
+    if (self.selectedOrderKeyString) {
+        self.typeVar = ToThisViewTypeFromSelected;
+    }else{
+        self.typeVar = ToThisViewTypeFromCreate;
+    }
     
-    //顯示當下使用者用
-    [[[helper getDatabaseRefOfMenuUsers]child:createdMenuUid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        usersArray = [NSMutableArray new];
-        
-        NSDictionary * resultDict = snapshot.value;
-        
-        for (NSString * userUid in resultDict) {
-            
-            NSDictionary * eachUser = resultDict[userUid];
-            
-            [usersArray addObject:eachUser];
-            
-            
-        }
-        
-        [self.usersCollectionView reloadData];
-        
-    }];
+    
+    //執行拿到所有進來的人 持續監控~
+    [self getUserArray:self.typeVar];
+    
+   
+    
+    
+    
+    
     
     
     //顯示當下餐廳用
@@ -65,6 +69,88 @@
     
     
 }
+
+
+-(void)getUserArray:(ToThisViewType)type{
+    
+    if (type == ToThisViewTypeFromSelected) {
+        
+        //顯示當下使用者用 (包含自己)
+        [[[helper getDatabaseRefOfMenuUsers]child:self.selectedOrderKeyString]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            
+            usersArray = [NSMutableArray new];
+            
+            
+            NSDictionary * resultDict = snapshot.value;
+            
+            if ([resultDict isEqual:[NSNull null]]) {
+                NSLog(@"沒用戶了");
+                NSLog(@"沒用戶了");
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"noUser" object:nil];
+                
+            }else{
+                
+                for (NSString * userUid in resultDict) {
+                    
+                    NSDictionary * eachUser = resultDict[userUid];
+                    
+                    [usersArray addObject:eachUser];
+                    
+                }
+                
+                [self.usersCollectionView reloadData];
+                
+            }
+            
+           
+            
+        }];
+        
+        
+    }else{
+        //從 create menu
+        
+        NSString * createdMenuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        //顯示當下使用者用 (包含自己)
+        [[[helper getDatabaseRefOfMenuUsers]child:createdMenuUid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            
+            usersArray = [NSMutableArray new];
+            
+            NSDictionary * resultDict = snapshot.value;
+            
+            if ([resultDict isEqual:[NSNull null]]) {
+                NSLog(@"沒用戶了");
+                NSLog(@"沒用戶了");
+            }else{
+                
+                for (NSString * userUid in resultDict) {
+                    
+                    NSDictionary * eachUser = resultDict[userUid];
+                    
+                    [usersArray addObject:eachUser];
+                    
+                    
+                }
+                
+                [self.usersCollectionView reloadData];
+                
+            }
+            
+            
+            
+            
+        }];
+        
+        
+    }
+    
+    
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -120,23 +206,97 @@
 */
 - (IBAction)okBtn:(id)sender {
     
-    NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
-    
-    NSString * okPressed = @"1";
     
     
-    [helper changeStatusWithMenuUid:menuUid status:okPressed];
+    NSString * cancelStatusString = @"1";
+    
+    [self changeStauts:cancelStatusString];
+    
     
 }
+
+
+
 - (IBAction)cancelBtn:(id)sender {
     
-    NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
     
-    NSString * cancelPress = @"0";
+    NSString * cancelStatusString = @"0";
+    
+    [self changeStauts:cancelStatusString];
+    
+
+    
+}
+
+-(void)changeStauts:(NSString *)statusString{
+    
+    //一樣判斷從哪邊進來, 才能改 狀態
+    
+    if (self.typeVar == ToThisViewTypeFromSelected) {
+        //from selected order
+        
+        //NSString * cancelPress = @"0";
+        
+        [helper changeStatusWithMenuUid:self.selectedOrderKeyString status:statusString];
+    }else{
+        //from create
+        
+        
+        NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [helper changeStatusWithMenuUid:menuUid status:statusString];
+        
+    }
     
     
-    [helper changeStatusWithMenuUid:menuUid status:cancelPress];
     
+    
+    
+}
+
+
+
+
+
+
+
+
+- (IBAction)quitThisPageBtnPressed:(id)sender {
+    
+    //刪除記錄 , 分創建者 與 加入者
+    if (_typeVar == ToThisViewTypeFromSelected) {
+        // selecter leave
+        [helper quitAndDeleteDataFromSelector:self.selectedOrderKeyString];
+        
+        [self dismissViewControllerAnimated:true completion:nil];
+    }else{
+        // creater leave
+         NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [helper quitAndDeleteDataFromCreater:menuUid];
+        
+    }
+    
+    
+}
+
+-(void)quitThisPage{
+    
+    if (self.typeVar == ToThisViewTypeFromSelected) {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"創立訂單者取消此訂單" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self dismissViewControllerAnimated:true completion:nil];
+        }];
+        
+                [alert addAction:ok];
+        [self presentViewController:alert animated:true completion:nil];
+        
+    }else{
+        [self dismissViewControllerAnimated:true completion:nil];
+    }
+    
+   
 }
 
 @end

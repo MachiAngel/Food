@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    
+    ToThisViewTypeFromSelected,
+    ToThisViewTypeFromCreate
+    
+} ToThisViewType;
+
 @interface AddMenuViewController : UIViewController
+
+@property (nonatomic ,strong)NSString * selectedOrderKeyString;
+
+
 
 @end

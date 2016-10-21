@@ -61,11 +61,20 @@
 -(void)uploadUserData:(NSDictionary*)info;
 
 
-//for add menu
+// detailTableView method for add menu
 -(void)createMenuWith:(NSString*)menuUid menuItialize:(NSDictionary *)menu;
 
-//for  add menu btn
+//  addMenuViewController method for  test cancel
 -(void)changeStatusWithMenuUid:(NSString*)menuUid status:(NSString*)status;
+
+
+// detailTableView method for add menu
+// ordersViewController method for join the order
+-(void)createMenuUsersWith:(NSString*)menuUid;
+
+//  addMenuViewController method for quit and delete
+-(void)quitAndDeleteDataFromSelector:(NSString*)menuUid;
+-(void)quitAndDeleteDataFromCreater:(NSString*)menuUid;
 
 
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;
