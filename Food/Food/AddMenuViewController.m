@@ -11,11 +11,12 @@
 #import "Helper.h"
 #import "RestaurantInfo.h" //拿到點餐列表
 #import "OrderPickerView.h"
+#import "orderListTableViewCell.h"
 
-@import Firebase;
 
 
-@interface AddMenuViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+
+@interface AddMenuViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     //顯示當下裡面使用者
     NSMutableArray * usersArray;
@@ -25,6 +26,10 @@
     
     //判斷是否status 全部都ok
     NSMutableArray * statusOkArray;
+    
+    //拿到使用者點餐資訊array
+    NSMutableArray * usersOrderArray;
+    
     
     Helper * helper;
     RestaurantInfo * restaurantManager;
@@ -38,7 +43,17 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *usersCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *orderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderCreaterLabel;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *sendOrderBtnView;
+@property (weak, nonatomic) IBOutlet UIButton *chooseOrderBtnView;
+
+
+
+@property (weak, nonatomic) IBOutlet UITableView *orderlistTableView;
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *progressView;
+@property (weak, nonatomic) IBOutlet UILabel *showFinishLabel;
 
 @end
 
@@ -46,6 +61,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.showFinishLabel.text = @"";
     
     // selecter listen if creater leave
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(quitThisPage) name:@"noUser" object:nil];
@@ -80,7 +97,11 @@
         self.sendOrderBtnView.alpha = 0.5;
     }
     
+    //持續觀察totalPrice
+    [self observeTotalPriceLabel:self.typeVar];
     
+    //持續觀察orderList
+    [self observeOrderListForTableView:self.typeVar];
     
     
 }
@@ -93,14 +114,14 @@
             
             menuArray = [NSMutableArray new];
             
-            NSLog(@"QQQQQ%@",result);
+            
             for (int i = 0; i < result.count; i++) {
                 NSDictionary * eachItem = result[i];
                 
                 NSString * foodName = eachItem[@"FoodName"];
                 NSString * foodPrice = eachItem[@"FoodPrice"];
                 
-                NSString * showItem = [NSString stringWithFormat:@"%@  %@元",foodName,foodPrice];
+                NSString * showItem = [NSString stringWithFormat:@"%@ %@元",foodName,foodPrice];
                 
                 [menuArray addObject:showItem];
                 
@@ -125,7 +146,7 @@
                 NSString * foodName = eachItem[@"FoodName"];
                 NSString * foodPrice = eachItem[@"FoodPrice"];
                 
-                NSString * showItem = [NSString stringWithFormat:@"%@  %@元",foodName,foodPrice];
+                NSString * showItem = [NSString stringWithFormat:@"%@ %@元",foodName,foodPrice];
                 
                 [menuArray addObject:showItem];
                 
@@ -136,6 +157,72 @@
         
         
         
+    }
+    
+}
+
+
+
+-(void)observeOrderListForTableView:(ToThisViewType)type{
+    
+    if (type == ToThisViewTypeFromSelected) {
+        
+        //拿到使用者點餐資訊array
+        //NSMutableArray * usersOrderArray;
+        [restaurantManager getOrderListArrayWithUid:self.selectedOrderKeyString handler:^(NSMutableArray *result) {
+            
+            usersOrderArray = result;
+            
+            [self.orderlistTableView reloadData];
+            
+            
+        }];
+       
+        
+    }else{
+        NSString * createdMenuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [restaurantManager getOrderListArrayWithUid:createdMenuUid handler:^(NSMutableArray *result) {
+            
+            usersOrderArray = result;
+            
+            [self.orderlistTableView reloadData];
+            
+            
+        }];
+        
+        
+        
+    }
+    
+    
+}
+
+
+
+-(void)observeTotalPriceLabel:(ToThisViewType)type{
+    
+    if (type == ToThisViewTypeFromSelected) {
+        
+        [restaurantManager getTotalPriceWithMenuUid:self.selectedOrderKeyString handler:^(NSString *result) {
+            
+            NSString * totalPriceFinal = [NSString stringWithFormat:@"%@",result];
+            
+            self.totalPriceLabel.text = totalPriceFinal;
+            
+        }];
+        
+    }else{
+         NSString * createdMenuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [restaurantManager getTotalPriceWithMenuUid:createdMenuUid handler:^(NSString *result) {
+            
+            NSString * totalPriceFinal = [NSString stringWithFormat:@"%@",result];
+            
+            self.totalPriceLabel.text = totalPriceFinal;
+            
+        }];
+
     }
     
 }
@@ -170,8 +257,6 @@
                 [self.usersCollectionView reloadData];
                 
             }
-            
-           
             
         }];
         
@@ -224,19 +309,11 @@
             }
             
             
-            
-            
         }];
-        
         
     }
     
-    
 }
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -244,7 +321,7 @@
 }
 
 
-
+#pragma mark - CollectionView Delegate Medthod
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
@@ -281,6 +358,29 @@
     
 }
 
+#pragma mark - TableView Delegate Medthod
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return usersOrderArray.count;
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    orderListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
+    NSDictionary * eachOrder = usersOrderArray[indexPath.row];
+    
+    NSString * orderString = eachOrder[@"Order"];
+    NSString * userName = eachOrder[@"UserName"];
+    
+    cell.singleOrderLabel.text = [NSString stringWithFormat:@"%@  點了 %@",userName,orderString];
+    
+    return cell;
+}
+
+
 
 /*
 #pragma mark - Navigation
@@ -292,9 +392,11 @@
 }
 */
 
-
+#pragma mark - Button Pressed Method
 - (IBAction)orderBtnPressed:(id)sender {
     
+    _orderLabel.text = @"尚未點餐";
+    self.progressView.image = [UIImage imageNamed:@"progress1"];
     
     OrderPickerView *pickerView =  [[OrderPickerView alloc] initWithFrame:CGRectMake(100, 200, 200, 300)];
     
@@ -303,8 +405,11 @@
         _orderLabel.text = selectedOrder;
         NSLog(@"******%@*******",selectedOrder);
         
+        self.progressView.image = [UIImage imageNamed:@"progress2"];
+        
     };
     
+    //將餐點資料灌入下載到的array;
     pickerView.MArray = menuArray;
     
     [self.view addSubview:pickerView];
@@ -315,29 +420,237 @@
 
 - (IBAction)okBtn:(id)sender {
     
-    
-    
-    NSString * cancelStatusString = @"1";
-    
-    [self changeStauts:cancelStatusString];
+    if ([_orderLabel.text isEqualToString:@"尚未點餐"]) {
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"尚未選擇餐點" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           
+        }];
+        
+        [alert addAction:ok];
+        [self presentViewController:alert animated:true completion:nil];
+        
+        
+    }else{
+         //點ok後  上傳清單到 table view
+        [self uploadSelfOrder:self.typeVar];
+        
+         //計算完後 上傳final Price到該地點
+        [self uploadFinalPriceFromAdd:self.typeVar];
+        
+        
+        //自己頁面調整
+        self.showFinishLabel.text =@"點餐完成，請等待其他人";
+        
+        self.progressView.image = [UIImage imageNamed:@"progress3"];
+        
+        //小綠人
+        NSString * okStatusString = @"1";
+        [self changeStauts:okStatusString];
+        
+        //按確定後不給點了
+        self.chooseOrderBtnView.alpha = 0.5;
+        self.chooseOrderBtnView.userInteractionEnabled = false;
+        
+        
+    }
     
     
 }
+
+
+
+-(void)uploadFinalPriceFromAdd:(ToThisViewType)type{
+    
+    NSString * finalTotalString = [self countTotalPriceFromAdd:self.totalPriceLabel.text add:self.orderLabel.text];
+    
+    NSDictionary * totalPrice =@{@"TotalPrice":finalTotalString};
+    
+    
+    if (type == ToThisViewTypeFromSelected) {
+       
+        
+        [helper uploadtotalPriceWithUid:self.selectedOrderKeyString andPrice:totalPrice];
+        
+    }else{
+        
+         NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [helper uploadtotalPriceWithUid:menuUid andPrice:totalPrice];
+
+        
+    }
+    
+    
+    
+    
+}
+
+
+-(void)uploadFinalPriceFromDeleteOrder:(ToThisViewType)type{
+    
+    NSString * finalTotalString = [self countTotalPriceFromDelete:self.totalPriceLabel.text DeleteString:self.orderLabel.text];
+    
+    NSDictionary * totalPrice =@{@"TotalPrice":finalTotalString};
+    
+    
+    if (type == ToThisViewTypeFromSelected) {
+        
+        
+        [helper uploadtotalPriceWithUid:self.selectedOrderKeyString andPrice:totalPrice];
+        
+    }else{
+        
+        NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [helper uploadtotalPriceWithUid:menuUid andPrice:totalPrice];
+       
+    }
+    
+    
+}
+
+
+
+
+-(void)uploadSelfOrder:(ToThisViewType)type{
+    
+    
+    NSString * userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    NSString * orderString = self.orderLabel.text;
+    
+    NSDictionary * orderDict = @{@"UserName":userName,@"Order":orderString};
+    
+    
+    
+    if (type == ToThisViewTypeFromSelected) {
+        
+        [helper uploadUserOrderWithMenuUid:self.selectedOrderKeyString andOrder:orderDict];
+        
+    
+    }else{
+        
+        NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [helper uploadUserOrderWithMenuUid:menuUid andOrder:orderDict];
+        
+        
+    }
+    
+}
+
+
+-(void)deleteSelfOrder:(ToThisViewType)type{
+    
+    if (type == ToThisViewTypeFromSelected) {
+        
+        [helper deleteUserOrderWithMenuUid:self.selectedOrderKeyString];
+        
+        
+    }else{
+        
+        NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        
+        [helper deleteUserOrderWithMenuUid:menuUid];
+        
+    }
+    
+}
+
+
+
+
+-(NSString*)countTotalPriceFromAdd:(NSString *)CurrentTotal add:(NSString*)add{
+    
+    NSArray *array = [add componentsSeparatedByString:@" "];
+    
+    NSString * priceString = array[1];
+    
+    NSString * currentTotalString = CurrentTotal;
+    
+    NSInteger priceInt = [priceString integerValue];
+    NSInteger currentTotalInt = [currentTotalString integerValue];
+    
+    currentTotalInt = currentTotalInt + priceInt;
+    
+    NSString *finalTotalString = [NSString stringWithFormat:@"%ld", (long)currentTotalInt];
+    
+    return finalTotalString;
+    
+    
+}
+
+-(NSString*)countTotalPriceFromDelete:(NSString *)CurrentTotal DeleteString:(NSString*)deleteString
+{
+    
+    NSArray *array = [deleteString componentsSeparatedByString:@" "];
+    
+    NSString * priceString = array[1];
+    
+    NSString * currentTotalString = CurrentTotal;
+    NSLog(@"NUmber %@",currentTotalString);
+    
+    NSInteger priceInt = [priceString integerValue];
+    NSInteger currentTotalInt = [currentTotalString integerValue];
+    
+    currentTotalInt = currentTotalInt - priceInt;
+    NSLog(@"NUmber %ld",currentTotalInt);
+    
+    NSString *finalTotalString = [NSString stringWithFormat:@"%ld", (long)currentTotalInt];
+    
+    return finalTotalString;
+    
+    
+}
+
+
+
+
+
+
+
+
 
 
 
 - (IBAction)cancelBtn:(id)sender {
     
+
     
     NSString * cancelStatusString = @"0";
     
     [self changeStauts:cancelStatusString];
     
-
+    
+    
+    
+    //按下取消開啟可選擇餐點
+    self.chooseOrderBtnView.alpha = 1;
+    self.chooseOrderBtnView.userInteractionEnabled = true;
+    self.progressView.image = [UIImage imageNamed:@"progress1.png"];
+    
+    //取消馬上刪除資料 更新total price
+    
+    [self uploadFinalPriceFromDeleteOrder:self.typeVar];
+    [self deleteSelfOrder:self.typeVar];
+    
+    self.orderLabel.text = @"尚未點餐";
     
 }
+
+
+
+
+
+
+
 - (IBAction)sendOrderBtnPressed:(id)sender {
+    
 }
+
+
+
+
 
 -(void)changeStauts:(NSString *)statusString{
     
@@ -346,9 +659,10 @@
     if (self.typeVar == ToThisViewTypeFromSelected) {
         //from selected order
         
-        //NSString * cancelPress = @"0";
+        
         
         [helper changeStatusWithMenuUid:self.selectedOrderKeyString status:statusString];
+        
     }else{
         //from create
         
@@ -404,6 +718,11 @@
         [self presentViewController:alert animated:true completion:nil];
         
     }else{
+        
+        //need remove observe
+        
+        
+        
         [self dismissViewControllerAnimated:true completion:nil];
     }
     

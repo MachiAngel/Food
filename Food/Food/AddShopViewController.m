@@ -61,8 +61,8 @@
     foodItems = [NSMutableArray new];
     shopInfo =[NSMutableArray new];
     
-    self.shopFoodIconView.contentMode = UIViewContentModeScaleAspectFill;
-    self.shopImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.shopFoodIconView.contentMode = UIViewContentModeScaleToFill;
+    self.shopImageView.contentMode = UIViewContentModeScaleToFill;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goMainView) name:@"doneAddShop" object:nil];
     

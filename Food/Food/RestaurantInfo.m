@@ -20,6 +20,9 @@ static RestaurantInfo* _restaurantManager;
     //for detail
     NSMutableArray * foodItems;
     
+    //for addMenu
+    NSMutableArray * orderList;
+    
 }
 
 +(instancetype)sharedInstance{
@@ -92,20 +95,66 @@ static RestaurantInfo* _restaurantManager;
             
         }
         
-       
-        
+
         done(foodItems);
         
     }];
     
     
     
+}
+
+
+-(void)getOrderListArrayWithUid:(NSString*)uid handler:(DoneHandler)done{
     
+    Helper * helper = [Helper sharedInstance];
     
+    [[[helper getDatabaseRefOfMenuOrderList]child:uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        orderList = [NSMutableArray new];
+        
+        NSDictionary * orderListDict = snapshot.value;
+        
+        if ([orderListDict isEqual: [NSNull null]]) {
+            NSLog(@"沒值");
+        }else{
+            
+            for (NSString * userUid in orderListDict) {
+                
+                NSDictionary *eachOrderList = orderListDict[userUid];
+                
+                [orderList addObject:eachOrderList];
+                
+            }
+            
+        }
+        
+        done(orderList);
+        
+    }];
     
     
 }
 
+
+
+
+-(void)getTotalPriceWithMenuUid:(NSString*)uid handler:(DoneHandlerString)done{
+    
+    Helper * helper = [Helper sharedInstance];
+    
+    [[[helper getDatabaseRefOfMenus]child:uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSDictionary * menuInfo = snapshot.value;
+        NSString * totalPrice = menuInfo[@"TotalPrice"];
+        
+         done(totalPrice);
+        
+    }];
+
+   
+    
+}
 
 
 

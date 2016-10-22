@@ -430,6 +430,58 @@ static Helper * _helper;
 }
 
 
+
+
+-(void)uploadUserOrderWithMenuUid:(NSString*)uid andOrder:(NSDictionary*)dict{
+    
+    NSString * userUid = [self uidOfCurrentUser];
+    
+    
+    [[[[self getDatabaseRefOfMenuOrderList]child:uid]child:userUid]updateChildValues:dict withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if (error) {
+            NSLog(@"error: %@",error);
+            return ;
+        }else{
+            NSLog(@"success upload");
+        }
+
+    }];
+    
+  
+}
+
+-(void)uploadtotalPriceWithUid:(NSString*)uid andPrice:(NSDictionary*)dict{
+    
+    [[[self getDatabaseRefOfMenus]child:uid]updateChildValues:dict withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if (error) {
+            NSLog(@"error: %@",error);
+            return ;
+        }else{
+            NSLog(@"success upload");
+        }
+        
+    }];
+    
+}
+
+
+
+
+-(void)deleteUserOrderWithMenuUid:(NSString*)uid{
+    
+    NSString * userUid = [self uidOfCurrentUser];
+    
+    
+    [[[[self getDatabaseRefOfMenuOrderList]child:uid]child:userUid]removeValue];
+    
+    
+}
+
+
+
+
 -(void)quitAndDeleteDataFromSelector:(NSString*)menuUid{
     
     NSString * currentUserUid = [self uidOfCurrentUser];
@@ -517,8 +569,13 @@ static Helper * _helper;
     
 }
 
-         
-         
+-(FIRDatabaseReference *)getDatabaseRefOfMenuOrderList{
+    
+    
+    return [[[FIRDatabase database]reference]child:@"OrderList"];
+    
+}
+
          
 
 //storge

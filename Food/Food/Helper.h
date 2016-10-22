@@ -77,6 +77,15 @@
 -(void)quitAndDeleteDataFromCreater:(NSString*)menuUid;
 
 
+// AddMenuViewController method for "user choose order and ok"
+-(void)uploadUserOrderWithMenuUid:(NSString*)uid andOrder:(NSDictionary*)dict;
+-(void)uploadtotalPriceWithUid:(NSString*)uid andPrice:(NSDictionary*)dict;
+
+
+// AddmenuViewController method for cancel order
+-(void)deleteUserOrderWithMenuUid:(NSString*)uid;
+
+
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;
 
 -(FIRDatabaseReference *)getDatabaseRefOfFoodItems;
@@ -86,6 +95,8 @@
 -(FIRDatabaseReference *)getDatabaseRefOfMenus;
 
 -(FIRDatabaseReference *)getDatabaseRefOfMenuUsers;
+
+-(FIRDatabaseReference *)getDatabaseRefOfMenuOrderList;
 
 //--------------------------------------------------------------//
 

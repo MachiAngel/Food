@@ -12,6 +12,9 @@
 
 typedef void (^DoneHandler)(NSMutableArray * result);
 
+typedef void (^DoneHandlerString)(NSString * result);
+
+
 @interface RestaurantInfo : NSObject
 
 +(instancetype)sharedInstance;
@@ -23,6 +26,13 @@ typedef void (^DoneHandler)(NSMutableArray * result);
 //for detail view
 
 -(void)getRestaurantFoodItemArrayWithUid:(NSString*)uid handler:(DoneHandler)done;
+
+
+
+//for addMenuViewContrller
+-(void)getTotalPriceWithMenuUid:(NSString*)uid handler:(DoneHandlerString)done;
+
+-(void)getOrderListArrayWithUid:(NSString*)uid handler:(DoneHandler)done;
 
 
 -(NSMutableArray *)getAllRestaurantUids;

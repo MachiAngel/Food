@@ -23,6 +23,10 @@
 		113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */; };
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
 		114C765B1DBB767F00E3D584 /* OrderPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C765A1DBB767F00E3D584 /* OrderPickerView.m */; };
+		114C765F1DBB961600E3D584 /* orderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C765E1DBB961600E3D584 /* orderListTableViewCell.m */; };
+		114C76861DBBB32C00E3D584 /* progress3.png in Resources */ = {isa = PBXBuildFile; fileRef = 114C76831DBBB32C00E3D584 /* progress3.png */; };
+		114C76881DBBB32C00E3D584 /* progress2.png in Resources */ = {isa = PBXBuildFile; fileRef = 114C76851DBBB32C00E3D584 /* progress2.png */; };
+		114C768C1DBBB5F500E3D584 /* progress1.png in Resources */ = {isa = PBXBuildFile; fileRef = 114C768B1DBBB5F500E3D584 /* progress1.png */; };
 		1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1179DC591DB3AF640016BF70 /* unknow.png */; };
 		117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */; };
 		117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */; };
@@ -72,6 +76,11 @@
 		113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		114C76591DBB767F00E3D584 /* OrderPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPickerView.h; sourceTree = "<group>"; };
 		114C765A1DBB767F00E3D584 /* OrderPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPickerView.m; sourceTree = "<group>"; };
+		114C765D1DBB961600E3D584 /* orderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderListTableViewCell.h; sourceTree = "<group>"; };
+		114C765E1DBB961600E3D584 /* orderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderListTableViewCell.m; sourceTree = "<group>"; };
+		114C76831DBBB32C00E3D584 /* progress3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress3.png; sourceTree = "<group>"; };
+		114C76851DBBB32C00E3D584 /* progress2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress2.png; sourceTree = "<group>"; };
+		114C768B1DBBB5F500E3D584 /* progress1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress1.png; sourceTree = "<group>"; };
 		1179DC591DB3AF640016BF70 /* unknow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknow.png; sourceTree = "<group>"; };
 		117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantInfo.h; sourceTree = "<group>"; };
 		117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfo.m; sourceTree = "<group>"; };
@@ -170,14 +179,24 @@
 				1184CE411DB6254D009E2A3E /* FoodView.m */,
 				114C76591DBB767F00E3D584 /* OrderPickerView.h */,
 				114C765A1DBB767F00E3D584 /* OrderPickerView.m */,
-				1192A8891DB776FE0034237F /* UserCollectionViewCell.h */,
-				1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */,
 				113983AE1DB92CA80080AAB5 /* OrdersTableViewCell.h */,
 				113983AF1DB92CA80080AAB5 /* OrdersTableViewCell.m */,
+				114C765C1DBB95B500E3D584 /* addMenuPageView */,
 				1192A8861DB76CAD0034237F /* mainPageView */,
 				1192A8851DB76C8A0034237F /* addRestaurantPageView */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		114C765C1DBB95B500E3D584 /* addMenuPageView */ = {
+			isa = PBXGroup;
+			children = (
+				1192A8891DB776FE0034237F /* UserCollectionViewCell.h */,
+				1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */,
+				114C765D1DBB961600E3D584 /* orderListTableViewCell.h */,
+				114C765E1DBB961600E3D584 /* orderListTableViewCell.m */,
+			);
+			name = addMenuPageView;
 			sourceTree = "<group>";
 		};
 		1192A8851DB76C8A0034237F /* addRestaurantPageView */ = {
@@ -243,6 +262,9 @@
 				1192A88F1DB77C860034237F /* user1.jpeg */,
 				1179DC591DB3AF640016BF70 /* unknow.png */,
 				113983B11DB92EB20080AAB5 /* order.jpg */,
+				114C768B1DBBB5F500E3D584 /* progress1.png */,
+				114C76831DBBB32C00E3D584 /* progress3.png */,
+				114C76851DBBB32C00E3D584 /* progress2.png */,
 				11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */,
 				11EA3F0F1DAD80AA00C5E4FA /* main.m */,
 			);
@@ -340,11 +362,14 @@
 			files = (
 				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
 				1192A8901DB77C860034237F /* user1.jpeg in Resources */,
+				114C768C1DBBB5F500E3D584 /* progress1.png in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
 				113983B21DB92EB20080AAB5 /* order.jpg in Resources */,
 				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
+				114C76881DBBB32C00E3D584 /* progress2.png in Resources */,
 				11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */,
+				114C76861DBBB32C00E3D584 /* progress3.png in Resources */,
 				11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,6 +492,7 @@
 				11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */,
 				117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */,
 				117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */,
+				114C765F1DBB961600E3D584 /* orderListTableViewCell.m in Sources */,
 				110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */,
 				113BFFE41DAEA74000E2B58D /* Helper.m in Sources */,
 				110B6ACA1DB2447B009CC9F7 /* FoodItemTableViewCell.m in Sources */,
