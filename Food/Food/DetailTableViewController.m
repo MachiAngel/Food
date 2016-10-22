@@ -145,15 +145,16 @@
     
    NSString *user = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
     
-    NSLog(@"DDDDDDDD%@",user);
-    NSLog(@"DDDDDDDD%@",user);
+  
     
     NSString * menuUid = [helper getRandomChild];
     
+    //存該新的 menuUid 到 userDefaults
     [[NSUserDefaults standardUserDefaults]setObject:menuUid forKey:@"menuUid"];
+    //存該Restaurant key 到 userDefaults
+    
+    [[NSUserDefaults standardUserDefaults]setObject:self.selectedUid forKey:@"SelectedRestaurant"];
     [[NSUserDefaults standardUserDefaults]synchronize];
-    
-    
 
     
     

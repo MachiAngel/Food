@@ -18,7 +18,7 @@ typedef enum {
 @interface AddMenuViewController : UIViewController
 
 @property (nonatomic ,strong)NSString * selectedOrderKeyString;
-
+@property (nonatomic ,strong)NSString * SelectedRestaurantUid;
 
 
 @end

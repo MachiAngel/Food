@@ -157,7 +157,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ghF-i5-qPz" id="8oY-BV-6uY">
-                                    <frame key="frameInset" width="375" height="59.5"/>
+                                    <frame key="frameInset" width="375" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="餐廳名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgf-Jy-ig0">
@@ -211,7 +211,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u0j-yB-8RM" id="0hd-RA-HLX">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -240,7 +240,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wb7-XS-E7w" id="hF8-E2-uZI">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -392,7 +392,7 @@
                                         <rect key="frame" x="0.0" y="28" width="1000" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DhP-8K-87w" id="wnw-rk-iRi">
-                                            <frame key="frameInset" width="1000" height="59.5"/>
+                                            <frame key="frameInset" width="1000" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5zO-IO-5kr">
@@ -656,7 +656,7 @@
                                         <rect key="frame" x="0.0" y="148" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3sB-Vi-THq" id="Qya-oZ-fGy">
-                                            <frame key="frameInset" width="375" height="119.5"/>
+                                            <frame key="frameInset" width="375" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店名:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph0-1a-CiV">
@@ -720,7 +720,7 @@
                                         <rect key="frame" x="0.0" y="268" width="375" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J21-9J-N6e" id="QRQ-bj-PN3">
-                                            <frame key="frameInset" width="375" height="239.5"/>
+                                            <frame key="frameInset" width="375" height="239"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpE-Qm-JXV"/>
@@ -741,7 +741,7 @@
                                         <rect key="frame" x="0.0" y="536" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZbL-6J-Efu" id="7lC-5m-fYV">
-                                            <frame key="frameInset" width="375" height="67.5"/>
+                                            <frame key="frameInset" width="375" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-bg-CVq">
@@ -795,7 +795,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o6P-C2-6A7">
-                                <frame key="frameInset" minX="16" minY="20" width="343" height="70"/>
+                                <frame key="frameInset" minX="16" minY="62" width="343" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EK8-jH-dEm">
@@ -859,14 +859,54 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7b-HE-ser">
+                                <frame key="frameInset" minX="16" minY="164" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="點餐"/>
+                                <connections>
+                                    <action selector="orderBtnPressed:" destination="hpK-wK-NyO" eventType="touchUpInside" id="Atc-LL-J2O"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2g-yA-bas">
+                                <frame key="frameInset" minX="114" minY="168" width="222" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="訂單發起人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N73-1J-AEY">
+                                <frame key="frameInset" minX="143" minY="20" width="107" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rN5-Tg-6xi">
+                                <state key="normal" title="送出"/>
+                                <connections>
+                                    <action selector="sendOrderBtnPressed:" destination="hpK-wK-NyO" eventType="touchUpInside" id="yMM-CJ-jmq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="餐廳姓名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZu-Fh-E55">
+                                <frame key="frameInset" minX="16" minY="20" width="119" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.84393645340000001" green="0.96072392610000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="rN5-Tg-6xi" secondAttribute="trailing" constant="23" id="Ak7-cv-nGd"/>
                             <constraint firstItem="Hk0-po-bjW" firstAttribute="top" secondItem="hVG-0R-NpV" secondAttribute="bottom" constant="20" id="Ncm-7k-ywT"/>
+                            <constraint firstItem="Hk0-po-bjW" firstAttribute="top" secondItem="rN5-Tg-6xi" secondAttribute="bottom" constant="20" id="TOW-lX-kMX"/>
                             <constraint firstItem="hVG-0R-NpV" firstAttribute="leading" secondItem="uSG-Sd-dG6" secondAttribute="leadingMargin" id="hfI-Xh-F6a"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="orderCreaterLabel" destination="N73-1J-AEY" id="Unm-ob-KcE"/>
+                        <outlet property="orderLabel" destination="m2g-yA-bas" id="Dn0-IH-zuh"/>
+                        <outlet property="sendOrderBtnView" destination="rN5-Tg-6xi" id="0lz-MD-LNo"/>
                         <outlet property="usersCollectionView" destination="o6P-C2-6A7" id="KAY-zI-XJR"/>
                     </connections>
                 </viewController>

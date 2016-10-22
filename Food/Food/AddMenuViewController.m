@@ -10,6 +10,7 @@
 #import "UserCollectionViewCell.h"
 #import "Helper.h"
 #import "RestaurantInfo.h" //拿到點餐列表
+#import "OrderPickerView.h"
 
 @import Firebase;
 
@@ -18,6 +19,13 @@
 {
     //顯示當下裡面使用者
     NSMutableArray * usersArray;
+    
+    //拿到最後整理好的品項array
+    NSMutableArray * menuArray;
+    
+    //判斷是否status 全部都ok
+    NSMutableArray * statusOkArray;
+    
     Helper * helper;
     RestaurantInfo * restaurantManager;
     
@@ -28,6 +36,9 @@
 @property (nonatomic,assign) ToThisViewType typeVar;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *usersCollectionView;
+@property (weak, nonatomic) IBOutlet UILabel *orderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orderCreaterLabel;
+@property (weak, nonatomic) IBOutlet UIButton *sendOrderBtnView;
 
 @end
 
@@ -38,7 +49,7 @@
     
     // selecter listen if creater leave
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(quitThisPage) name:@"noUser" object:nil];
-    //creater leave
+    // listen creater leave
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(quitThisPage) name:@"createrLeave" object:nil];
     
     
@@ -53,23 +64,81 @@
     }
     
     
-    //執行拿到所有進來的人 持續監控~
+    //執行方法拿到所有進來的人 持續監控~
     [self getUserArray:self.typeVar];
     
-   
+
+    //執行方法拿到當下餐廳餐點用的品項array
+    [self getFoodItems:self.typeVar];
     
+    //handle sender btn
     
-    
-    
-    
-    
-    //顯示當下餐廳用
+    if (self.typeVar == ToThisViewTypeFromSelected) {
+        self.sendOrderBtnView.alpha = 0;
+    }else{
+        self.sendOrderBtnView.userInteractionEnabled = false;
+        self.sendOrderBtnView.alpha = 0.5;
+    }
     
     
     
     
 }
 
+-(void)getFoodItems:(ToThisViewType)type{
+    
+    if (type == ToThisViewTypeFromSelected){
+        
+        [restaurantManager getRestaurantFoodItemArrayWithUid:self.SelectedRestaurantUid handler:^(NSMutableArray *result) {
+            
+            menuArray = [NSMutableArray new];
+            
+            NSLog(@"QQQQQ%@",result);
+            for (int i = 0; i < result.count; i++) {
+                NSDictionary * eachItem = result[i];
+                
+                NSString * foodName = eachItem[@"FoodName"];
+                NSString * foodPrice = eachItem[@"FoodPrice"];
+                
+                NSString * showItem = [NSString stringWithFormat:@"%@  %@元",foodName,foodPrice];
+                
+                [menuArray addObject:showItem];
+                
+            }
+            
+        }];
+
+        
+        
+    }else{
+        
+        NSString * RestaurantUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"SelectedRestaurant"];
+        
+        [restaurantManager getRestaurantFoodItemArrayWithUid:RestaurantUid handler:^(NSMutableArray *result) {
+            
+            menuArray = [NSMutableArray new];
+            
+            NSLog(@"QQQQQ%@",result);
+            for (int i = 0; i < result.count; i++) {
+                NSDictionary * eachItem = result[i];
+                
+                NSString * foodName = eachItem[@"FoodName"];
+                NSString * foodPrice = eachItem[@"FoodPrice"];
+                
+                NSString * showItem = [NSString stringWithFormat:@"%@  %@元",foodName,foodPrice];
+                
+                [menuArray addObject:showItem];
+                
+            }
+            
+        }];
+        
+        
+        
+        
+    }
+    
+}
 
 -(void)getUserArray:(ToThisViewType)type{
     
@@ -93,8 +162,8 @@
                 for (NSString * userUid in resultDict) {
                     
                     NSDictionary * eachUser = resultDict[userUid];
-                    
-                    [usersArray addObject:eachUser];
+                   [usersArray addObject:eachUser];
+                   
                     
                 }
                 
@@ -117,6 +186,8 @@
             
             usersArray = [NSMutableArray new];
             
+            statusOkArray = [NSMutableArray new];
+            
             NSDictionary * resultDict = snapshot.value;
             
             if ([resultDict isEqual:[NSNull null]]) {
@@ -127,11 +198,26 @@
                 for (NSString * userUid in resultDict) {
                     
                     NSDictionary * eachUser = resultDict[userUid];
-                    
                     [usersArray addObject:eachUser];
+                    
+                    //算綠燈
+                    NSString * eachStatus = eachUser[@"SelfStatus"];
+                    if ([eachStatus isEqualToString:@"1"]) {
+                        [statusOkArray addObject:eachStatus];
+                    }
                     
                     
                 }
+                //判斷是否全部按ok的時候
+                if (usersArray.count == statusOkArray.count) {
+                    self.sendOrderBtnView.alpha = 1;
+                    self.sendOrderBtnView.userInteractionEnabled = true;
+                }else{
+                    self.sendOrderBtnView.alpha = 0.5;
+                    self.sendOrderBtnView.userInteractionEnabled = false;
+                    
+                }
+                
                 
                 [self.usersCollectionView reloadData];
                 
@@ -156,6 +242,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 
@@ -204,6 +291,28 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (IBAction)orderBtnPressed:(id)sender {
+    
+    
+    OrderPickerView *pickerView =  [[OrderPickerView alloc] initWithFrame:CGRectMake(100, 200, 200, 300)];
+    
+    pickerView.pickerBlock = ^(NSString *selectedOrder){
+        
+        _orderLabel.text = selectedOrder;
+        NSLog(@"******%@*******",selectedOrder);
+        
+    };
+    
+    pickerView.MArray = menuArray;
+    
+    [self.view addSubview:pickerView];
+    
+}
+
+
+
 - (IBAction)okBtn:(id)sender {
     
     
@@ -226,6 +335,8 @@
     
 
     
+}
+- (IBAction)sendOrderBtnPressed:(id)sender {
 }
 
 -(void)changeStauts:(NSString *)statusString{

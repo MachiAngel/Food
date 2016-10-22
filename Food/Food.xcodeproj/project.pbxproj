@@ -22,6 +22,7 @@
 		113BFFE41DAEA74000E2B58D /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFE31DAEA74000E2B58D /* Helper.m */; };
 		113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */; };
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
+		114C765B1DBB767F00E3D584 /* OrderPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C765A1DBB767F00E3D584 /* OrderPickerView.m */; };
 		1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1179DC591DB3AF640016BF70 /* unknow.png */; };
 		117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */; };
 		117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */; };
@@ -69,6 +70,8 @@
 		113BFFE31DAEA74000E2B58D /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		114C76591DBB767F00E3D584 /* OrderPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPickerView.h; sourceTree = "<group>"; };
+		114C765A1DBB767F00E3D584 /* OrderPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPickerView.m; sourceTree = "<group>"; };
 		1179DC591DB3AF640016BF70 /* unknow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknow.png; sourceTree = "<group>"; };
 		117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantInfo.h; sourceTree = "<group>"; };
 		117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfo.m; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 			children = (
 				1184CE401DB6254D009E2A3E /* FoodView.h */,
 				1184CE411DB6254D009E2A3E /* FoodView.m */,
+				114C76591DBB767F00E3D584 /* OrderPickerView.h */,
+				114C765A1DBB767F00E3D584 /* OrderPickerView.m */,
 				1192A8891DB776FE0034237F /* UserCollectionViewCell.h */,
 				1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */,
 				113983AE1DB92CA80080AAB5 /* OrdersTableViewCell.h */,
@@ -452,6 +457,7 @@
 				113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */,
 				1192A88B1DB776FE0034237F /* UserCollectionViewCell.m in Sources */,
 				11EA3F101DAD80AA00C5E4FA /* main.m in Sources */,
+				114C765B1DBB767F00E3D584 /* OrderPickerView.m in Sources */,
 				110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */,
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
 				117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */,

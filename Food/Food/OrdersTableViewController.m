@@ -23,6 +23,7 @@
 }
 
 @property (nonatomic ,strong)NSString * selectedOrderKeyString;
+@property (nonatomic ,strong)NSString * selectedRestaurantString;
 
 @end
 
@@ -97,9 +98,14 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
+    
+    //轉場時需拿到的資料 , 一個是該訂單 key , 一個是該餐廳 uid (才能做品項array)
     self.selectedOrderKeyString = ordersKeyArray[indexPath.row];
     
-   
+    NSDictionary * eachOrderDict = ordersArray[indexPath.row];
+    _selectedRestaurantString = eachOrderDict[@"SelectedRestaurant"];
+    
+    //完成時會發通知
     [helper createMenuUsersWith:self.selectedOrderKeyString];
     
     
@@ -111,6 +117,7 @@
     AddMenuViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
     
     addMenuVC.selectedOrderKeyString = self.selectedOrderKeyString;
+    addMenuVC.SelectedRestaurantUid = self.selectedRestaurantString;
     
     [self presentViewController:addMenuVC animated:true completion:nil];
     
