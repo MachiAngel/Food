@@ -54,7 +54,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-   
     
     helper = [Helper sharedInstance];
     
@@ -73,7 +72,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 - (IBAction)popAddFoodItemViewBtn:(id)sender {
@@ -98,8 +96,6 @@
         
         
     }else{
-        
-
         
         NSData *foodImageData = UIImageJPEGRepresentation(self.shopFoodIconView.image, 0.5);
         
@@ -126,11 +122,9 @@
         //
         [self.view endEditing:YES];
         
-        
     }
     
 }
-
 
 
 - (IBAction)cancelAddFoodBtn:(id)sender {
@@ -140,8 +134,6 @@
     [self.view endEditing:YES];
     
 }
-
-
 
 
 - (IBAction)okBtn:(id)sender {
@@ -178,7 +170,6 @@
         
     }else{
         
-        
         //prepare restaurant unique id
         
         NSString * uniqueId = [helper getRandomChild];
@@ -201,12 +192,7 @@
         
         [helper uploadFoodItemsImageToStorage:foodItems child:uniqueId];
         
-        
-        
     }
-    
-    
-    
     
 }
 
@@ -336,8 +322,6 @@
     }
     
     
-    
-    
     if ([UIImagePickerController isSourceTypeAvailable:soureceType] == false) { //check sourceType is existence?
         NSLog(@"Invalid Source Type.");
         return;
@@ -345,9 +329,7 @@
     
     UIImagePickerController *picker = [UIImagePickerController new];
     picker.sourceType = soureceType;
-    picker.mediaTypes = @[@"public.image",@"public.movie"]; // mediaTypes：傳入照片(public.image)/傳入影片public.movie
-    //        picker.mediaTypes = @[(NSString*)kUTTypeImage,(NSString*)kUTTypeMovie]; //意義同上程式
-    
+    picker.mediaTypes = @[@"public.image",@"public.movie"];
     
     picker.delegate = self;
     [self presentViewController:picker animated:true completion:nil];
@@ -383,13 +365,6 @@
     }else{
         [self savaWithImage:resizeImage];
     }
-    
-    
-    
-    
-   
-    
-   
     
     [picker dismissViewControllerAnimated:true completion:nil]; //記得加否則選下一張照片時會沒有反應(imagepicker會沒反應)
     

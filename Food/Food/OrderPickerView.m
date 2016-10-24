@@ -44,7 +44,7 @@
     _W = self.frame.size.width;
     _H = self.frame.size.height;
     
-    //蓝色条
+    //藍色條
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _W, 25)];
     view.backgroundColor = [UIColor colorWithRed:5/255.f green:160/255.f blue:249/255.f alpha:1];
     view.userInteractionEnabled = YES;
@@ -72,7 +72,7 @@
     [self addSubview:rightButton];
     
     
-    //中间的label
+    //中間的label
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 25)];
     label.font = [UIFont systemFontOfSize:15];
     label.text = @"選擇餐點";
@@ -143,7 +143,7 @@
     
 }
 
-#pragma mark - 用户滑动的时候选中哪一个
+
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
     _OrderSelectedString = _MArray[row];

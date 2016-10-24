@@ -9,6 +9,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "LoginViewController.h"
 #import "Helper.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()< FBSDKLoginButtonDelegate,UITextFieldDelegate>
 {
@@ -63,13 +64,31 @@
     
     [super viewDidAppear:animated];
     
-    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        YourViewController *v = [[YourViewController alloc] init];
+//        [self presentViewController:v animated:YES completion:^{}];
+//    });
     
     if ([helper uidOfCurrentUser]) {
-        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+//        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+//        
+//        [self presentViewController:tabVC animated:true completion:nil];
         
-        [self presentViewController:tabVC animated:true completion:nil];
+        
+        
+        
+        
+        UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        UITabBarController * myTabBarVC = [storyboard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+        
+        AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        app.window.rootViewController = myTabBarVC;
+        [app.window makeKeyAndVisible];
+        
+        
+        
         
     }
     

@@ -14,6 +14,7 @@ typedef void (^DoneHandler)(NSMutableArray * result);
 
 typedef void (^DoneHandlerString)(NSString * result);
 
+typedef void (^DoneHandlerDict)(NSDictionary * result);
 
 @interface RestaurantInfo : NSObject
 
@@ -33,6 +34,10 @@ typedef void (^DoneHandlerString)(NSString * result);
 -(void)getTotalPriceWithMenuUid:(NSString*)uid handler:(DoneHandlerString)done;
 
 -(void)getOrderListArrayWithUid:(NSString*)uid handler:(DoneHandler)done;
+
+-(void)getCreateMenuInfo:(NSString*)uid handler:(DoneHandlerDict)done;
+
+-(void)removeHandlerWithMenuUid:(NSString*)uid;
 
 
 -(NSMutableArray *)getAllRestaurantUids;

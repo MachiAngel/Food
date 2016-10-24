@@ -19,8 +19,9 @@ static OrderModel * _orderManager;
     //for did selected cell use
     NSMutableArray * ordersKeyArray;
     
-//    //for detail
-//    NSMutableArray * foodItems;
+    
+    FIRDatabaseHandle _handler;
+    
     
 }
 
@@ -47,7 +48,7 @@ static OrderModel * _orderManager;
    //observeEventType
     //observeSingleEventOfType
     
-    [[helper getDatabaseRefOfMenus]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    _handler = [[helper getDatabaseRefOfMenus]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         
         
@@ -57,9 +58,7 @@ static OrderModel * _orderManager;
             
         NSDictionary * ordersDict = snapshot.value;
         
-        NSLog(@"CC%@",ordersDict);
-        NSLog(@"CC%@",ordersDict);
-        NSLog(@"CC%@",ordersDict);
+        
         
         if ([ordersDict isEqual: [NSNull null]]) {
             NSLog(@"沒值");
@@ -81,8 +80,14 @@ static OrderModel * _orderManager;
         
     }];
     
+}
+
+
+-(void)deleteFirebaseObserve{
     
+    Helper * helper = [Helper sharedInstance];
     
+    [[helper getDatabaseRefOfMenus]removeObserverWithHandle:_handler];
     
 }
 

@@ -24,9 +24,9 @@
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
 		114C765B1DBB767F00E3D584 /* OrderPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C765A1DBB767F00E3D584 /* OrderPickerView.m */; };
 		114C765F1DBB961600E3D584 /* orderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C765E1DBB961600E3D584 /* orderListTableViewCell.m */; };
-		114C76861DBBB32C00E3D584 /* progress3.png in Resources */ = {isa = PBXBuildFile; fileRef = 114C76831DBBB32C00E3D584 /* progress3.png */; };
-		114C76881DBBB32C00E3D584 /* progress2.png in Resources */ = {isa = PBXBuildFile; fileRef = 114C76851DBBB32C00E3D584 /* progress2.png */; };
-		114C768C1DBBB5F500E3D584 /* progress1.png in Resources */ = {isa = PBXBuildFile; fileRef = 114C768B1DBBB5F500E3D584 /* progress1.png */; };
+		115CA2BA1DBDDE720027F069 /* progress1.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B71DBDDE720027F069 /* progress1.png */; };
+		115CA2BB1DBDDE720027F069 /* progress3.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B81DBDDE720027F069 /* progress3.png */; };
+		115CA2BC1DBDDE720027F069 /* progress2.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B91DBDDE720027F069 /* progress2.png */; };
 		1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1179DC591DB3AF640016BF70 /* unknow.png */; };
 		117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */; };
 		117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */; };
@@ -78,9 +78,9 @@
 		114C765A1DBB767F00E3D584 /* OrderPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPickerView.m; sourceTree = "<group>"; };
 		114C765D1DBB961600E3D584 /* orderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderListTableViewCell.h; sourceTree = "<group>"; };
 		114C765E1DBB961600E3D584 /* orderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderListTableViewCell.m; sourceTree = "<group>"; };
-		114C76831DBBB32C00E3D584 /* progress3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress3.png; sourceTree = "<group>"; };
-		114C76851DBBB32C00E3D584 /* progress2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress2.png; sourceTree = "<group>"; };
-		114C768B1DBBB5F500E3D584 /* progress1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress1.png; sourceTree = "<group>"; };
+		115CA2B71DBDDE720027F069 /* progress1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress1.png; sourceTree = "<group>"; };
+		115CA2B81DBDDE720027F069 /* progress3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress3.png; sourceTree = "<group>"; };
+		115CA2B91DBDDE720027F069 /* progress2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress2.png; sourceTree = "<group>"; };
 		1179DC591DB3AF640016BF70 /* unknow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknow.png; sourceTree = "<group>"; };
 		117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantInfo.h; sourceTree = "<group>"; };
 		117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfo.m; sourceTree = "<group>"; };
@@ -261,10 +261,10 @@
 				11EA3F1F1DAD80AA00C5E4FA /* Info.plist */,
 				1192A88F1DB77C860034237F /* user1.jpeg */,
 				1179DC591DB3AF640016BF70 /* unknow.png */,
+				115CA2B71DBDDE720027F069 /* progress1.png */,
+				115CA2B81DBDDE720027F069 /* progress3.png */,
+				115CA2B91DBDDE720027F069 /* progress2.png */,
 				113983B11DB92EB20080AAB5 /* order.jpg */,
-				114C768B1DBBB5F500E3D584 /* progress1.png */,
-				114C76831DBBB32C00E3D584 /* progress3.png */,
-				114C76851DBBB32C00E3D584 /* progress2.png */,
 				11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */,
 				11EA3F0F1DAD80AA00C5E4FA /* main.m */,
 			);
@@ -361,15 +361,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
+				115CA2BA1DBDDE720027F069 /* progress1.png in Resources */,
 				1192A8901DB77C860034237F /* user1.jpeg in Resources */,
-				114C768C1DBBB5F500E3D584 /* progress1.png in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
 				113983B21DB92EB20080AAB5 /* order.jpg in Resources */,
 				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
-				114C76881DBBB32C00E3D584 /* progress2.png in Resources */,
+				115CA2BC1DBDDE720027F069 /* progress2.png in Resources */,
 				11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */,
-				114C76861DBBB32C00E3D584 /* progress3.png in Resources */,
+				115CA2BB1DBDDE720027F069 /* progress3.png in Resources */,
 				11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

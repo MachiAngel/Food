@@ -22,6 +22,10 @@ static RestaurantInfo* _restaurantManager;
     
     //for addMenu
     NSMutableArray * orderList;
+    NSDictionary * createMenuInfo;
+    
+    FIRDatabaseHandle  _handleWithTotalPrice;
+    FIRDatabaseHandle  _handleWithOrderList;
     
 }
 
@@ -101,15 +105,30 @@ static RestaurantInfo* _restaurantManager;
     }];
     
     
+}
+
+
+-(void)getCreateMenuInfo:(NSString*)uid handler:(DoneHandlerDict)done{
+    
+     Helper * helper = [Helper sharedInstance];
+    createMenuInfo = [NSDictionary new];
+    
+    [[[helper getDatabaseRefOfMenus]child:uid]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        createMenuInfo = snapshot.value;
+        
+        done(createMenuInfo);
+    }];
     
 }
+
 
 
 -(void)getOrderListArrayWithUid:(NSString*)uid handler:(DoneHandler)done{
     
     Helper * helper = [Helper sharedInstance];
     
-    [[[helper getDatabaseRefOfMenuOrderList]child:uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    _handleWithOrderList = [[[helper getDatabaseRefOfMenuOrderList]child:uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         orderList = [NSMutableArray new];
         
@@ -143,16 +162,28 @@ static RestaurantInfo* _restaurantManager;
     
     Helper * helper = [Helper sharedInstance];
     
-    [[[helper getDatabaseRefOfMenus]child:uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+   _handleWithTotalPrice = [[[helper getDatabaseRefOfMenus]child:uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+       
         
         NSDictionary * menuInfo = snapshot.value;
-        NSString * totalPrice = menuInfo[@"TotalPrice"];
         
-         done(totalPrice);
+        if ([menuInfo isEqual:[NSNull null]]) {
+            NSLog(@"total null");
+        }else{
+            
+            NSString * totalPrice = menuInfo[@"TotalPrice"];
+            
+            done(totalPrice);
+            
+        }
+        
+        
+       
         
     }];
 
-   
+    
     
 }
 
@@ -163,6 +194,17 @@ static RestaurantInfo* _restaurantManager;
     
     NSLog(@"all restaurant uid : %@",restaurantUidArray);
     return restaurantUidArray;
+}
+
+-(void)removeHandlerWithMenuUid:(NSString*)uid{
+    
+    Helper * helper = [Helper sharedInstance];
+    
+    [[[helper getDatabaseRefOfMenuOrderList]child:uid]removeObserverWithHandle:_handleWithOrderList];
+    
+    [[[helper getDatabaseRefOfMenus]child:uid]removeObserverWithHandle:_handleWithTotalPrice];
+    
+    
 }
 
 

@@ -32,7 +32,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Created" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Selected" object:nil];
+    
+    
+    
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
     
     orderManager = [OrderModel sharedInstance];
     helper = [Helper sharedInstance];
@@ -46,15 +56,20 @@
         [self.tableView reloadData];
         
     }];
-    
-    
+
     
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [orderManager deleteFirebaseObserve];
+  
+  
     
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -81,11 +96,19 @@
     NSDictionary * eachOrderDict = ordersArray[indexPath.row];
     
     cell.orderRestaurantName.textColor = [UIColor orangeColor];
-    cell.orderRestaurantName.text = eachOrderDict[@"ShopName"];
     
-    NSString * nameString = [NSString stringWithFormat:@"創建者:%@",eachOrderDict[@"Creater"]];
+    NSString * RtName = [NSString stringWithFormat:@"訂購店家: %@",eachOrderDict[@"ShopName"]];
+    
+    cell.orderRestaurantName.text = RtName;
+    
+    NSString * nameString = [NSString stringWithFormat:@"訂單建立者:%@",eachOrderDict[@"Creater"]];
     
     cell.createrName.text = nameString;
+    
+    NSString * createTimeString = [NSString stringWithFormat:@"建立時間:%@",eachOrderDict[@"CreateTime"]];
+    cell.createTime.text = createTimeString;
+    
+    
     
     cell.orderImageView.image = [UIImage imageNamed:@"order.jpg"];
     
@@ -106,7 +129,7 @@
     _selectedRestaurantString = eachOrderDict[@"SelectedRestaurant"];
     
     //完成時會發通知
-    [helper createMenuUsersWith:self.selectedOrderKeyString];
+    [helper selectedMenuUsersWith:self.selectedOrderKeyString];
     
     
 }
@@ -123,6 +146,8 @@
     
     
 }
+
+
 
 
 // 再判斷是否需要

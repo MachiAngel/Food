@@ -8,7 +8,7 @@
 
 #import "TabBarViewController.h"
 
-@interface TabBarViewController ()
+@interface TabBarViewController ()<UITabBarControllerDelegate>
 
 @end
 
@@ -16,13 +16,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
+    NSLog(@"GGGGGGGGGGGGG");
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    
+    NSLog(@"didSelectViewControllerdidSelectViewControllerdidSelectViewControllerdidSelectViewControllerdidSelectViewController");
+    
+    
+}
+
 
 /*
 #pragma mark - Navigation

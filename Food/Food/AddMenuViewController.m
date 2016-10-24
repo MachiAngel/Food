@@ -31,18 +31,30 @@
     NSMutableArray * usersOrderArray;
     
     
+    //createInfo 資訊
+    NSDictionary * createInfo;
+    
+    //顯示label
+    NSString * createrName;
+    
+    //for cancelBtn
+    NSUInteger cancelNumber;
+    
+    
     Helper * helper;
     RestaurantInfo * restaurantManager;
     
-    //未用
-    //FIRDatabaseHandle * _refHandle;
+    
 }
 
 @property (nonatomic,assign) ToThisViewType typeVar;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *usersCollectionView;
 @property (weak, nonatomic) IBOutlet UILabel *orderLabel;
+
+//top view link
 @property (weak, nonatomic) IBOutlet UILabel *orderCreaterLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orderRestaurantLabel;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *sendOrderBtnView;
@@ -61,6 +73,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    cancelNumber = 1;
+    
+    //for create use
+   
     
     self.showFinishLabel.text = @"";
     
@@ -104,6 +121,14 @@
     [self observeOrderListForTableView:self.typeVar];
     
     
+    
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self getCreateInfo:self.typeVar];
+    
 }
 
 -(void)getFoodItems:(ToThisViewType)type{
@@ -130,7 +155,6 @@
         }];
 
         
-        
     }else{
         
         NSString * RestaurantUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"SelectedRestaurant"];
@@ -139,7 +163,6 @@
             
             menuArray = [NSMutableArray new];
             
-            NSLog(@"QQQQQ%@",result);
             for (int i = 0; i < result.count; i++) {
                 NSDictionary * eachItem = result[i];
                 
@@ -154,7 +177,36 @@
             
         }];
         
+    }
+    
+}
+
+-(void)getCreateInfo:(ToThisViewType)type{
+    
+    if (type == ToThisViewTypeFromSelected){
         
+        [restaurantManager getCreateMenuInfo:self.selectedOrderKeyString handler:^(NSDictionary *result) {
+            
+            createInfo = result;
+            NSLog(@"XDXD%@",createInfo);
+            
+            NSString * createrString = [NSString stringWithFormat:@"建立者:%@",createInfo[@"Creater"]];
+            NSString * restautantString = [NSString stringWithFormat:@"店家:%@",createInfo[@"ShopName"]];
+            
+            self.orderCreaterLabel.text = createrString;
+            self.orderRestaurantLabel.text = restautantString;
+            
+        }];
+        
+    }else{
+        
+        NSLog(@"CCCCCCC:%@",self.menuCreateInfo);
+        
+        NSString * createrString = [NSString stringWithFormat:@"建立者:%@",self.menuCreateInfo[@"Creater"]];
+        NSString * restautantString = [NSString stringWithFormat:@"店家:%@",self.menuCreateInfo[@"ShopName"]];
+        
+        self.orderCreaterLabel.text = createrString;
+        self.orderRestaurantLabel.text = restautantString;
         
         
     }
@@ -175,10 +227,8 @@
             
             [self.orderlistTableView reloadData];
             
-            
         }];
        
-        
     }else{
         NSString * createdMenuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
         
@@ -191,14 +241,9 @@
             
         }];
         
-        
-        
     }
     
-    
 }
-
-
 
 -(void)observeTotalPriceLabel:(ToThisViewType)type{
     
@@ -321,6 +366,12 @@
 }
 
 
+-(void)dealloc{
+    NSLog(@"AddmenuController dealloc");
+    NSLog(@"AddmenuController dealloc");
+   
+}
+
 #pragma mark - CollectionView Delegate Medthod
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -347,11 +398,6 @@
     }else if ([status isEqualToString:@"1"]){
         cell.userImage.layer.borderColor = [UIColor greenColor].CGColor;
     }
-    
-    
-    
-    
-   
     
     
     return cell;
@@ -392,7 +438,7 @@
 }
 */
 
-#pragma mark - Button Pressed Method
+#pragma mark - Picker View Button Pressed Method
 - (IBAction)orderBtnPressed:(id)sender {
     
     _orderLabel.text = @"尚未點餐";
@@ -404,9 +450,10 @@
         
         _orderLabel.text = selectedOrder;
         NSLog(@"******%@*******",selectedOrder);
+        UIImage * image2 = [UIImage imageNamed:@"progress2"];
         
-        self.progressView.image = [UIImage imageNamed:@"progress2"];
-        
+        self.progressView.image = image2;
+        cancelNumber = 2;
     };
     
     //將餐點資料灌入下載到的array;
@@ -416,15 +463,17 @@
     
 }
 
-
+#pragma mark - ViewController Button Pressed Method
 
 - (IBAction)okBtn:(id)sender {
+    
+    cancelNumber = 3;
     
     if ([_orderLabel.text isEqualToString:@"尚未點餐"]) {
         UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"尚未選擇餐點" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-           
+            cancelNumber = 1;
         }];
         
         [alert addAction:ok];
@@ -440,7 +489,7 @@
         
         
         //自己頁面調整
-        self.showFinishLabel.text =@"點餐完成，請等待其他人";
+        self.showFinishLabel.text = @"點餐完成，請等待其他人，頁面將自動跳轉";
         
         self.progressView.image = [UIImage imageNamed:@"progress3"];
         
@@ -452,9 +501,7 @@
         self.chooseOrderBtnView.alpha = 0.5;
         self.chooseOrderBtnView.userInteractionEnabled = false;
         
-        
     }
-    
     
 }
 
@@ -480,10 +527,6 @@
 
         
     }
-    
-    
-    
-    
 }
 
 
@@ -507,10 +550,7 @@
        
     }
     
-    
 }
-
-
 
 
 -(void)uploadSelfOrder:(ToThisViewType)type{
@@ -606,13 +646,6 @@
 
 
 
-
-
-
-
-
-
-
 - (IBAction)cancelBtn:(id)sender {
     
 
@@ -620,28 +653,42 @@
     NSString * cancelStatusString = @"0";
     
     [self changeStauts:cancelStatusString];
+        
+
+    
+    //取消馬上刪除資料 更新total price
+    //利用image判斷重複點擊cancel
     
     
+    
+    
+    if (cancelNumber == 1) {
+        NSLog(@"不用執行取消");
+    
+    }else if(cancelNumber == 2){
+        
+        self.progressView.image = [UIImage imageNamed:@"progress1.png"];
+        self.orderLabel.text = @"尚未點餐";
+        cancelNumber = 1;
+        NSLog(@"第二階段");
+        
+    }else{
+          NSLog(@"第三階段");
+        [self uploadFinalPriceFromDeleteOrder:self.typeVar];
+        [self deleteSelfOrder:self.typeVar];
+         cancelNumber = 1;
+        
+    }
     
     
     //按下取消開啟可選擇餐點
     self.chooseOrderBtnView.alpha = 1;
     self.chooseOrderBtnView.userInteractionEnabled = true;
     self.progressView.image = [UIImage imageNamed:@"progress1.png"];
-    
-    //取消馬上刪除資料 更新total price
-    
-    [self uploadFinalPriceFromDeleteOrder:self.typeVar];
-    [self deleteSelfOrder:self.typeVar];
-    
     self.orderLabel.text = @"尚未點餐";
+    self.showFinishLabel.text = @"";
     
 }
-
-
-
-
-
 
 
 - (IBAction)sendOrderBtnPressed:(id)sender {
@@ -660,12 +707,10 @@
         //from selected order
         
         
-        
         [helper changeStatusWithMenuUid:self.selectedOrderKeyString status:statusString];
         
     }else{
         //from create
-        
         
         NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
         
@@ -673,17 +718,7 @@
         
     }
     
-    
-    
-    
-    
 }
-
-
-
-
-
-
 
 
 - (IBAction)quitThisPageBtnPressed:(id)sender {
@@ -691,9 +726,26 @@
     //刪除記錄 , 分創建者 與 加入者
     if (_typeVar == ToThisViewTypeFromSelected) {
         // selecter leave
-        [helper quitAndDeleteDataFromSelector:self.selectedOrderKeyString];
         
-        [self dismissViewControllerAnimated:true completion:nil];
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"離開將會刪除你的點餐" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [helper quitAndDeleteDataFromSelector:self.selectedOrderKeyString];
+            
+            [self uploadFinalPriceFromDeleteOrder:self.typeVar];
+            
+            [self dismissViewControllerAnimated:true completion:nil];
+            
+        }];
+        
+        [alert addAction:ok];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:true completion:nil];
+
+        
     }else{
         // creater leave
          NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
@@ -722,11 +774,37 @@
         //need remove observe
         
         
-        
         [self dismissViewControllerAnimated:true completion:nil];
     }
     
    
 }
+
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+    
+    if (self.typeVar == ToThisViewTypeFromSelected) {
+        [restaurantManager removeHandlerWithMenuUid:self.selectedOrderKeyString];
+        
+        [[[helper getDatabaseRefOfMenuUsers]child:self.selectedOrderKeyString]removeAllObservers];
+        
+        
+    }else{
+        //remove obersvers
+        NSString * menuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        [restaurantManager removeHandlerWithMenuUid:menuUid];
+        
+        [[[helper getDatabaseRefOfMenuUsers]child:menuUid]removeAllObservers];
+        
+        
+    }
+    
+}
+
+
+
+
 
 @end

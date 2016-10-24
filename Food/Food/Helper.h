@@ -27,10 +27,6 @@
 @interface Helper : NSObject
 
 
-
-
-
-
 +(instancetype)sharedInstance;
 
 
@@ -71,6 +67,8 @@
 // detailTableView method for add menu
 // ordersViewController method for join the order
 -(void)createMenuUsersWith:(NSString*)menuUid;
+-(void)selectedMenuUsersWith:(NSString*)menuUid;
+
 
 //  addMenuViewController method for quit and delete
 -(void)quitAndDeleteDataFromSelector:(NSString*)menuUid;
@@ -84,6 +82,7 @@
 
 // AddmenuViewController method for cancel order
 -(void)deleteUserOrderWithMenuUid:(NSString*)uid;
+
 
 
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;
@@ -102,17 +101,6 @@
 
 
 -(void)switchToMainView:(UIViewController*)view;
-
--(void)switchToLoginView:(UIViewController*)view;
-
-
-
--(void)putImageToStorage:(NSData*)imageData;
-
-
--(void)deleteAnonymousAccount;
-    
-
 
 
 

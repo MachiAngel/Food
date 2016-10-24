@@ -49,6 +49,7 @@
     [super viewDidAppear:animated];
     
     
+    
     self.tmpView.alpha = 1;
     [self.tmpAIV startAnimating];
     
@@ -98,7 +99,6 @@
 
     
     
-    
 }
 
 
@@ -129,9 +129,6 @@
     
     // 設置模型數據给cell 重寫set 方法
     cell.tg = tg;
-    
-    
-    NSLog(@"%@",cell.tg);
     
     return cell;
 }

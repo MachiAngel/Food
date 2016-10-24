@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *orderImageView;
 @property (weak, nonatomic) IBOutlet UILabel *orderRestaurantName;
 @property (weak, nonatomic) IBOutlet UILabel *createrName;
+@property (weak, nonatomic) IBOutlet UILabel *createTime;
 
 @end

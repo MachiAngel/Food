@@ -12,14 +12,18 @@
 #import "RestaurantInfo.h"
 #import "Helper.h"
 #import "SVProgressHUD.h"
+#import "AddMenuViewController.h"
+#import "AppDelegate.h"
+#import "RestaurantsTableViewController.h"
+
 
 @interface DetailTableViewController ()
 {
     Helper * helper;
     RestaurantInfo * restaurantManager;
     
-    //傳送給 新增餐廳  先沒用
-    //NSArray * foodItemsArray;
+    //傳送給 新增餐廳
+    NSDictionary * createInfo;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
@@ -157,13 +161,27 @@
     [[NSUserDefaults standardUserDefaults]synchronize];
 
     
+    //拿到現在時間
+    NSDate * lastTime = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *strDate = [dateFormatter stringFromDate:lastTime];
+    
+    
+    
     
     NSDictionary * menu = @{@"Creater":user,
                             @"SelectedRestaurant":self.selectedUid,
                             @"ShopName":self.detail.ShopName,
                             @"ShopPhone":self.detail.ShopPhone,
                             @"TotalPrice":@"0",
-                            @"MyPrice":@"0"};
+                            @"MyPrice":@"0",
+                            @"CreateTime":strDate};
+    
+    //for create info
+    
+    createInfo = menu;
+    
     
     
     [helper createMenuWith:menuUid menuItialize:menu];
@@ -174,15 +192,29 @@
     
 }
 
+
+//-(void)viewDidDisappear:(BOOL)animated{
+//    [super viewDidDisappear:animated];
+//    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    AddMenuViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
+//    addMenuVC.menuCreateInfo = createInfo;
+//    
+//    [self presentViewController:addMenuVC animated:true completion:nil];
+//}
+
 -(void)goAddMenu{
     
     [SVProgressHUD dismiss];
+    
+
+    
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
+    AddMenuViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];
+    addMenuVC.menuCreateInfo = createInfo;
     
     [self presentViewController:addMenuVC animated:true completion:nil];
     
-    
+
 }
 
 

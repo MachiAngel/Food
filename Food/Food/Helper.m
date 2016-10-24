@@ -46,9 +46,7 @@ static Helper * _helper;
         NSLog(@"down upload userInfo");
     }];
     
-    
 }
-
 
 
 //直接登入
@@ -64,25 +62,19 @@ static Helper * _helper;
             return ;
         }
         
-        
         NSLog(@"Email sign in success");
         
         [self switchToMainView:nil];
-        
         
     }];
     
 }
 
 
-
-
 //創帳號
 
 -(void)signUpWithEmail:(NSString*)email
               password:(NSString*)password{
-    
-    
     
     [[FIRAuth auth]createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
         
@@ -101,6 +93,7 @@ static Helper * _helper;
     
 }
 
+//FB登入
 -(void)loginWithCredential:(NSString *)loginCredential{
     
     FIRAuthCredential *credential = [FIRFacebookAuthProvider
@@ -166,38 +159,15 @@ static Helper * _helper;
 -(void)switchToMainView:(UIViewController *)view{
     
 
-    
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
     
     [view presentViewController:tabVC animated:true completion:nil];
     
-    
 }
-
-
--(void)switchToLoginView:(UIViewController *)view{
-    
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-   // UIViewController * loginView = [storyboard instantiateViewControllerWithIdentifier:@"loginVeiw"];
-    
-    
-    
-   //[view presentViewController:myTabBarVC animated:true completion:nil];
-    
-    
-}
-
 
 
 #pragma mark - upload to Firebase
-
-
-//可能還要存放使用者資訊的方法
-//還要改 存放餐廳資訊之類的參數
-
-
 
 -(void)uploadRestaurantData:(NSDictionary*)RestaurantInfo
                   mainImage:(NSData*) mainImageData
@@ -314,51 +284,13 @@ static Helper * _helper;
             
         }];
         
-    
-        
-        
+     
     }
     
     
-    
-    
 }
 
 
-
-
-
-
-
-
-
-
-
-//還要改 存放地點改參數  才能存不同區圖片
--(void)putImageToStorage:(NSData*)imageData{
-    
-    
-    
-    NSString * uid = [[[FIRAuth auth]currentUser] uid];
-
-    FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *storageRef = [storage reference];
-    
-    
-    FIRStorageReference *ref = [storageRef child:uid];
-    
-    FIRStorageReference *picRef = [ref child:@"image/pic.jpg"];
-    
-    [picRef putData:imageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
-        
-       
-        NSString * picUrlstring = [metadata.downloadURL absoluteString];
-        
-        //下載網址放到 database
-        [[[self getDatabaseRefOfCurrentUser]child:@"pic"] setValue:picUrlstring];
-    
-    }];
-}
 
 #pragma mark - Create Menu Method
 
@@ -429,6 +361,31 @@ static Helper * _helper;
     
 }
 
+//for OrderViewController
+-(void)selectedMenuUsersWith:(NSString*)menuUid{
+    
+    NSString * currentUserUid = [self uidOfCurrentUser];
+    
+    NSString * userName = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    NSDictionary * userInfo = @{@"UserName":userName,@"SelfStatus":@"0"};
+    
+    
+    
+    [[[[self getDatabaseRefOfMenuUsers]child:menuUid]child:currentUserUid]updateChildValues:userInfo withCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if (error) {
+            NSLog(@"create menu error:%@",error);
+            return ;
+        }
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"Selected" object:nil];
+        
+    }];
+    
+    
+}
+
+
 
 
 
@@ -487,7 +444,7 @@ static Helper * _helper;
     NSString * currentUserUid = [self uidOfCurrentUser];
     
     [[[[self getDatabaseRefOfMenuUsers]child:menuUid]child:currentUserUid]removeValue];
-    
+   [[[[self getDatabaseRefOfMenuOrderList]child:menuUid]child:currentUserUid]removeValue];
 }
 
 
@@ -497,6 +454,7 @@ static Helper * _helper;
     
     [[[self getDatabaseRefOfMenuUsers]child:menuUid]removeValue];
     [[[self getDatabaseRefOfMenus]child:menuUid]removeValue];
+    [[[self getDatabaseRefOfMenuOrderList]child:menuUid]removeValue];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"createrLeave" object:nil];
 }
 
@@ -504,21 +462,12 @@ static Helper * _helper;
 
 
 
-#pragma mark - Delete anonymous user acc or logout
 
--(void)deleteAnonymousAccount{
-    [[self getDatabaseRefOfCurrentUser]removeAllObservers];
-    
-    [[self getDatabaseRefOfCurrentUser]setValue:nil];
-    
-    
-    [[FIRAuth auth].currentUser deleteWithCompletion:^(NSError * _Nullable error) {
-        
-    }];
-    
-    
-    
-}
+
+
+
+
+
 
 
 
@@ -592,6 +541,8 @@ static Helper * _helper;
     
 }
 
+
+#pragma mark - Other Method
 
 -(NSString *)uidOfCurrentUser{
     

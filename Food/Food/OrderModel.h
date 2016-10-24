@@ -20,5 +20,7 @@ typedef void (^DoneHandler)(NSMutableArray * result);
 
 -(NSMutableArray*)getOrdersKeyArray;
 
+-(void)deleteFirebaseObserve;
+
 
 @end

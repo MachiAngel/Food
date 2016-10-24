@@ -31,7 +31,7 @@
     if (cell == nil) {
         // 如果找不到就從xib中創建cell
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"restaurantInfoCell" owner:nil options:nil] firstObject];
-        NSLog(@"創建一個新的cell");
+     
     }else{
         //如果是重用cell，则把cell中自己添加的subview清除掉，避免出现重叠问题
         
