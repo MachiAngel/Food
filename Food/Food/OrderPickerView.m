@@ -46,7 +46,10 @@
     
     //藍色條
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _W, 25)];
-    view.backgroundColor = [UIColor colorWithRed:5/255.f green:160/255.f blue:249/255.f alpha:1];
+//    view.backgroundColor = [UIColor colorWithRed:5/255.f green:160/255.f blue:249/255.f alpha:1];
+    
+    view.backgroundColor = [UIColor blueColor];
+    
     view.userInteractionEnabled = YES;
     [self addSubview:view];
     
@@ -59,7 +62,8 @@
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, _H-30, 50, 25)];
     leftButton.tag = 101;
     [leftButton setTitle:@"取消" forState:UIControlStateNormal];
-    [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [leftButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:leftButton];
     
@@ -67,7 +71,8 @@
     UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(_W - 50, _H-30, 50, 25)];
     rightButton.tag = 102;
     [rightButton setTitle:@"确定" forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [rightButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:rightButton];
     
@@ -89,9 +94,14 @@
     
     if (btn.tag==101) {
         //
-        
+        self.pickerBlock(@"cancel");
     }else{
         //
+        if (_OrderSelectedString == nil) {
+            _OrderSelectedString = _MArray[0];
+        }
+        
+        
         self.pickerBlock(_OrderSelectedString);
     }
     
@@ -99,10 +109,6 @@
     
     
 }
-
-
-
-
 
 
 

@@ -452,9 +452,11 @@ static Helper * _helper;
     
 //    NSString * currentUserUid = [self uidOfCurrentUser];
     
+    
+    [[[self getDatabaseRefOfMenuOrderList]child:menuUid]removeValue];
     [[[self getDatabaseRefOfMenuUsers]child:menuUid]removeValue];
     [[[self getDatabaseRefOfMenus]child:menuUid]removeValue];
-    [[[self getDatabaseRefOfMenuOrderList]child:menuUid]removeValue];
+    
     [[NSNotificationCenter defaultCenter]postNotificationName:@"createrLeave" object:nil];
 }
 

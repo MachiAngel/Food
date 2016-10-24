@@ -59,6 +59,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sendOrderBtnView;
 @property (weak, nonatomic) IBOutlet UIButton *chooseOrderBtnView;
+@property (weak, nonatomic) IBOutlet UIButton *okBtnView;
 
 
 
@@ -98,7 +99,7 @@
     }
     
     
-    //執行方法拿到所有進來的人 持續監控~
+    //執行方法拿到所有進來的人 持續監控~!!!!!!!!!!!!!
     [self getUserArray:self.typeVar];
     
 
@@ -330,7 +331,7 @@
                     NSDictionary * eachUser = resultDict[userUid];
                     [usersArray addObject:eachUser];
                     
-                    //算綠燈
+                    //算綠燈數量
                     NSString * eachStatus = eachUser[@"SelfStatus"];
                     if ([eachStatus isEqualToString:@"1"]) {
                         [statusOkArray addObject:eachStatus];
@@ -444,22 +445,47 @@
     _orderLabel.text = @"尚未點餐";
     self.progressView.image = [UIImage imageNamed:@"progress1"];
     
-    OrderPickerView *pickerView =  [[OrderPickerView alloc] initWithFrame:CGRectMake(100, 200, 200, 300)];
+    //--------------------------------------------------------------//
+    
+    UIView * view1 = [[UIView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height)];
+    
+    view1.backgroundColor = [UIColor blackColor];
+    view1.alpha = 0.8;
+    
+    [self.view addSubview:view1];
+    
+     //--------------------------------------------------------------//
+    
+    OrderPickerView *pickerView =  [[OrderPickerView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
+    pickerView.center = view1.center;
+    
     
     pickerView.pickerBlock = ^(NSString *selectedOrder){
         
-        _orderLabel.text = selectedOrder;
-        NSLog(@"******%@*******",selectedOrder);
-        UIImage * image2 = [UIImage imageNamed:@"progress2"];
         
-        self.progressView.image = image2;
-        cancelNumber = 2;
+        if ([selectedOrder isEqualToString:@"cancel"]) {
+            [view1 removeFromSuperview];
+        }else{
+            _orderLabel.text = selectedOrder;
+            NSLog(@"******%@*******",selectedOrder);
+            UIImage * image2 = [UIImage imageNamed:@"progress2"];
+            
+            self.progressView.image = image2;
+            cancelNumber = 2;
+            
+            [view1 removeFromSuperview];
+            
+        }
+        
+        
+        
+        
     };
     
     //將餐點資料灌入下載到的array;
     pickerView.MArray = menuArray;
     
-    [self.view addSubview:pickerView];
+    [view1 addSubview:pickerView];
     
 }
 
@@ -489,7 +515,12 @@
         
         
         //自己頁面調整
-        self.showFinishLabel.text = @"點餐完成，請等待其他人，頁面將自動跳轉";
+        if (self.typeVar == ToThisViewTypeFromSelected) {
+            self.showFinishLabel.text = @"點餐完成，請等待其他人，頁面將自動跳轉";
+        }else{
+            self.showFinishLabel.text = @"點餐完成，請等待其他人，再按送出";
+        }
+        
         
         self.progressView.image = [UIImage imageNamed:@"progress3"];
         
@@ -500,6 +531,8 @@
         //按確定後不給點了
         self.chooseOrderBtnView.alpha = 0.5;
         self.chooseOrderBtnView.userInteractionEnabled = false;
+        self.okBtnView.alpha = 0.5;
+        self.okBtnView.userInteractionEnabled = false;
         
     }
     
@@ -654,7 +687,8 @@
     
     [self changeStauts:cancelStatusString];
         
-
+    self.okBtnView.alpha = 1;
+    self.okBtnView.userInteractionEnabled = true;
     
     //取消馬上刪除資料 更新total price
     //利用image判斷重複點擊cancel
@@ -693,10 +727,12 @@
 
 - (IBAction)sendOrderBtnPressed:(id)sender {
     
+    
+    
+    
+    
+    
 }
-
-
-
 
 
 -(void)changeStauts:(NSString *)statusString{
@@ -727,23 +763,35 @@
     if (_typeVar == ToThisViewTypeFromSelected) {
         // selecter leave
         
-        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"離開將會刪除你的點餐" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (cancelNumber != 1) {
+            
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"警告" message:@"離開將會刪除你的點餐" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            
+            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                [helper quitAndDeleteDataFromSelector:self.selectedOrderKeyString];
+                [self uploadFinalPriceFromDeleteOrder:self.typeVar];
+                
+                [self dismissViewControllerAnimated:true completion:nil];
+                
+            }];
+            
+            [alert addAction:ok];
+            [alert addAction:cancel];
+            [self presentViewController:alert animated:true completion:nil];
+            
+        }else{
             
             [helper quitAndDeleteDataFromSelector:self.selectedOrderKeyString];
             
-            [self uploadFinalPriceFromDeleteOrder:self.typeVar];
+            //[self uploadFinalPriceFromDeleteOrder:self.typeVar];
             
             [self dismissViewControllerAnimated:true completion:nil];
-            
-        }];
+
+        };
         
-        [alert addAction:ok];
-        [alert addAction:cancel];
-        [self presentViewController:alert animated:true completion:nil];
 
         
     }else{

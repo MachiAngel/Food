@@ -35,8 +35,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Selected" object:nil];
     
     
-    
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -66,9 +64,7 @@
     [orderManager deleteFirebaseObserve];
   
   
-    
 }
-
 
 
 
