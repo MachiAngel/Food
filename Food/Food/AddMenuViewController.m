@@ -87,6 +87,8 @@
     // listen creater leave
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(quitThisPage) name:@"createrLeave" object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goRecord) name:@"sendMenu" object:nil];
+    
     
     restaurantManager = [RestaurantInfo sharedInstance];
     helper = [Helper sharedInstance];
@@ -121,7 +123,8 @@
     //持續觀察orderList
     [self observeOrderListForTableView:self.typeVar];
     
-    
+    //觀察是否按送出
+    [self observerSendNotice:self.typeVar];
     
     
 }
@@ -361,6 +364,44 @@
     
 }
 
+
+-(void)observerSendNotice:(ToThisViewType)type{
+    if (type == ToThisViewTypeFromSelected){
+        
+        [[[helper getDatabaseRefOfMenuNotice]child:self.selectedOrderKeyString]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            
+            NSDictionary * notice = snapshot.value;
+            
+            if ([notice isEqual:[NSNull null]]) {
+                NSLog(@"沒東西");
+            }else{
+                NSLog(@"有通知了");
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"sendMenu" object:nil];
+            }
+            
+            
+        }];
+        
+    }else{
+        
+        NSString * createdMenuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+        [[[helper getDatabaseRefOfMenuNotice]child:createdMenuUid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            
+            NSDictionary * notice = snapshot.value;
+            if ([notice isEqual:[NSNull null]]) {
+                NSLog(@"沒東西");
+            }else{
+                NSLog(@"有通知了");
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"sendMenu" object:nil];
+            }
+            
+        }];
+        
+    }
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -422,22 +463,11 @@
     NSString * orderString = eachOrder[@"Order"];
     NSString * userName = eachOrder[@"UserName"];
     
-    cell.singleOrderLabel.text = [NSString stringWithFormat:@"%@  點了 %@",userName,orderString];
+    cell.singleOrderLabel.text = [NSString stringWithFormat:@"%@ 點了 %@",userName,orderString];
     
     return cell;
 }
 
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - Picker View Button Pressed Method
 - (IBAction)orderBtnPressed:(id)sender {
@@ -727,11 +757,16 @@
 
 - (IBAction)sendOrderBtnPressed:(id)sender {
     
+     NSString * createdMenuUid = [[NSUserDefaults standardUserDefaults]objectForKey:@"menuUid"];
+    
+    //發通知到線上 做方法觀察
+    [helper createrUploadSendNotice:createdMenuUid];
+    
+    //刪除全部東西
+   // [helper createrSendBtnPressed:createdMenuUid];
     
     
-    
-    
-    
+
 }
 
 
@@ -846,12 +881,119 @@
         
         [[[helper getDatabaseRefOfMenuUsers]child:menuUid]removeAllObservers];
         
-        
     }
     
 }
 
 
+
+-(void)goRecord{
+    
+    if (self.typeVar == ToThisViewTypeFromSelected){
+        //from selected
+        //拿到所有基本
+        NSMutableArray * orderArray = [NSMutableArray new];
+        
+        NSString * createrNameString = createInfo[@"Creater"];
+        NSString * createTimeString = createInfo[@"CreateTime"];
+        NSString * restaurantName = createInfo[@"ShopName"];
+        NSString * restaurantPhone = createInfo[@"ShopPhone"];
+        NSString * totalPriceString = self.totalPriceLabel.text;
+        
+        for (int i = 0; i < usersOrderArray.count; i++) {
+            NSDictionary * eachOrder = usersOrderArray[i];
+            
+            NSString * orderString = eachOrder[@"Order"];
+            NSString * userName = eachOrder[@"UserName"];
+            NSString * comboOrderString = [NSString stringWithFormat:@"%@ 點了 %@",userName,orderString];
+            [orderArray addObject:comboOrderString];
+        }
+        
+        //組合
+        NSDictionary * record = @{@"createrName":createrNameString,
+                                  @"createTime":createTimeString,
+                                  @"restaurantName":restaurantName,
+                                  @"restaurantPhone":restaurantPhone,
+                                  @"totalPrice":totalPriceString,
+                                  @"orderArray":orderArray};
+        //for userDefault
+        NSMutableArray * recordArray = [NSMutableArray new];
+        [recordArray addObject:record];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:recordArray forKey:@"recordArray"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+    }else{
+        //from creater  self.menuCreateInfo
+        NSMutableArray * orderArray = [NSMutableArray new];
+        
+        NSString * createrNameString = createInfo[@"Creater"];
+        NSString * createTimeString = createInfo[@"CreateTime"];
+        NSString * restaurantName = createInfo[@"ShopName"];
+        NSString * restaurantPhone = createInfo[@"ShopPhone"];
+        NSString * totalPriceString = self.totalPriceLabel.text;
+        
+        for (int i = 0; i < usersOrderArray.count; i++) {
+            NSDictionary * eachOrder = usersOrderArray[i];
+            
+            NSString * orderString = eachOrder[@"Order"];
+            NSString * userName = eachOrder[@"UserName"];
+            NSString * comboOrderString = [NSString stringWithFormat:@"%@ 點了 %@",userName,orderString];
+            [orderArray addObject:comboOrderString];
+        }
+        
+        //組合
+        NSDictionary * record = @{@"createrName":createrNameString,
+                                  @"createTime":createTimeString,
+                                  @"restaurantName":restaurantName,
+                                  @"restaurantPhone":restaurantPhone,
+                                  @"totalPrice":totalPriceString,
+                                  @"orderArray":orderArray};
+        //for userDefault
+        NSMutableArray * recordArray = [NSMutableArray new];
+        [recordArray addObject:record];
+        
+        [[NSUserDefaults standardUserDefaults]setObject:recordArray forKey:@"recordArray"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        
+    }
+    
+    
+    
+}
+
+//-(void)getCreateInfo:(ToThisViewType)type{
+//    
+//    if (type == ToThisViewTypeFromSelected){
+//
+//        [restaurantManager getCreateMenuInfo:self.selectedOrderKeyString handler:^(NSDictionary *result) {
+//            
+//            createInfo = result;
+//            NSLog(@"XDXD%@",createInfo);
+//            
+//            NSString * createrString = [NSString stringWithFormat:@"建立者:%@",createInfo[@"Creater"]];
+//            NSString * restautantString = [NSString stringWithFormat:@"店家:%@",createInfo[@"ShopName"]];
+//            
+//            self.orderCreaterLabel.text = createrString;
+//            self.orderRestaurantLabel.text = restautantString;
+//            
+//        }];
+//        
+//    }else{
+//        
+//        NSLog(@"CCCCCCC:%@",self.menuCreateInfo);
+//        
+//        NSString * createrString = [NSString stringWithFormat:@"建立者:%@",self.menuCreateInfo[@"Creater"]];
+//        NSString * restautantString = [NSString stringWithFormat:@"店家:%@",self.menuCreateInfo[@"ShopName"]];
+//        
+//        self.orderCreaterLabel.text = createrString;
+//        self.orderRestaurantLabel.text = restautantString;
+//        
+//        
+//    }
+//    
+//}
 
 
 

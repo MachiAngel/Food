@@ -450,7 +450,6 @@ static Helper * _helper;
 
 -(void)quitAndDeleteDataFromCreater:(NSString*)menuUid{
     
-//    NSString * currentUserUid = [self uidOfCurrentUser];
     
     
     [[[self getDatabaseRefOfMenuOrderList]child:menuUid]removeValue];
@@ -462,14 +461,25 @@ static Helper * _helper;
 
 
 
+-(void)createrUploadSendNotice:(NSString *)menuUid{
+    
+    NSDictionary * notice = @{@"Notice":@"1"};
+    [[[self getDatabaseRefOfMenuNotice]child:menuUid]updateChildValues:notice];
+    
+}
 
+-(void)createrSendBtnPressed:(NSString*)menuUid{
+    
+    [[[self getDatabaseRefOfMenuUsers]child:menuUid]removeValue];
+    
+    [[[self getDatabaseRefOfMenuOrderList]child:menuUid]removeValue];
+    
+    [[[self getDatabaseRefOfMenus]child:menuUid]removeValue];
+    
 
-
-
-
-
-
-
+    
+    
+}
 
 
 
@@ -527,7 +537,12 @@ static Helper * _helper;
     
 }
 
-         
+-(FIRDatabaseReference *)getDatabaseRefOfMenuNotice{
+    
+    
+    return [[[FIRDatabase database]reference]child:@"MenuNotice"];
+    
+}
 
 //storge
 

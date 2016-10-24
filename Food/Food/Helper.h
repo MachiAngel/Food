@@ -83,6 +83,10 @@
 // AddmenuViewController method for cancel order
 -(void)deleteUserOrderWithMenuUid:(NSString*)uid;
 
+// AddmenuViewController method for send order
+-(void)createrUploadSendNotice:(NSString *)menuUid;
+-(void)createrSendBtnPressed:(NSString*)menuUid;
+
 
 
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;
@@ -96,6 +100,8 @@
 -(FIRDatabaseReference *)getDatabaseRefOfMenuUsers;
 
 -(FIRDatabaseReference *)getDatabaseRefOfMenuOrderList;
+
+-(FIRDatabaseReference *)getDatabaseRefOfMenuNotice;
 
 //--------------------------------------------------------------//
 
