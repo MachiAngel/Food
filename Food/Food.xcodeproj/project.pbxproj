@@ -18,7 +18,6 @@
 		113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */; };
 		113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */; };
 		113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */; };
-		113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFCB1DAEA24600E2B58D /* SettingTableViewController.m */; };
 		113BFFE41DAEA74000E2B58D /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 113BFFE31DAEA74000E2B58D /* Helper.m */; };
 		113BFFF01DAED03900E2B58D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */; };
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
@@ -27,6 +26,8 @@
 		115CA2BA1DBDDE720027F069 /* progress1.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B71DBDDE720027F069 /* progress1.png */; };
 		115CA2BB1DBDDE720027F069 /* progress3.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B81DBDDE720027F069 /* progress3.png */; };
 		115CA2BC1DBDDE720027F069 /* progress2.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B91DBDDE720027F069 /* progress2.png */; };
+		1169C3711DBE716700EBBBFD /* OrLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1169C3701DBE716700EBBBFD /* OrLine.png */; };
+		1169C3741DBE723700EBBBFD /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169C3731DBE723700EBBBFD /* RecordViewController.m */; };
 		1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1179DC591DB3AF640016BF70 /* unknow.png */; };
 		117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */; };
 		117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */; };
@@ -68,8 +69,6 @@
 		113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewController.m; sourceTree = "<group>"; };
 		113BFFC71DAEA21C00E2B58D /* RecordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordsTableViewController.h; sourceTree = "<group>"; };
 		113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsTableViewController.m; sourceTree = "<group>"; };
-		113BFFCA1DAEA24600E2B58D /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
-		113BFFCB1DAEA24600E2B58D /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		113BFFE21DAEA74000E2B58D /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		113BFFE31DAEA74000E2B58D /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		113BFFEC1DAED03900E2B58D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -81,6 +80,9 @@
 		115CA2B71DBDDE720027F069 /* progress1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress1.png; sourceTree = "<group>"; };
 		115CA2B81DBDDE720027F069 /* progress3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress3.png; sourceTree = "<group>"; };
 		115CA2B91DBDDE720027F069 /* progress2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress2.png; sourceTree = "<group>"; };
+		1169C3701DBE716700EBBBFD /* OrLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrLine.png; sourceTree = "<group>"; };
+		1169C3721DBE723700EBBBFD /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		1169C3731DBE723700EBBBFD /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
 		1179DC591DB3AF640016BF70 /* unknow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknow.png; sourceTree = "<group>"; };
 		117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantInfo.h; sourceTree = "<group>"; };
 		117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfo.m; sourceTree = "<group>"; };
@@ -148,10 +150,10 @@
 				1192A88D1DB777460034237F /* AddMenuViewController.m */,
 				113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */,
 				113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */,
+				1169C3721DBE723700EBBBFD /* RecordViewController.h */,
+				1169C3731DBE723700EBBBFD /* RecordViewController.m */,
 				113BFFC71DAEA21C00E2B58D /* RecordsTableViewController.h */,
 				113BFFC81DAEA21C00E2B58D /* RecordsTableViewController.m */,
-				113BFFCA1DAEA24600E2B58D /* SettingTableViewController.h */,
-				113BFFCB1DAEA24600E2B58D /* SettingTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -265,6 +267,7 @@
 				115CA2B81DBDDE720027F069 /* progress3.png */,
 				115CA2B91DBDDE720027F069 /* progress2.png */,
 				113983B11DB92EB20080AAB5 /* order.jpg */,
+				1169C3701DBE716700EBBBFD /* OrLine.png */,
 				11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */,
 				11EA3F0F1DAD80AA00C5E4FA /* main.m */,
 			);
@@ -362,6 +365,7 @@
 			files = (
 				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
 				115CA2BA1DBDDE720027F069 /* progress1.png in Resources */,
+				1169C3711DBE716700EBBBFD /* OrLine.png in Resources */,
 				1192A8901DB77C860034237F /* user1.jpeg in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
@@ -479,9 +483,9 @@
 				113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */,
 				11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */,
 				1192A88E1DB777460034237F /* AddMenuViewController.m in Sources */,
-				113BFFCC1DAEA24600E2B58D /* SettingTableViewController.m in Sources */,
 				1192A88B1DB776FE0034237F /* UserCollectionViewCell.m in Sources */,
 				11EA3F101DAD80AA00C5E4FA /* main.m in Sources */,
+				1169C3741DBE723700EBBBFD /* RecordViewController.m in Sources */,
 				114C765B1DBB767F00E3D584 /* OrderPickerView.m in Sources */,
 				110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */,
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
