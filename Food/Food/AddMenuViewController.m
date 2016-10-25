@@ -488,7 +488,7 @@
     UIView * view1 = [[UIView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width,self.view.frame.size.height)];
     
     view1.backgroundColor = [UIColor blackColor];
-    view1.alpha = 0.8;
+    view1.alpha = 0.9;
     
     [self.view addSubview:view1];
     

@@ -17,6 +17,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *uploaderLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *cellBackgroundView;
+
+
 
 @end
 
@@ -72,6 +75,8 @@
     self.addressLabel.text = [NSString stringWithFormat:@"地址:%@", tg.ShopAddress];
     // 設置餐廳電話
     self.uploaderLabel.text = [NSString stringWithFormat:@"上傳者:%@", tg.UploadUser];
+    
+    //[self sendSubviewToBack:self.cellBackgroundView];
 }
 
 

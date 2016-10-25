@@ -399,7 +399,7 @@
                             <constraint firstItem="mDq-v7-r9D" firstAttribute="leading" secondItem="kL9-K4-0Cn" secondAttribute="leadingMargin" id="acd-xx-hAW"/>
                             <constraint firstItem="mjo-sL-zBy" firstAttribute="leading" secondItem="kL9-K4-0Cn" secondAttribute="leadingMargin" id="bim-RW-7Vf"/>
                             <constraint firstItem="mDq-v7-r9D" firstAttribute="top" secondItem="PUy-BE-bRA" secondAttribute="bottom" constant="20" id="brK-pc-SUr"/>
-                            <constraint firstItem="PUy-BE-bRA" firstAttribute="top" secondItem="h53-bX-tSJ" secondAttribute="bottom" constant="119" id="fmo-Q6-Whe"/>
+                            <constraint firstItem="PUy-BE-bRA" firstAttribute="top" secondItem="h53-bX-tSJ" secondAttribute="bottom" constant="50" id="fmo-Q6-Whe"/>
                             <constraint firstItem="i7m-tQ-Rnz" firstAttribute="top" secondItem="oVR-WX-xHt" secondAttribute="bottom" constant="20" id="hGM-fB-3in"/>
                             <constraint firstItem="oVR-WX-xHt" firstAttribute="centerX" secondItem="kL9-K4-0Cn" secondAttribute="centerX" id="kAJ-Fe-0QL"/>
                             <constraint firstItem="noK-2E-K3g" firstAttribute="top" secondItem="mDq-v7-r9D" secondAttribute="bottom" constant="8" id="ntv-dt-tp3"/>
@@ -1079,8 +1079,8 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="progress1.png" translatesAutoresizingMaskIntoConstraints="NO" id="bZq-Wb-fjv"/>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提示完成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15i-lt-n6z">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="總計:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwx-9o-qKU">

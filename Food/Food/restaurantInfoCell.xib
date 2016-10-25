@@ -16,6 +16,7 @@
                 <frame key="frameInset" width="320" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellOrange.png" translatesAutoresizingMaskIntoConstraints="NO" id="ztK-Zt-MAt"/>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pne-e7-DfB">
                         <constraints>
                             <constraint firstAttribute="width" constant="111" id="xaT-sg-PkF"/>
@@ -35,8 +36,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="地址" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPw-JF-e31">
-                        <frame key="frameInset" minX="139" minY="49" width="173" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="地址" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPw-JF-e31">
+                        <frame key="frameInset" minX="139" minY="39" width="173" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                         <nil key="textColor"/>
@@ -46,12 +47,17 @@
                 <color key="backgroundColor" red="0.99539839659999996" green="0.99539839659999996" blue="0.99539839659999996" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="pne-e7-DfB" secondAttribute="bottom" constant="5" id="6U5-et-hDf"/>
+                    <constraint firstAttribute="bottom" secondItem="ztK-Zt-MAt" secondAttribute="bottom" id="C2T-8N-aP9"/>
+                    <constraint firstAttribute="trailing" secondItem="ztK-Zt-MAt" secondAttribute="trailing" id="CZG-vp-lyD"/>
+                    <constraint firstItem="ztK-Zt-MAt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OCn-fy-A1x"/>
                     <constraint firstItem="pne-e7-DfB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="6" id="fDD-0f-dV3"/>
                     <constraint firstItem="pne-e7-DfB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="fcJ-M0-39k"/>
+                    <constraint firstItem="ztK-Zt-MAt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="rs1-q6-Q89"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressLabel" destination="OPw-JF-e31" id="TV7-UA-wTX"/>
+                <outlet property="cellBackgroundView" destination="ztK-Zt-MAt" id="frT-Je-TFp"/>
                 <outlet property="iconView" destination="pne-e7-DfB" id="DtF-iD-jXe"/>
                 <outlet property="titleLabel" destination="HTL-8W-qMu" id="SJC-Nq-eh3"/>
                 <outlet property="uploaderLabel" destination="naU-y8-0Gu" id="DUH-Ve-wni"/>
@@ -59,4 +65,7 @@
             <point key="canvasLocation" x="-140" y="-49"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="cellOrange.png" width="320" height="120"/>
+    </resources>
 </document>
