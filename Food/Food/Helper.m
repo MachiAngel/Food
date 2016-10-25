@@ -64,7 +64,7 @@ static Helper * _helper;
         
         NSLog(@"Email sign in success");
         
-        [self switchToMainView:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"singInDone" object:nil];
         
     }];
     
@@ -82,12 +82,16 @@ static Helper * _helper;
             //可以讓使用者知道為何失敗
             NSLog(@"%@",error);
             return ;
+        }else{
+            
+            NSDictionary * userInfo = @{@"Email":email,@"Password":password};
+            
+            [self uploadUserData:userInfo];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"createAcc" object:nil];
+            
         }
         
         
-        NSDictionary * userInfo = @{@"Email":email,@"Password":password};
-        
-        [self uploadUserData:userInfo];
         
     }];
     
@@ -159,10 +163,18 @@ static Helper * _helper;
 -(void)switchToMainView:(UIViewController *)view{
     
 
-    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+//    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+//    
+//    [view presentViewController:tabVC animated:true completion:nil];
     
-    [view presentViewController:tabVC animated:true completion:nil];
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UITabBarController * myTabBarVC = [storyboard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+    
+    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    app.window.rootViewController = myTabBarVC;
+    [app.window makeKeyAndVisible];
     
 }
 

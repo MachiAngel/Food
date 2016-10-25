@@ -7,8 +7,12 @@
 //
 
 #import "RecordsTableViewController.h"
+#import "RecordViewController.h"
+
 
 @interface RecordsTableViewController ()
+
+@property (nonatomic,strong)NSArray * records;
 
 @end
 
@@ -17,12 +21,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    _records = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
+    NSLog(@"%lu",_records.count);
+    [self.tableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -32,24 +42,41 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return _records.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSDictionary * each = _records[indexPath.row];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",each[@"restaurantName"]];
+    
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"時間:%@",each[@"createTime"]];
     
     return cell;
 }
-*/
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:true];
+    
+    NSDictionary * each = _records[indexPath.row];
+    
+    RecordViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RecordViewController"];
+    
+    vc.recordDict = each;
+    vc.fromTableViewString = @"1";
+    
+    [self showViewController:vc sender:nil];
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

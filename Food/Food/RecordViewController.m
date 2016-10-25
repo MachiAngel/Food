@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *ordersTextView;
 @property (weak, nonatomic) IBOutlet UILabel *shopPhoneLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *leaveBtnView;
 
 @end
 
@@ -22,33 +23,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-//   NSArray * records = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
-//    NSLog(@"-------------cc");
-//    NSLog(@"%@",records);
-//    NSLog(@"%@",records[0]);
-//    NSLog(@"-------------cc");
+    NSLog(@"%@",self.fromTableViewString);
     
-//    NSDictionary * record = @{@"createrName":createrNameString,
-//                              @"createTime":createTimeString,
-//                              @"restaurantName":restaurantName,
-//                              @"restaurantPhone":restaurantPhone,
-//                              @"totalPrice":totalPriceString,
-//                              @"orderArray":orderArray};
-    
-    NSLog(@"EEEEE%@",self.recordDict);
+    if ([self.fromTableViewString isEqualToString:@"1"]) {
+        self.leaveBtnView.alpha = 0;
+    }
     
     
-//    @property (weak, nonatomic) IBOutlet UILabel *restaurantNameLabel;
-//    @property (weak, nonatomic) IBOutlet UILabel *createrNameLabel;
-//    @property (weak, nonatomic) IBOutlet UILabel *createTimeLabel;
-//    @property (weak, nonatomic) IBOutlet UITextView *ordersTextView;
-//    @property (weak, nonatomic) IBOutlet UILabel *shopPhoneLabel;
     
-    self.restaurantNameLabel.text = self.recordDict[@"restaurantName"];
-    self.createrNameLabel.text = self.recordDict[@"createrNameString"];
-    self.shopPhoneLabel.text = self.recordDict[@"restaurantPhone"];
+    self.restaurantNameLabel.text = [NSString stringWithFormat:@"商店名稱:%@",self.recordDict[@"restaurantName"]];
+    
+    
+    self.createrNameLabel.text = [NSString stringWithFormat:@"建立者:%@",self.recordDict[@"createrName"]];
+    
+    self.shopPhoneLabel.text = [NSString stringWithFormat:@"商店電話:%@",self.recordDict[@"restaurantPhone"]];
+    
+    
+    self.createTimeLabel.text = [NSString stringWithFormat:@"訂單建立時間:%@",self.recordDict[@"createTime"]];
+    
     
     NSArray * orderArray = self.recordDict[@"orderArray"];
     for (int i = 0; i < orderArray.count; i++) {
@@ -66,6 +59,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 - (IBAction)leaveBtnPressed:(id)sender {
     
     UIViewController *vc = self.presentingViewController;

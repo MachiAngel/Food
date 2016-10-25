@@ -12,5 +12,6 @@
 
 
 @property(nonatomic,strong)NSDictionary * recordDict;
+@property(nonatomic,strong)NSString * fromTableViewString;
 
 @end

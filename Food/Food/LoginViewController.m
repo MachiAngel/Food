@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import "Helper.h"
 #import "AppDelegate.h"
+#import "SVProgressHUD.h"
 
 @interface LoginViewController ()< FBSDKLoginButtonDelegate,UITextFieldDelegate>
 {
@@ -30,11 +31,12 @@
     // Do any additional setup after loading the view.
     
     //登出用  還要改
-//    NSError *error;
-//    [[FIRAuth auth] signOut:&error];
-//    if (!error) {
-//        // Sign-out succeeded
-//    }
+    NSError *error;
+    [[FIRAuth auth] signOut:&error];
+    if (!error) {
+    // Sign-out succeeded
+       [FBSDKAccessToken setCurrentAccessToken:nil]; 
+    }
     
     
     helper = [Helper sharedInstance];
@@ -44,18 +46,33 @@
     @[@"public_profile", @"email", @"user_friends"];
     
     
+    //fb登入後做的事情
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goMainView) name:@"doneLogin" object:nil];
     
+    
+    //直接登入成功的通知
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goMainView) name:@"singInDone" object:nil];
+    
+
     
     
 }
 
 
 -(void)goMainView{
-    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
     
-    [self presentViewController:tabVC animated:true completion:nil];
+
+    
+    [SVProgressHUD dismiss];
+    
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UITabBarController * myTabBarVC = [storyboard instantiateViewControllerWithIdentifier:@"TabBarVC"];
+    
+    AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    app.window.rootViewController = myTabBarVC;
+    [app.window makeKeyAndVisible];
+    
 }
 
 
@@ -70,14 +87,7 @@
 //    });
     
     if ([helper uidOfCurrentUser]) {
-//        UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
-//        
-//        [self presentViewController:tabVC animated:true completion:nil];
-        
-        
-        
-        
+
         
         UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
@@ -86,8 +96,6 @@
         AppDelegate * app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         app.window.rootViewController = myTabBarVC;
         [app.window makeKeyAndVisible];
-        
-        
         
         
     }
@@ -102,6 +110,7 @@
 }
 - (IBAction)emailLoginBtn:(id)sender {
     
+        
     NSString * emailString = self.emailTextField.text;
     NSString * passwordString = self.passwordTextField.text;
     
@@ -113,34 +122,16 @@
 
 - (IBAction)createAccBtn:(id)sender {
     
-    NSString * emailString = self.emailTextField.text;
-    NSString * passwordString = self.passwordTextField.text;
-    
-    [helper signUpWithEmail:emailString password:passwordString];
-    
-    [self setNameAlert];
+//    NSString * emailString = self.emailTextField.text;
+//    NSString * passwordString = self.passwordTextField.text;
+//    
+//    [helper signUpWithEmail:emailString password:passwordString];
+//    
+//    [self setNameAlert];
     
 }
 
--(void)setNameAlert{
-    
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"設定" message:@"請輸入名字" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        
-        textField.tag = 1;
-        textField.enablesReturnKeyAutomatically = true;
-        textField.returnKeyType = UIReturnKeyDone;
-        textField.placeholder = @"請輸入名字";
-        textField.delegate = self;
-        
-    }];
-    
-    [self presentViewController:alert animated:true completion:nil];
-    
-    
-    
-}
+
 
 
 /*
@@ -176,7 +167,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
         
                 //------------ for facebook------------//
         //可在這邊貼一個veiw?
-       // self.FbLoginView.hidden = true;
+        self.FbLoginView.hidden = true;
+        [SVProgressHUD show];
         
     }
     
@@ -191,23 +183,11 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 }
 
 
--(void)textFieldDidEndEditing:(UITextField *)textField{
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
     
-            //get new name
-        NSString * userName = textField.text;
-        
-        
-        [[NSUserDefaults standardUserDefaults]setObject:userName forKey:@"userName"];
-        [[NSUserDefaults standardUserDefaults]synchronize];
-        
-    
-        [self dismissViewControllerAnimated:true completion:nil];
-    
-    
-    NSDictionary * userNameDict = @{@"UserName":userName};
-    [helper uploadUserData:userNameDict];
-    [helper switchToMainView:self];
-    
+    [textField resignFirstResponder];
+    return true;
 }
 
 

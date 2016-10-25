@@ -23,6 +23,9 @@
 		113BFFF11DAED03900E2B58D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113BFFED1DAED03900E2B58D /* FBSDKLoginKit.framework */; };
 		114C765B1DBB767F00E3D584 /* OrderPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C765A1DBB767F00E3D584 /* OrderPickerView.m */; };
 		114C765F1DBB961600E3D584 /* orderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 114C765E1DBB961600E3D584 /* orderListTableViewCell.m */; };
+		115812481DBF49C600C229E1 /* backgroundPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 115812471DBF49C600C229E1 /* backgroundPhoto.png */; };
+		1158124A1DBF6AB200C229E1 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 115812491DBF6AB200C229E1 /* orange.png */; };
+		1158124D1DBF7A2100C229E1 /* CreateAccViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1158124C1DBF7A2100C229E1 /* CreateAccViewController.m */; };
 		115CA2BA1DBDDE720027F069 /* progress1.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B71DBDDE720027F069 /* progress1.png */; };
 		115CA2BB1DBDDE720027F069 /* progress3.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B81DBDDE720027F069 /* progress3.png */; };
 		115CA2BC1DBDDE720027F069 /* progress2.png in Resources */ = {isa = PBXBuildFile; fileRef = 115CA2B91DBDDE720027F069 /* progress2.png */; };
@@ -77,6 +80,10 @@
 		114C765A1DBB767F00E3D584 /* OrderPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPickerView.m; sourceTree = "<group>"; };
 		114C765D1DBB961600E3D584 /* orderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderListTableViewCell.h; sourceTree = "<group>"; };
 		114C765E1DBB961600E3D584 /* orderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderListTableViewCell.m; sourceTree = "<group>"; };
+		115812471DBF49C600C229E1 /* backgroundPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundPhoto.png; sourceTree = "<group>"; };
+		115812491DBF6AB200C229E1 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
+		1158124B1DBF7A2100C229E1 /* CreateAccViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAccViewController.h; sourceTree = "<group>"; };
+		1158124C1DBF7A2100C229E1 /* CreateAccViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAccViewController.m; sourceTree = "<group>"; };
 		115CA2B71DBDDE720027F069 /* progress1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress1.png; sourceTree = "<group>"; };
 		115CA2B81DBDDE720027F069 /* progress3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress3.png; sourceTree = "<group>"; };
 		115CA2B91DBDDE720027F069 /* progress2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = progress2.png; sourceTree = "<group>"; };
@@ -138,6 +145,8 @@
 			children = (
 				11EA3F281DAD8D7700C5E4FA /* LoginViewController.h */,
 				11EA3F291DAD8D7700C5E4FA /* LoginViewController.m */,
+				1158124B1DBF7A2100C229E1 /* CreateAccViewController.h */,
+				1158124C1DBF7A2100C229E1 /* CreateAccViewController.m */,
 				110B6A471DB20DD7009CC9F7 /* TabBarViewController.h */,
 				110B6A481DB20DD7009CC9F7 /* TabBarViewController.m */,
 				113BFFBE1DAEA0E600E2B58D /* RestaurantsTableViewController.h */,
@@ -261,6 +270,7 @@
 				11EA3F1C1DAD80AA00C5E4FA /* LaunchScreen.storyboard */,
 				11EA3F2B1DAD8DC700C5E4FA /* GoogleService-Info.plist */,
 				11EA3F1F1DAD80AA00C5E4FA /* Info.plist */,
+				115812491DBF6AB200C229E1 /* orange.png */,
 				1192A88F1DB77C860034237F /* user1.jpeg */,
 				1179DC591DB3AF640016BF70 /* unknow.png */,
 				115CA2B71DBDDE720027F069 /* progress1.png */,
@@ -268,6 +278,7 @@
 				115CA2B91DBDDE720027F069 /* progress2.png */,
 				113983B11DB92EB20080AAB5 /* order.jpg */,
 				1169C3701DBE716700EBBBFD /* OrLine.png */,
+				115812471DBF49C600C229E1 /* backgroundPhoto.png */,
 				11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */,
 				11EA3F0F1DAD80AA00C5E4FA /* main.m */,
 			);
@@ -375,6 +386,8 @@
 				11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */,
 				115CA2BB1DBDDE720027F069 /* progress3.png in Resources */,
 				11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */,
+				115812481DBF49C600C229E1 /* backgroundPhoto.png in Resources */,
+				1158124A1DBF6AB200C229E1 /* orange.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +503,7 @@
 				110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */,
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
 				117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */,
+				1158124D1DBF7A2100C229E1 /* CreateAccViewController.m in Sources */,
 				113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */,
 				113983B51DB93B510080AAB5 /* OrderModel.m in Sources */,
 				1184CE421DB6254D009E2A3E /* FoodView.m in Sources */,

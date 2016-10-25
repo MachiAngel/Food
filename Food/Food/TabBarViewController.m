@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    NSLog(@"GGGGGGGGGGGGG");
+  
     
     
 }
@@ -27,12 +27,12 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    
-    NSLog(@"didSelectViewControllerdidSelectViewControllerdidSelectViewControllerdidSelectViewControllerdidSelectViewController");
-    
-    
-}
+//-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+//    
+//    NSLog(@"didSelectViewControllerdidSelectViewControllerdidSelectViewControllerdidSelectViewControllerdidSelectViewController");
+//    
+//    
+//}
 
 
 /*

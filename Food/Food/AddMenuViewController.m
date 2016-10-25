@@ -963,8 +963,6 @@
     
         NSString * createTimeString = self.menuCreateInfo[@"CreateTime"];
         
-        
-        
         NSString * restaurantName = self.menuCreateInfo[@"ShopName"];
         NSString * restaurantPhone = self.menuCreateInfo[@"ShopPhone"];
         NSString * totalPriceString = self.totalPriceLabel.text;
@@ -985,6 +983,9 @@
                                   @"restaurantPhone":restaurantPhone,
                                   @"totalPrice":totalPriceString,
                                   @"orderArray":orderArray};
+        
+        NSLog(@"XXXXOOOO%@",record);
+        
         //for userDefault
         
         NSArray * tmpRecordArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
