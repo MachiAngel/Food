@@ -24,11 +24,41 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-   NSArray * records = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
-    NSLog(@"-------------cc");
-    NSLog(@"%@",records);
-    NSLog(@"%@",records[0]);
-    NSLog(@"-------------cc");
+//   NSArray * records = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
+//    NSLog(@"-------------cc");
+//    NSLog(@"%@",records);
+//    NSLog(@"%@",records[0]);
+//    NSLog(@"-------------cc");
+    
+//    NSDictionary * record = @{@"createrName":createrNameString,
+//                              @"createTime":createTimeString,
+//                              @"restaurantName":restaurantName,
+//                              @"restaurantPhone":restaurantPhone,
+//                              @"totalPrice":totalPriceString,
+//                              @"orderArray":orderArray};
+    
+    NSLog(@"EEEEE%@",self.recordDict);
+    
+    
+//    @property (weak, nonatomic) IBOutlet UILabel *restaurantNameLabel;
+//    @property (weak, nonatomic) IBOutlet UILabel *createrNameLabel;
+//    @property (weak, nonatomic) IBOutlet UILabel *createTimeLabel;
+//    @property (weak, nonatomic) IBOutlet UITextView *ordersTextView;
+//    @property (weak, nonatomic) IBOutlet UILabel *shopPhoneLabel;
+    
+    self.restaurantNameLabel.text = self.recordDict[@"restaurantName"];
+    self.createrNameLabel.text = self.recordDict[@"createrNameString"];
+    self.shopPhoneLabel.text = self.recordDict[@"restaurantPhone"];
+    
+    NSArray * orderArray = self.recordDict[@"orderArray"];
+    for (int i = 0; i < orderArray.count; i++) {
+        NSString * eachOrderString = orderArray[i];
+        
+        self.ordersTextView.text = [self.ordersTextView.text stringByAppendingFormat:@"%@\n",eachOrderString];
+    }
+    
+    self.ordersTextView.text = [self.ordersTextView.text stringByAppendingFormat:@"總計:%@元\n",self.recordDict[@"totalPrice"]];
+    
     
 }
 

@@ -930,8 +930,8 @@
                                   @"restaurantPhone":restaurantPhone,
                                   @"totalPrice":totalPriceString,
                                   @"orderArray":orderArray};
-        //for userDefault
         
+        //for userDefault
         
         NSArray * tmpRecordArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
         
@@ -949,6 +949,8 @@
         //selected go next page
         
         RecordViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RecordViewController"];
+        
+        vc.recordDict = record;
         
         [self presentViewController:vc animated:true completion:nil];
         
@@ -1003,14 +1005,12 @@
         // go next page
         
         RecordViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RecordViewController"];
+        vc.recordDict = record;
         
         [self presentViewController:vc animated:true completion:nil];
         
         
-        
     }
-    
-    
     
 }
 
