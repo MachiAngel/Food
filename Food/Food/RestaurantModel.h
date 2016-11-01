@@ -20,13 +20,29 @@
 // 餐廳地址
 @property (nonatomic, copy) NSString *ShopAddress;
 
-// 餐廳電話 還沒用到
+// 餐廳電話 
 @property (nonatomic, copy) NSString *ShopPhone;
 
 //餐廳上傳者 
 @property (nonatomic, copy) NSString *UploadUser;
 
 
+//#define NJInitH(name) \
+//- (instancetype)initWithDict:(NSDictionary *)dict; \
+//+ (instancetype)name##WithDict:(NSDictionary *)dict;
+//
+//#define NJInitM(name)\
+//- (instancetype)initWithDict:(NSDictionary *)dict \
+//{ \
+//if (self = [super init]) { \
+//[self setValuesForKeysWithDictionary:dict]; \
+//} \
+//return self; \
+//} \
+//+ (instancetype)name##WithDict:(NSDictionary *)dict \
+//{ \
+//return [[self alloc] initWithDict:dict]; \
+//}
 
 NJInitH(tg)
 

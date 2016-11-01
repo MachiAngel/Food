@@ -14,7 +14,7 @@
 #import "DetailTableViewController.h"
 
 
-@interface RestaurantsTableViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface RestaurantsTableViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchResultsUpdating,UISearchBarDelegate>
 {
     //靠此manager 拿到網路資料
     RestaurantInfo * restaurantManager;
@@ -28,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UIView *tmpView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *tmpAIV;
 
+
+@property (nonatomic,strong) UISearchController * searchController;
+@property (nonatomic,strong) NSMutableArray * searchList;
 @end
 
 @implementation RestaurantsTableViewController
@@ -35,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self createSearchBar];
+    _searchList = [NSMutableArray new];
    
     
 }
@@ -42,6 +47,23 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)createSearchBar{
+    
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
+    
+    self.searchController.searchBar.delegate = self;
+    
+    self.searchController.searchBar.keyboardType = UIKeyboardTypeDefault;
+    //
+    self.myTableView.tableHeaderView = self.searchController.searchBar;
 }
 
 
@@ -102,9 +124,6 @@
 }
 
 
-
-
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -114,21 +133,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return _restaurants.count;
+    if (self.searchController.active) {
+        return _searchList.count;
+    }else{
+        return _restaurants.count;
+    }
+    
+    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     restaurantInfoCell *cell = [restaurantInfoCell cellWithTableView:tableView];
     
-    // 取出對應模型
-    RestaurantModel *tg = self.restaurants[indexPath.row];
-    
-    
-    // 設置模型數據给cell 重寫set 方法
-    cell.tg = tg;
+    if (self.searchController.active) {
+     
+        RestaurantModel *tg = self.searchList[indexPath.row];
+        
+        cell.tg = tg;
+        
+    }else{
+        // 取出對應模型
+        RestaurantModel *tg = self.restaurants[indexPath.row];
+        // 設置模型數據给cell 重寫set 方法
+        cell.tg = tg;
+       
+    }
     
     return cell;
 }
@@ -143,8 +174,6 @@
     
     NSString * selectedUid = self.restaurantUids[indexPath.row];
     
-    
-    
     DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
     
     detailVC.detail = forDetail;
@@ -157,6 +186,89 @@
 }
 
 
+#pragma mark - SeachBar Delegate
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    searchBar.text=@"";
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    self.myTableView.allowsSelection=YES;
+    self.myTableView.scrollEnabled=YES;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    //
+    //    NSArray *results;
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    self.myTableView.allowsSelection=YES;
+    self.myTableView.scrollEnabled=YES;
+    
+    
+    [_searchList removeAllObjects];
+    NSString *searchString = [self.searchController.searchBar text];
+    
+    for (int i = 0; i < self.restaurants.count; i++) {
+        RestaurantModel * eachModel = self.restaurants[i];
+        NSString * restaurantName = eachModel.ShopName;
+        
+        if ([restaurantName rangeOfString:searchString].location != NSNotFound) {
+            [_searchList addObject:eachModel];
+        }
+        
+    }
+    
+   // [self.myTableView reloadData];
+    
+    
+    
+}
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    
+    NSLog(@"搜索begin");
+    
+    self.searchController.searchBar.showsCancelButton = YES;
+    
+    
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
+    
+    NSLog(@"搜索end");
+    
+    //刷新表格
+    [self.myTableView reloadData];
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+    
+    
+    return YES;
+}
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController{
+   
+    [_searchList removeAllObjects];
+    NSString *searchString = [self.searchController.searchBar text];
+    
+    for (int i = 0; i < self.restaurants.count; i++) {
+        RestaurantModel * eachModel = self.restaurants[i];
+        NSString * restaurantName = eachModel.ShopName;
+        NSString * restaurantAddress = eachModel.ShopAddress;
+        
+        if ([restaurantName rangeOfString:searchString].location != NSNotFound ||[restaurantAddress rangeOfString:searchString].location != NSNotFound)
+        {
+            [_searchList addObject:eachModel];
+        }
+        
+    }
+
+    [self.myTableView reloadData];
+    
+    
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -174,7 +286,7 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 */
 
