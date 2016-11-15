@@ -40,6 +40,11 @@ typedef void (^DoneHandlerDict)(NSDictionary * result);
 -(void)removeHandlerWithMenuUid:(NSString*)uid;
 
 
+//for favoriteViewController
+-(void)getFavoriteRestaurantArray:(DoneHandler)done;
+
+
 -(NSMutableArray *)getAllRestaurantUids;
+-(NSMutableArray *)getFavoriteRestaurantUids;
 
 @end

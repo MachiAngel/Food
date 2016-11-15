@@ -29,8 +29,9 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *tmpAIV;
 
 
-@property (nonatomic,strong) UISearchController * searchController;
+
 @property (nonatomic,strong) NSMutableArray * searchList;
+@property (nonatomic,strong) NSMutableArray * searchUidList;
 @end
 
 @implementation RestaurantsTableViewController
@@ -40,6 +41,7 @@
     
     [self createSearchBar];
     _searchList = [NSMutableArray new];
+    _searchUidList = [NSMutableArray new];
    
     
 }
@@ -80,10 +82,11 @@
     //去網路拿資料 並且會回傳一個array 餐廳到我的block
     [restaurantManager getAllRestaurantArray:^(NSMutableArray *result) {
         
-        _restaurantUids = [restaurantManager getAllRestaurantUids];
+        //回傳一個array而已 所以在順便拿uid
+        self.restaurantUids = [restaurantManager getAllRestaurantUids];
        
         NSLog(@"--------");
-        NSLog(@"%@",_restaurantUids);
+        NSLog(@"所有餐廳頁面出現時所有餐廳的Uid: %@",_restaurantUids);
         
         //字典轉模型 到新的array
         
@@ -93,6 +96,7 @@
             RestaurantModel *tg = [RestaurantModel tgWithDict:dict];
             [models addObject:tg];
         }
+        
         //自己array, 已經都是模型
         self.restaurants = [models copy];
         
@@ -110,18 +114,18 @@
     
 }
 
-
-- (IBAction)addOrderMenuBtn:(id)sender {
-    
-   // AddShopViewController
-    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController * addShopVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddShopViewController"];
-    
-    [self presentViewController:addShopVC animated:true completion:nil];
-
-    
-    
-}
+//
+//- (IBAction)addOrderMenuBtn:(id)sender {
+//    
+//   // AddShopViewController
+//    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UIViewController * addShopVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddShopViewController"];
+//    
+//    [self presentViewController:addShopVC animated:true completion:nil];
+//
+//    
+//    
+//}
 
 
 #pragma mark - Table view data source
@@ -170,18 +174,43 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
-    RestaurantModel *forDetail = self.restaurants[indexPath.row];
+    //選擇cell時判斷 searchList 有沒有物件
     
-    NSString * selectedUid = self.restaurantUids[indexPath.row];
+    if (self.searchList.count > 0) {
+        
+        
+        RestaurantModel *forDetail = self.searchList[indexPath.row];
+        
+        NSString * selectedUid = self.searchUidList[indexPath.row];
+        
+        DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+        
+        detailVC.detail = forDetail;
+        detailVC.selectedUid = selectedUid;
+        
+        //轉場前取消搜尋bar important
+        self.searchController.active = false;
+        
+        [self showViewController:detailVC sender:nil];
+        
+        
+        
+    }else{
+        
+        RestaurantModel *forDetail = self.restaurants[indexPath.row];
+        
+        NSString * selectedUid = self.restaurantUids[indexPath.row];
+        
+        DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+        
+        detailVC.detail = forDetail;
+        detailVC.selectedUid = selectedUid;
+        
+        [self showViewController:detailVC sender:nil];
+        
+    }
     
-    DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
-    
-    detailVC.detail = forDetail;
-    detailVC.selectedUid = selectedUid;
-    
-   
-    
-    [self showViewController:detailVC sender:nil];
+
     
 }
 
@@ -208,18 +237,24 @@
     [_searchList removeAllObjects];
     NSString *searchString = [self.searchController.searchBar text];
     
+    
+    //拿到每個物件去比對條件
     for (int i = 0; i < self.restaurants.count; i++) {
         RestaurantModel * eachModel = self.restaurants[i];
-        NSString * restaurantName = eachModel.ShopName;
+        NSString * searchUid = self.restaurantUids[i];
         
-        if ([restaurantName rangeOfString:searchString].location != NSNotFound) {
+        NSString * restaurantName = eachModel.ShopName;
+        NSString * restaurantAddress = eachModel.ShopAddress;
+        
+        //判斷符合項目邏輯
+        if ([restaurantName rangeOfString:searchString].location != NSNotFound ||[restaurantAddress rangeOfString:searchString].location != NSNotFound) {
             [_searchList addObject:eachModel];
+            [_searchUidList addObject:searchUid];
         }
         
     }
     
    // [self.myTableView reloadData];
-    
     
     
 }
@@ -229,6 +264,7 @@
     NSLog(@"搜索begin");
     
     self.searchController.searchBar.showsCancelButton = YES;
+    
     
     
     return YES;
@@ -254,18 +290,20 @@
     
     for (int i = 0; i < self.restaurants.count; i++) {
         RestaurantModel * eachModel = self.restaurants[i];
+        NSString * searchUid = self.restaurantUids[i];
+        
         NSString * restaurantName = eachModel.ShopName;
         NSString * restaurantAddress = eachModel.ShopAddress;
         
         if ([restaurantName rangeOfString:searchString].location != NSNotFound ||[restaurantAddress rangeOfString:searchString].location != NSNotFound)
         {
             [_searchList addObject:eachModel];
+            [_searchUidList addObject:searchUid];
         }
         
     }
 
     [self.myTableView reloadData];
-    
     
     
 }

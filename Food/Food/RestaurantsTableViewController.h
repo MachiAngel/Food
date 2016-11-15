@@ -10,4 +10,6 @@
 
 @interface RestaurantsTableViewController : UIViewController
 
+@property (nonatomic,strong) UISearchController * searchController;
+
 @end

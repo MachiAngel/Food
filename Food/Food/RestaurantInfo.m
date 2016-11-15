@@ -24,6 +24,10 @@ static RestaurantInfo* _restaurantManager;
     NSMutableArray * orderList;
     NSDictionary * createMenuInfo;
     
+    //for favorite array
+    NSMutableArray * favoriteRestaurantArray;
+    NSMutableArray * favoriteRestaurantUidArray;
+    
     FIRDatabaseHandle  _handleWithTotalPrice;
     FIRDatabaseHandle  _handleWithOrderList;
     
@@ -50,10 +54,10 @@ static RestaurantInfo* _restaurantManager;
     //拿到餐聽的ref 並觀察他底下的東西
     [[helper getDatabaseRefOfRestaurants]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        //each restaurant value
+        //this array for each restaurant value
         restaurantArray = [NSMutableArray new];
         
-        //each restaurant key (aka uid)
+        //this array for each restaurant key (aka uid)
         restaurantUidArray = [NSMutableArray new];
         
         NSDictionary * restaurantInfo = snapshot.value;
@@ -71,10 +75,57 @@ static RestaurantInfo* _restaurantManager;
         done(restaurantArray);
         
     }];
-    
 
+}
+
+-(void)getFavoriteRestaurantArray:(DoneHandler)done{
+    
+    
+    NSArray * favoriteUidArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"favorRestaurants"];
+    
+    NSLog(@"favorite count :%lu",favoriteUidArray.count);
+    
+   
+   
+    if (favoriteUidArray) {
+        
+        favoriteRestaurantArray = [NSMutableArray new];
+        favoriteRestaurantUidArray = [NSMutableArray new];
+        
+        Helper * helper = [Helper sharedInstance];
+        //拿到餐聽的ref 並觀察他底下的東西
+        [[helper getDatabaseRefOfRestaurants]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            
+            //所有info
+            NSDictionary * restaurantInfo = snapshot.value;
+            
+            for(NSString * uid in restaurantInfo){
+                
+                if ([favoriteUidArray containsObject:uid]) {
+                    
+                    NSMutableDictionary * eachRestaurant = restaurantInfo[uid];
+                    
+                    [favoriteRestaurantArray addObject:eachRestaurant];
+                    
+                    [favoriteRestaurantUidArray addObject:uid];
+                }
+                
+            }
+            //when finish for loop , go block
+            done(favoriteRestaurantArray);
+            
+        }];
+        
+        
+    }else{
+        NSLog(@"沒任何最愛餐廳");
+    }
+    
     
 }
+
+
+
 
 
 -(void)getRestaurantFoodItemArrayWithUid:(NSString*)uid handler:(DoneHandler)done{
@@ -177,10 +228,7 @@ static RestaurantInfo* _restaurantManager;
             done(totalPrice);
             
         }
-        
-        
        
-        
     }];
 
     
@@ -188,13 +236,19 @@ static RestaurantInfo* _restaurantManager;
 }
 
 
-
-
 -(NSMutableArray *)getAllRestaurantUids{
     
     NSLog(@"all restaurant uid : %@",restaurantUidArray);
     return restaurantUidArray;
 }
+
+
+-(NSMutableArray *)getFavoriteRestaurantUids{
+    
+    NSLog(@"favorite restaurant uid : %@",favoriteRestaurantUidArray);
+    return favoriteRestaurantUidArray;
+}
+
 
 -(void)removeHandlerWithMenuUid:(NSString*)uid{
     

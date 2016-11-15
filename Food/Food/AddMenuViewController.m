@@ -284,6 +284,8 @@
     
 }
 
+
+
 -(void)getUserArray:(ToThisViewType)type{
     
     if (type == ToThisViewTypeFromSelected) {

@@ -68,10 +68,14 @@
     
     NSDictionary * each = _records[indexPath.row];
     
-    RecordViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RecordViewController"];
+    RecordViewController * vc = [self.storyboard   instantiateViewControllerWithIdentifier:@"RecordViewController"];
     
     vc.recordDict = each;
     vc.fromTableViewString = @"1";
+    
+    if (vc.recordDict) {
+        NSLog(@"aa");
+    }
     
     [self showViewController:vc sender:nil];
     

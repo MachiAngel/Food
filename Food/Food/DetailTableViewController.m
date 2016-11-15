@@ -24,6 +24,9 @@
     
     //傳送給 新增餐廳
     NSDictionary * createInfo;
+    
+    UIBarButtonItem * favorBtn;
+    BOOL favorBtnIsPressed;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
@@ -41,6 +44,43 @@
     
     helper = [Helper sharedInstance];
     restaurantManager = [RestaurantInfo sharedInstance];
+    
+    
+    //判斷是否有按過收藏
+    NSArray * temp = [[NSUserDefaults standardUserDefaults]objectForKey:ARRAY_FAVOR_KEY];
+    
+    if (temp) {
+        if ([temp containsObject:self.selectedUid]) {
+            favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"取消收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
+            favorBtn.tintColor = [UIColor redColor];
+            
+            //important
+            favorBtnIsPressed  = true;
+            
+        }else{
+            favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
+            favorBtn.tintColor = [UIColor blueColor];
+        }
+//        for (NSString * eachFavor in temp) {
+//            if ([eachFavor isEqualToString:self.selectedUid]) {
+//                favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"取消收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
+//                favorBtn.tintColor = [UIColor redColor];
+//            }else{
+//                favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
+//                favorBtn.tintColor = [UIColor blueColor];
+//            }
+//        }
+        
+    }else{
+         favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
+        favorBtn.tintColor = [UIColor blueColor];
+        
+    }
+    
+    
+    self.navigationItem.rightBarButtonItem = favorBtn;
+    
+    
     
     //觀察創造菜單上傳成功時
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Created" object:nil];
@@ -97,10 +137,6 @@
     }];
     
     
-    
-    
-    
-    
     //-------------------------傳值可解決的區--------------------------------//
     _restaurantName.text = self.detail.ShopName;
     _restaurantAddress.text = self.detail.ShopAddress;
@@ -113,16 +149,68 @@
     
     [_mainImageView sd_setImageWithURL:mainImageURL placeholderImage:[UIImage imageNamed:@"unknow.png"]];
     
-    NSLog(@"%@",self.selectedUid);
+    NSLog(@"該細節頁面餐廳的Uid: %@",self.selectedUid);
     //---------------------------------------------------------------------//
     
     
+}
+
+
+-(void)barButtonPressed{
     
-    
-    
+    if (!favorBtnIsPressed) {
+        
+        //按下收藏之後要做的事情
+        //step1 拿到目前資料
+        NSArray * temp = [[NSUserDefaults standardUserDefaults]objectForKey:ARRAY_FAVOR_KEY];
+        NSMutableArray * allFavorArray = [[NSMutableArray alloc]initWithArray:temp];
+        
+        if (allFavorArray) {
+           
+            [allFavorArray addObject:self.selectedUid];
+            [[NSUserDefaults standardUserDefaults]setObject:allFavorArray forKey:ARRAY_FAVOR_KEY];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            
+        }else{
+            NSMutableArray * newArray = [NSMutableArray new];
+            [newArray addObject:self.selectedUid];
+            [[NSUserDefaults standardUserDefaults]setObject:allFavorArray forKey:ARRAY_FAVOR_KEY];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+        }
+        
+        favorBtn.title = @"取消收藏";
+        favorBtn.tintColor = [UIColor redColor];
+        
+        favorBtnIsPressed  = true;
+       
+        
+    }else{
+        
+        //取消收藏之後要做的事情
+        //step1 拿到defaults 所有餐廳
+        NSArray * temp = [[NSUserDefaults standardUserDefaults]objectForKey:ARRAY_FAVOR_KEY];
+        NSMutableArray * allFavorArray = [[NSMutableArray alloc]initWithArray:temp];
+        
+        //step2 取消的餐廳uid
+        NSString * deleteString = self.selectedUid;
+        
+        [allFavorArray removeObject:deleteString];
+        
+        //step3 更defaults資料
+        [[NSUserDefaults standardUserDefaults]setObject:allFavorArray forKey:ARRAY_FAVOR_KEY];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        
+        favorBtn.title = @"收藏";
+        favorBtn.tintColor = [UIColor blueColor];
+        
+        favorBtnIsPressed  = false;
+        
+    }
     
     
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -148,8 +236,6 @@
 - (IBAction)addMenuBtnPressed:(id)sender {
     
    NSString *user = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
-    
-  
     
     NSString * menuUid = [helper getRandomChild];
     
@@ -205,8 +291,6 @@
 -(void)goAddMenu{
     
     [SVProgressHUD dismiss];
-    
-
     
     UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     AddMenuViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddMenuViewController"];

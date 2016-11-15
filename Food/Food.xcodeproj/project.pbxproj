@@ -42,6 +42,9 @@
 		1192A88B1DB776FE0034237F /* UserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1192A88A1DB776FE0034237F /* UserCollectionViewCell.m */; };
 		1192A88E1DB777460034237F /* AddMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1192A88D1DB777460034237F /* AddMenuViewController.m */; };
 		1192A8901DB77C860034237F /* user1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 1192A88F1DB77C860034237F /* user1.jpeg */; };
+		119A7A281DD9587700E80BED /* FavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119A7A271DD9587700E80BED /* FavoriteViewController.m */; };
+		119F88E81DD55B3E00EEC927 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119F88E71DD55B3E00EEC927 /* ViewController.m */; };
+		119F88EE1DD55DBC00EEC927 /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 119F88ED1DD55DBC00EEC927 /* ThirdViewController.m */; };
 		11EA3F101DAD80AA00C5E4FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F0F1DAD80AA00C5E4FA /* main.m */; };
 		11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F121DAD80AA00C5E4FA /* AppDelegate.m */; };
 		11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F171DAD80AA00C5E4FA /* Main.storyboard */; };
@@ -110,6 +113,12 @@
 		1192A88C1DB777460034237F /* AddMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMenuViewController.h; sourceTree = "<group>"; };
 		1192A88D1DB777460034237F /* AddMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMenuViewController.m; sourceTree = "<group>"; };
 		1192A88F1DB77C860034237F /* user1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user1.jpeg; sourceTree = "<group>"; };
+		119A7A261DD9587700E80BED /* FavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteViewController.h; sourceTree = "<group>"; };
+		119A7A271DD9587700E80BED /* FavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteViewController.m; sourceTree = "<group>"; };
+		119F88E61DD55B3E00EEC927 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		119F88E71DD55B3E00EEC927 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		119F88EC1DD55DBC00EEC927 /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
+		119F88ED1DD55DBC00EEC927 /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		11EA3F0B1DAD80AA00C5E4FA /* Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Food.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EA3F0F1DAD80AA00C5E4FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11EA3F111DAD80AA00C5E4FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -151,8 +160,7 @@
 				1158124C1DBF7A2100C229E1 /* CreateAccViewController.m */,
 				110B6A471DB20DD7009CC9F7 /* TabBarViewController.h */,
 				110B6A481DB20DD7009CC9F7 /* TabBarViewController.m */,
-				113BFFBE1DAEA0E600E2B58D /* RestaurantsTableViewController.h */,
-				113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */,
+				119F88E51DD55B0500EEC927 /* SegementController */,
 				110B6AC51DB241FB009CC9F7 /* AddShopViewController.h */,
 				110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */,
 				1184CE431DB62576009E2A3E /* DetailTableViewController.h */,
@@ -229,6 +237,21 @@
 				117C1AAB1DB5208F004AB4F9 /* restaurantInfoCell.xib */,
 			);
 			name = mainPageView;
+			sourceTree = "<group>";
+		};
+		119F88E51DD55B0500EEC927 /* SegementController */ = {
+			isa = PBXGroup;
+			children = (
+				119F88E61DD55B3E00EEC927 /* ViewController.h */,
+				119F88E71DD55B3E00EEC927 /* ViewController.m */,
+				113BFFBE1DAEA0E600E2B58D /* RestaurantsTableViewController.h */,
+				113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */,
+				119A7A261DD9587700E80BED /* FavoriteViewController.h */,
+				119A7A271DD9587700E80BED /* FavoriteViewController.m */,
+				119F88EC1DD55DBC00EEC927 /* ThirdViewController.h */,
+				119F88ED1DD55DBC00EEC927 /* ThirdViewController.m */,
+			);
+			name = SegementController;
 			sourceTree = "<group>";
 		};
 		11EA3F021DAD80AA00C5E4FA = {
@@ -503,16 +526,19 @@
 				1192A88B1DB776FE0034237F /* UserCollectionViewCell.m in Sources */,
 				11EA3F101DAD80AA00C5E4FA /* main.m in Sources */,
 				1169C3741DBE723700EBBBFD /* RecordViewController.m in Sources */,
+				119A7A281DD9587700E80BED /* FavoriteViewController.m in Sources */,
 				114C765B1DBB767F00E3D584 /* OrderPickerView.m in Sources */,
 				110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */,
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
 				117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */,
 				1158124D1DBF7A2100C229E1 /* CreateAccViewController.m in Sources */,
+				119F88EE1DD55DBC00EEC927 /* ThirdViewController.m in Sources */,
 				113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */,
 				113983B51DB93B510080AAB5 /* OrderModel.m in Sources */,
 				1184CE421DB6254D009E2A3E /* FoodView.m in Sources */,
 				11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */,
 				117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */,
+				119F88E81DD55B3E00EEC927 /* ViewController.m in Sources */,
 				117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */,
 				114C765F1DBB961600E3D584 /* orderListTableViewCell.m in Sources */,
 				110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */,

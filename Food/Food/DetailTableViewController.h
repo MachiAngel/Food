@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "RestaurantModel.h"
 
+#define ARRAY_FAVOR_KEY  @"favorRestaurants"
+
 @interface DetailTableViewController : UITableViewController
 
 @property (nonatomic,strong) RestaurantModel * detail;
