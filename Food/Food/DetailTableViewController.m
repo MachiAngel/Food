@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *restaurantPhone;
 @property (weak, nonatomic) IBOutlet UIScrollView *foodItemsScrollView;
 
+@property (weak, nonatomic) IBOutlet UIButton *starBtn;
 @end
 
 @implementation DetailTableViewController
@@ -44,6 +45,21 @@
     
     helper = [Helper sharedInstance];
     restaurantManager = [RestaurantInfo sharedInstance];
+    
+    
+    //判斷是否有按過星星
+    
+    [[[helper getDatabaseRefOfRestaurants]child:self.selectedUid]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSDictionary * tappedRestaurantDict = snapshot.value;
+        
+        NSDictionary * starUsers = tappedRestaurantDict[@"stars"];
+        
+        NSString * btnText = starUsers[[helper uidOfCurrentUser]] ? @"★" : @"☆";
+        
+        self.starBtn.titleLabel.text = btnText;
+        
+    }];
     
     
     //判斷是否有按過收藏
@@ -61,15 +77,7 @@
             favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
             favorBtn.tintColor = [UIColor blueColor];
         }
-//        for (NSString * eachFavor in temp) {
-//            if ([eachFavor isEqualToString:self.selectedUid]) {
-//                favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"取消收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
-//                favorBtn.tintColor = [UIColor redColor];
-//            }else{
-//                favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
-//                favorBtn.tintColor = [UIColor blueColor];
-//            }
-//        }
+
         
     }else{
          favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
@@ -151,6 +159,10 @@
     
     NSLog(@"該細節頁面餐廳的Uid: %@",self.selectedUid);
     //---------------------------------------------------------------------//
+    
+    
+    
+    
     
     
 }
@@ -302,6 +314,23 @@
 }
 
 
+- (IBAction)addStarBtnPressed:(id)sender {
+    
+
+    [helper incrementStarsForRef:[[helper getDatabaseRefOfRestaurants]child:self.selectedUid]];
+    
+    
+    if ([self.starBtn.titleLabel.text isEqualToString:@"★"]) {
+        
+        [self.starBtn setTitle:@"☆" forState:UIControlStateNormal];
+        
+    }else{
+        [self.starBtn setTitle:@"★" forState:UIControlStateNormal];
+       
+    }
+    
+    
+}
 
 
 

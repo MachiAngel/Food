@@ -19,6 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *cellBackgroundView;
 
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 
 @end
@@ -36,9 +37,7 @@
         cell =  [[[NSBundle mainBundle] loadNibNamed:@"restaurantInfoCell" owner:nil options:nil] firstObject];
      
     }else{
-        //如果是重用cell，则把cell中自己添加的subview清除掉，避免出现重叠问题
-        
-    
+        //如果是重用cell，则把cell中自己添加的subview清除掉，避免出现重叠問题
         
     }
     return cell;
@@ -75,6 +74,16 @@
     self.addressLabel.text = [NSString stringWithFormat:@"地址:%@", tg.ShopAddress];
     // 設置餐廳電話
     self.uploaderLabel.text = [NSString stringWithFormat:@"上傳者:%@", tg.UploadUser];
+    
+    //設置數量
+    if (tg.starCount) {
+        NSString * count = [NSString stringWithFormat:@"★:%@",tg.starCount];
+        self.countLabel.text = count;
+    }else{
+        self.countLabel.text = @"★:0";
+    }
+
+    
     
     //[self sendSubviewToBack:self.cellBackgroundView];
 }

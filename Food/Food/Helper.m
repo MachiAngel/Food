@@ -304,6 +304,88 @@ static Helper * _helper;
 
 
 
+
+
+- (void)incrementStarsForRef:(FIRDatabaseReference *)ref {
+    
+    
+    //給一個路徑
+    
+    [ref runTransactionBlock:^FIRTransactionResult * _Nonnull(FIRMutableData * _Nonnull currentData) {
+        
+        //此路徑的currentData.value 是字典
+        NSMutableDictionary *post = currentData.value;
+        
+        //要是字典空的就直接回傳?
+        if (!post || [post isEqual:[NSNull null]]) {
+            return [FIRTransactionResult successWithValue:currentData];
+        }
+        
+        //----------------------以下保證 post 字典有東西----------------------//
+        
+        //拿到字典裡面的星星用戶
+        NSMutableDictionary *stars = [post objectForKey:@"stars"];
+        
+        
+        //要是沒有人按過星星
+        //就初始化一個可變字典
+        if (!stars) {
+            stars = [[NSMutableDictionary alloc] initWithCapacity:1];
+        }
+        //拿到用戶uid 判斷有沒有按過
+        NSString *uid = [FIRAuth auth].currentUser.uid;
+        
+        //拿出 post裡面的 星星數 並轉成int
+        int starCount = [post[@"starCount"] intValue];
+        
+        
+        //要是星星用戶有自己的資料,代表之前按過 , 就 減去 int的數字,並除掉星星用戶字典裡面的資料
+        if ([stars objectForKey:uid]) {
+            // Unstar the post and remove self from stars
+            starCount--;
+            
+            //字典 value 是 布林值 , 不過不用管  , 直接用key  刪除
+            [stars removeObjectForKey:uid];
+            
+        } else {
+            
+            //要是星星用戶沒有資料 , 代表沒按過 , 就加入 int 數字 , 並加入星星用戶資料
+            starCount++;
+            stars[uid] = @YES;
+        }
+        
+        
+        
+        
+        //準備字典 星星用戶  在放入post裡面
+        post[@"stars"] = stars;
+        
+        //準備星星數量 (改成NSString) 在放入post裡面
+        NSString * starTotal = [NSString stringWithFormat:@"%d",starCount];
+        //post[@"starCount"] = [NSNumber numberWithInt:starCount];
+        post[@"starCount"] = starTotal;
+        
+        // Set value and report transaction success
+        
+        [currentData setValue:post];
+        
+        
+        return [FIRTransactionResult successWithValue:currentData];
+        
+        
+    } andCompletionBlock:^(NSError * _Nullable error,
+                           BOOL committed,
+                           FIRDataSnapshot * _Nullable snapshot) {
+        // Transaction completed
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    // [END post_stars_transaction]
+}
+
+
+
 #pragma mark - Create Menu Method
 
 

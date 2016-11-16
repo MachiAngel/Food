@@ -26,6 +26,11 @@
 //餐廳上傳者 
 @property (nonatomic, copy) NSString *UploadUser;
 
+//按讚數量
+@property (nonatomic, copy) NSString *starCount;
+
+//useless
+@property (nonatomic, copy) NSDictionary *stars;
 
 //#define NJInitH(name) \
 //- (instancetype)initWithDict:(NSDictionary *)dict; \

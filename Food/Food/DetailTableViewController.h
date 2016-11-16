@@ -16,6 +16,7 @@
 @property (nonatomic,strong) RestaurantModel * detail;
 @property (nonatomic,strong) NSString * selectedUid;
 
+
 //未用
 @property (nonatomic,strong) NSArray * detailInfo;
 

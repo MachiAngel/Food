@@ -88,6 +88,8 @@
 -(void)createrSendBtnPressed:(NSString*)menuUid;
 
 
+-(void)incrementStarsForRef:(FIRDatabaseReference *)ref;
+
 
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;
 

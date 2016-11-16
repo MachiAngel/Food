@@ -252,20 +252,20 @@
     
     photoSavePlace = 1;
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please choose image source:" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"上傳照片" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self launchImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
         
     }];
-    UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *library = [UIAlertAction actionWithTitle:@"從相簿中選擇" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self launchImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     [alert addAction:camera];
     [alert addAction:library];
@@ -453,7 +453,7 @@
         
     }];
     
-    // 影片寫入，參考內建裝置p66(自已寫)
+    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
