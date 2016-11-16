@@ -11,6 +11,7 @@
 		110B6A491DB20DD7009CC9F7 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6A481DB20DD7009CC9F7 /* TabBarViewController.m */; };
 		110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */; };
 		110B6ACA1DB2447B009CC9F7 /* FoodItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */; };
+		111D90601DDC10A900ABAB18 /* ManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 111D905F1DDC10A900ABAB18 /* ManagerViewController.m */; };
 		113983AD1DB917AD0080AAB5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113983AC1DB917AD0080AAB5 /* QuartzCore.framework */; };
 		113983B01DB92CA80080AAB5 /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113983AF1DB92CA80080AAB5 /* OrdersTableViewCell.m */; };
 		113983B21DB92EB20080AAB5 /* order.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 113983B11DB92EB20080AAB5 /* order.jpg */; };
@@ -64,6 +65,8 @@
 		110B6AC61DB241FB009CC9F7 /* AddShopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddShopViewController.m; sourceTree = "<group>"; };
 		110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodItemTableViewCell.h; sourceTree = "<group>"; };
 		110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodItemTableViewCell.m; sourceTree = "<group>"; };
+		111D905E1DDC10A900ABAB18 /* ManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerViewController.h; sourceTree = "<group>"; };
+		111D905F1DDC10A900ABAB18 /* ManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerViewController.m; sourceTree = "<group>"; };
 		113983AC1DB917AD0080AAB5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		113983AE1DB92CA80080AAB5 /* OrdersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewCell.h; sourceTree = "<group>"; };
 		113983AF1DB92CA80080AAB5 /* OrdersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewCell.m; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				113BFFBF1DAEA0E600E2B58D /* RestaurantsTableViewController.m */,
 				119A7A261DD9587700E80BED /* FavoriteViewController.h */,
 				119A7A271DD9587700E80BED /* FavoriteViewController.m */,
+				111D905E1DDC10A900ABAB18 /* ManagerViewController.h */,
+				111D905F1DDC10A900ABAB18 /* ManagerViewController.m */,
 				119F88EC1DD55DBC00EEC927 /* ThirdViewController.h */,
 				119F88ED1DD55DBC00EEC927 /* ThirdViewController.m */,
 			);
@@ -532,6 +537,7 @@
 				113BFFC61DAEA17E00E2B58D /* OrdersTableViewController.m in Sources */,
 				117C1AB31DB52190004AB4F9 /* RestaurantModel.m in Sources */,
 				1158124D1DBF7A2100C229E1 /* CreateAccViewController.m in Sources */,
+				111D90601DDC10A900ABAB18 /* ManagerViewController.m in Sources */,
 				119F88EE1DD55DBC00EEC927 /* ThirdViewController.m in Sources */,
 				113BFFC91DAEA21C00E2B58D /* RecordsTableViewController.m in Sources */,
 				113983B51DB93B510080AAB5 /* OrderModel.m in Sources */,

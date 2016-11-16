@@ -279,7 +279,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ghF-i5-qPz" id="8oY-BV-6uY">
-                                    <frame key="frameInset" width="375" height="79.5"/>
+                                    <frame key="frameInset" width="375" height="79"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="建立者" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0k-Sf-6Wt">
@@ -421,7 +421,7 @@
             </objects>
             <point key="canvasLocation" x="3982" y="1673"/>
         </scene>
-        <!--Records Table View Controller-->
+        <!--訂購記錄-->
         <scene sceneID="lep-7N-do7">
             <objects>
                 <tableViewController id="QQQ-xf-3bk" customClass="RecordsTableViewController" sceneMemberID="viewController">
@@ -434,11 +434,11 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u0j-yB-8RM" id="0hd-RA-HLX">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gRr-mf-eZ6">
-                                            <frame key="frameInset" minX="15" minY="14" width="26.5" height="16"/>
+                                            <frame key="frameInset" minX="15" minY="14" width="27" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
@@ -460,7 +460,7 @@
                             <outlet property="delegate" destination="QQQ-xf-3bk" id="29D-7J-G88"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="QW8-XQ-wyf"/>
+                    <navigationItem key="navigationItem" title="訂購記錄" id="QW8-XQ-wyf"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Bm-E3-fH7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -601,7 +601,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DhP-8K-87w" id="wnw-rk-iRi">
-                                            <frame key="frameInset" width="375" height="59.5"/>
+                                            <frame key="frameInset" width="375" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5zO-IO-5kr">
@@ -850,7 +850,7 @@
                                         <rect key="frame" x="0.0" y="148" width="375" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3sB-Vi-THq" id="Qya-oZ-fGy">
-                                            <frame key="frameInset" width="375" height="119.5"/>
+                                            <frame key="frameInset" width="375" height="119"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店名:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ph0-1a-CiV">
@@ -923,7 +923,7 @@
                                         <rect key="frame" x="0.0" y="268" width="375" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J21-9J-N6e" id="QRQ-bj-PN3">
-                                            <frame key="frameInset" width="375" height="239.5"/>
+                                            <frame key="frameInset" width="375" height="239"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CpE-Qm-JXV"/>
@@ -944,7 +944,7 @@
                                         <rect key="frame" x="0.0" y="536" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZbL-6J-Efu" id="7lC-5m-fYV">
-                                            <frame key="frameInset" width="375" height="67.5"/>
+                                            <frame key="frameInset" width="375" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-bg-CVq">
@@ -1015,7 +1015,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="4BI-0q-9HX" customClass="UserCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="2.5" width="65" height="65"/>
+                                        <rect key="frame" x="0.0" y="3" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -1133,11 +1133,11 @@
                                     <constraint firstAttribute="height" constant="160" id="ZEX-0z-rjq"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="aPQ-Nf-D6I" customClass="orderListTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="aPQ-Nf-D6I" customClass="orderListTableViewCell">
                                         <rect key="frame" x="0.0" y="28" width="343" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aPQ-Nf-D6I" id="3td-e0-wdW">
-                                            <frame key="frameInset" width="343" height="29.5"/>
+                                            <frame key="frameInset" width="343" height="29"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojW-Yl-9lc">
@@ -1412,10 +1412,10 @@
             </objects>
             <point key="canvasLocation" x="640.79999999999995" y="1551.7241379310346"/>
         </scene>
-        <!--Third View Controller-->
+        <!--Manager View Controller-->
         <scene sceneID="nPB-39-Ggx">
             <objects>
-                <viewController id="Uou-Ac-3wU" customClass="ThirdViewController" sceneMemberID="viewController">
+                <viewController id="Uou-Ac-3wU" customClass="ManagerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iaH-bV-FdH"/>
                         <viewControllerLayoutGuide type="bottom" id="5Zi-8z-p5m"/>
@@ -1424,8 +1424,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="498"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2GH-4v-L4Z">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2GH-4v-L4Z">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Uou-Ac-3wU" id="lhI-Yf-U74"/>
+                                    <outlet property="delegate" destination="Uou-Ac-3wU" id="htR-NC-fZ0"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <constraints>
@@ -1435,6 +1439,9 @@
                             <constraint firstItem="5Zi-8z-p5m" firstAttribute="top" secondItem="2GH-4v-L4Z" secondAttribute="bottom" id="uqa-LY-g1a"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="managerTableView" destination="2GH-4v-L4Z" id="MYU-3n-Kip"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WXI-2s-CD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

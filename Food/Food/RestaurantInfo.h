@@ -44,7 +44,12 @@ typedef void (^DoneHandlerDict)(NSDictionary * result);
 -(void)getFavoriteRestaurantArray:(DoneHandler)done;
 
 
+//for managerViewController
+-(void)getMyRestaurantArray:(DoneHandler)done;
+
+
 -(NSMutableArray *)getAllRestaurantUids;
 -(NSMutableArray *)getFavoriteRestaurantUids;
+-(NSMutableArray *)getMyRestaurantUids;
 
 @end

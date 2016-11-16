@@ -28,6 +28,10 @@ static RestaurantInfo* _restaurantManager;
     NSMutableArray * favoriteRestaurantArray;
     NSMutableArray * favoriteRestaurantUidArray;
     
+    //for manager array
+    NSMutableArray * myRestaurantArray;
+    NSMutableArray * myRestaurantUidArray;
+    
     FIRDatabaseHandle  _handleWithTotalPrice;
     FIRDatabaseHandle  _handleWithOrderList;
     
@@ -125,6 +129,36 @@ static RestaurantInfo* _restaurantManager;
 }
 
 
+-(void)getMyRestaurantArray:(DoneHandler)done{
+    
+    
+    NSString * myName = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    
+    myRestaurantArray = [NSMutableArray new];
+    myRestaurantUidArray = [NSMutableArray new];
+    
+    Helper * helper = [Helper sharedInstance];
+    
+    [[helper getDatabaseRefOfRestaurants]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSDictionary * restaurantInfo = snapshot.value;
+        
+        for(NSString * uid in restaurantInfo){
+            
+            NSDictionary * eachRestaurant = restaurantInfo[uid];
+            
+            if ([myName isEqualToString:eachRestaurant[@"UploadUser"]]) {
+                [myRestaurantArray addObject:eachRestaurant];
+                [myRestaurantUidArray addObject:uid];
+            }
+            
+        }
+        
+        done(myRestaurantArray);
+        
+    }];
+    
+}
 
 
 
@@ -137,7 +171,6 @@ static RestaurantInfo* _restaurantManager;
     [[[helper getDatabaseRefOfFoodItems]child:uid]observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         // restaurant of uid -> food item dict
-        
         
         
         NSDictionary * foodItemsDict = snapshot.value;
@@ -247,6 +280,12 @@ static RestaurantInfo* _restaurantManager;
     
     NSLog(@"favorite restaurant uid : %@",favoriteRestaurantUidArray);
     return favoriteRestaurantUidArray;
+}
+
+-(NSMutableArray *)getMyRestaurantUids{
+    
+    NSLog(@"my restaurant uid : %@",myRestaurantUidArray);
+    return myRestaurantUidArray;
 }
 
 
