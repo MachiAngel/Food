@@ -108,10 +108,9 @@ static Helper * _helper;
         if (error) {
             NSLog(@"%@",error.description);
             return ;
+            
         }else{
             NSLog(@"Firebase credential  ok");
-            
-           
             
         
         //picture.width(300).height(300)
@@ -128,6 +127,9 @@ static Helper * _helper;
                     NSString * name = [result objectForKey:@"name"];
                     NSString * email = [result objectForKey:@"email"];
                     
+                    
+                    NSLog(@"myName: %@",name);
+                    
                     [[NSUserDefaults standardUserDefaults]setObject:name forKey:@"userName"];
                     [[NSUserDefaults standardUserDefaults]synchronize];
                     
@@ -138,12 +140,12 @@ static Helper * _helper;
                     
                     NSDictionary * userInfo = @{@"UserName":name,@"Email":email};
                     
+                    
                     [self uploadUserData:userInfo];
                     
                     
                     
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"doneLogin" object:nil];;
-                    
                     
                     
                 }
@@ -162,11 +164,6 @@ static Helper * _helper;
 
 -(void)switchToMainView:(UIViewController *)view{
     
-
-//    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    UITabBarController * tabVC = [storyBoard instantiateViewControllerWithIdentifier:@"TabBarVC"];
-//    
-//    [view presentViewController:tabVC animated:true completion:nil];
     
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
@@ -205,9 +202,6 @@ static Helper * _helper;
 //inside method
 -(void)uploadMainImageToStorage:(NSData*) mainImageData
                           child:(NSString*)childString{
-    
-    
-    
     
     //ref restaurant
     
@@ -302,6 +296,66 @@ static Helper * _helper;
     
 }
 
+
+//for delete restaurant
+
+-(void)deleteRestaurantByUid:(NSString*)uid done:(Handler)done{
+    
+    [[[self getDatabaseRefOfRestaurants]child:uid]removeValueWithCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+        
+        if (error) {
+          
+            done(error,nil);
+        }else{
+            
+            [self deleteRestaurantFoodsByUid:uid done:done];
+        }
+        
+    }];
+    
+}
+
+
+-(void)deleteRestaurantFoodsByUid:(NSString*)uid done:(Handler)done{
+    
+    [[[self getDatabaseRefOfFoodItems]child:uid]removeValueWithCompletionBlock:^(NSError * _Nullable error, FIRDatabaseReference * _Nonnull ref) {
+       
+                if (error) {
+                    NSLog(@"error is: %@",error.description);
+                    done(error,nil);
+                }else{
+                    NSLog(@"2");
+                    BOOL result = true;
+                    done(nil,result);
+                }
+        
+    }];
+    
+}
+
+//刪除圖片方法 , 暫時先不刪
+
+//-(void)deleteRestaurantPicByUid:(NSString*)uid done:(Handler)done{
+//    
+//    //NSString * picDirString = [NSString stringWithFormat:@"%@/",uid];
+
+//    NSString * minusUid = [uid stringByReplacingOccurrencesOfString:@"-" withString:@""];
+//    NSLog(@"string: %@",minusUid);
+//    
+//    [[[self getStorageRefOfRestaurant]child:minusUid]deleteWithCompletion:^(NSError * _Nullable error) {
+//        
+//        if (error) {
+//            NSLog(@"error is: %@",error.description);
+//            done(error,nil);
+//        }else{
+//            NSLog(@"2");
+//            BOOL result = true;
+//            done(nil,result);
+//        }
+//        
+//    }];
+//    
+//}
 
 
 
@@ -424,10 +478,7 @@ static Helper * _helper;
             return ;
         }
         
-        
-        
     }];
-    
     
     
 }
@@ -478,8 +529,6 @@ static Helper * _helper;
     
     
 }
-
-
 
 
 

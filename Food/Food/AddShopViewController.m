@@ -244,6 +244,16 @@
     
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [foodItems removeObjectAtIndex:indexPath.row];
+    
+    [tableView reloadData];
+    
+//    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    
+}
 
 
 //使用者按下店家照片

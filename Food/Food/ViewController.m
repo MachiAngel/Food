@@ -15,13 +15,14 @@
 #import "RestaurantModel.h"
 #import "DetailTableViewController.h"
 #import "FavoriteViewController.h"
-
+#import "ManagerViewController.h"
 
 
 
 @interface ViewController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *rootScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *lineLabel;
+
 
 @end
 
@@ -32,6 +33,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rootScrollView.delegate = self;
+    
+    
     
 }
 
@@ -52,6 +55,7 @@
     [self presentViewController:addShopVC animated:true completion:nil];
     
 }
+
 
 
 
@@ -80,6 +84,9 @@
 }
 
 
+
+
+
 //scrollerView代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -97,17 +104,58 @@
     
     
     
-    if (scrollView.contentOffset.x == self.view.frame.size.width *1 ) {
-        FavoriteViewController * FVC = self.childViewControllers[1];
-        
-    }
+//    if (scrollView.contentOffset.x == self.view.frame.size.width *1 ) {
+//        FavoriteViewController * FVC = self.childViewControllers[1];
+//        
+//    }else if(scrollView.contentOffset.x == self.view.frame.size.width *2){
+//    
+//    }
 
     
-    
-    
+    if (scrollView.contentOffset.x == self.view.frame.size.width *2) {
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editBtnPressed)];
+        
+    }else{
+        self.navigationItem.leftBarButtonItem = nil;
+        
+        ManagerViewController * mVC = self.childViewControllers[2];
+        
+        if (mVC.managerTableView.editing == true) {
+            [mVC.managerTableView setEditing:false animated:true];
+        }
+        
+        
+        
+    }
     
     
 }
+
+-(void)editBtnPressed{
+    
+    ManagerViewController * mVC = self.childViewControllers[2];
+    
+    [mVC.managerTableView setEditing:true animated:true];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneBtnPressed)];
+    
+    
+}
+
+
+-(void)doneBtnPressed{
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editBtnPressed)];
+    
+    ManagerViewController * mVC = self.childViewControllers[2];
+    
+    [mVC.managerTableView setEditing:false animated:true];
+    
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

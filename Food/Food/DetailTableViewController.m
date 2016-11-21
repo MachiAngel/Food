@@ -15,9 +15,10 @@
 #import "AddMenuViewController.h"
 #import "AppDelegate.h"
 #import "RestaurantsTableViewController.h"
+#import "PSNumberPad.h"
 
 
-@interface DetailTableViewController ()
+@interface DetailTableViewController ()<UITextFieldDelegate>
 {
     Helper * helper;
     RestaurantInfo * restaurantManager;
@@ -36,9 +37,13 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *foodItemsScrollView;
 
 @property (weak, nonatomic) IBOutlet UIButton *starBtn;
+
+
 @end
 
 @implementation DetailTableViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -81,7 +86,7 @@
         
     }else{
          favorBtn = [[UIBarButtonItem alloc]initWithTitle:@"收藏" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonPressed)];
-        favorBtn.tintColor = [UIColor blueColor];
+         favorBtn.tintColor = [UIColor blueColor];
         
     }
     
@@ -108,9 +113,11 @@
            
             
             NSString * foodName = each[@"FoodName"];
-            NSString * foodPrice = each[@"FoodPrice"];
-            NSString * foodImageString = each[@"FoodImageString"];
             
+            NSString * foodPrice = each[@"FoodPrice"];
+            NSString * foodPriceWithDollar =[NSString stringWithFormat:@"﹩%@",foodPrice];
+            
+            NSString * foodImageString = each[@"FoodImageString"];
             
             
             NSURL * imageUrl = [NSURL URLWithString:foodImageString];
@@ -120,11 +127,11 @@
             UIImageView * eachimage = [[UIImageView alloc]init];
             eachimage.frame = CGRectMake(width * i, 0, width, height);
             
-            //圖檔大可在加入 placeholder??
+            
             [eachimage sd_setImageWithURL:imageUrl placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 
                 //下載完成圖片後 在創出自己類別的組合view 並加入 scroll view
-                FoodView * view1 = [[FoodView alloc]initWithFoodView:eachimage.image fdname:foodName fdPrice:foodPrice];
+                FoodView * view1 = [[FoodView alloc]initWithFoodView:eachimage.image fdname:foodName fdPrice:foodPriceWithDollar];
                 
                 view1.frame = CGRectMake(width * i, 0, width, height);
                 
@@ -232,7 +239,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -243,52 +250,123 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
+    
         
 }
 - (IBAction)addMenuBtnPressed:(id)sender {
     
-   NSString *user = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
     
-    NSString * menuUid = [helper getRandomChild];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"是否設定密碼" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    //存該新的 menuUid 到 userDefaults
-    [[NSUserDefaults standardUserDefaults]setObject:menuUid forKey:@"menuUid"];
-    //存該Restaurant key 到 userDefaults
+    UIAlertAction * ok = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //user want to set password
+        
+        
+            //PSNumberPad * numberPad = [[PSNumberPad alloc] init];
+        
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請輸入四位數密碼" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+                textField.tag = 1;
+                //textField.enablesReturnKeyAutomatically = true;
+                //textField.returnKeyType = UIReturnKeyDone;
+                //textField.keyboardType = UIKeyboardTypeNumberPad;
+                textField.placeholder = @"四位數密碼";
+                textField.delegate = self;
+                
+                
+        
+            }];
+        
+            [self presentViewController:alert animated:true completion:nil];
+        
+        
+    }];
     
-    [[NSUserDefaults standardUserDefaults]setObject:self.selectedUid forKey:@"SelectedRestaurant"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self prepareInfoWithPassword:nil];
+    }];
+    
+    [alert addAction:cancel];
+    [alert addAction:ok];
+    
+    [self presentViewController:alert animated:true completion:nil];
+    
+    
+    
 
-    
-    //拿到現在時間
-    NSDate * lastTime = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    NSString *strDate = [dateFormatter stringFromDate:lastTime];
-    
-    
-    
-    
-    NSDictionary * menu = @{@"Creater":user,
-                            @"SelectedRestaurant":self.selectedUid,
-                            @"ShopName":self.detail.ShopName,
-                            @"ShopPhone":self.detail.ShopPhone,
-                            @"TotalPrice":@"0",
-                            @"MyPrice":@"0",
-                            @"CreateTime":strDate};
-    
-    //for create info
-    
-    createInfo = menu;
-    
-    
-    
-    [helper createMenuWith:menuUid menuItialize:menu];
-    //if ok , execute goAddMenu method
-    [SVProgressHUD show];
     
     
     
 }
+
+-(void)prepareInfoWithPassword:(NSString*)password{
+    
+    //add password or not
+    
+    NSString * passwordString;
+    if (password == nil) {
+        passwordString = @"";
+    }else{
+        passwordString = password;
+    }
+    
+    
+    //------------------------------------------------------
+       NSString *user = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    
+        NSString * menuUid = [helper getRandomChild];
+    
+        //存該新的 menuUid 到 userDefaults
+        [[NSUserDefaults standardUserDefaults]setObject:menuUid forKey:@"menuUid"];
+        //存該Restaurant key 到 userDefaults
+    
+        [[NSUserDefaults standardUserDefaults]setObject:self.selectedUid forKey:@"SelectedRestaurant"];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    
+        //拿到現在時間
+        NSDate * lastTime = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSString *strDate = [dateFormatter stringFromDate:lastTime];
+    
+    
+    
+    
+        NSDictionary * menu = @{@"Creater":user,
+                                @"SelectedRestaurant":self.selectedUid,
+                                @"ShopName":self.detail.ShopName,
+                                @"ShopPhone":self.detail.ShopPhone,
+                                @"TotalPrice":@"0",
+                                @"MyPrice":@"0",
+                                @"CreateTime":strDate,
+                                @"Password":passwordString
+                                };
+    
+        //for create info
+    
+        createInfo = menu;
+    
+    
+    
+        [helper createMenuWith:menuUid menuItialize:menu];
+    
+        //if ok , execute goAddMenu method
+        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+        [SVProgressHUD showWithStatus:@"創建訂單中"];
+    
+}
+
+
+- (IBAction)addPersonalMenuBtnPressed:(UIButton *)sender {
+    
+    
+    
+}
+
 
 
 //-(void)viewDidDisappear:(BOOL)animated{
@@ -387,5 +465,23 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if (textField.tag == 1) {
+        
+        //get password
+        NSString * userPassword = textField.text;
+        
+        [self prepareInfoWithPassword:userPassword];
+        
+        
+        [self dismissViewControllerAnimated:true completion:nil];
+        
+        
+    }
+    
+    
+    
+    
+}
 @end

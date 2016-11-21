@@ -17,8 +17,6 @@
     UIPickerView *_pickerView;
     
     NSString *_OrderSelectedString;
-    
-    
 }
 
 @end

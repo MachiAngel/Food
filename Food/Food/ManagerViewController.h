@@ -10,4 +10,6 @@
 
 @interface ManagerViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *managerTableView;
+
 @end

@@ -114,18 +114,6 @@
     
 }
 
-//
-//- (IBAction)addOrderMenuBtn:(id)sender {
-//    
-//   // AddShopViewController
-//    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    UIViewController * addShopVC = [storyBoard instantiateViewControllerWithIdentifier:@"AddShopViewController"];
-//    
-//    [self presentViewController:addShopVC animated:true completion:nil];
-//
-//    
-//    
-//}
 
 
 #pragma mark - Table view data source

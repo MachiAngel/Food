@@ -17,12 +17,13 @@
 {
     //靠此manager 拿到網路資料
     RestaurantInfo * restaurantManager;
+    Helper * helper;
     
 }
-@property (weak, nonatomic) IBOutlet UITableView *managerTableView;
 
-@property (nonatomic, strong) NSArray *myRestaurants;
-@property (nonatomic, strong) NSArray *myRestaurantUids;
+
+@property (nonatomic, strong) NSMutableArray *myRestaurants;
+@property (nonatomic, strong) NSMutableArray *myRestaurantUids;
 
 
 @end
@@ -32,6 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    helper = [Helper sharedInstance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,8 +60,8 @@
             [models addObject:tg];
         }
         
-        self.myRestaurants = [models copy];
-        
+        //不能用copy 要刪除
+        self.myRestaurants = models;
         
         [self.managerTableView reloadData];
         
@@ -67,6 +70,10 @@
     
 }
 
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -85,30 +92,89 @@
     // 設置模型數據给cell 重寫set 方法
     cell.tg = tg;
     
-    
     return cell;
 }
 
+//
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    
+//    [tableView deselectRowAtIndexPath:indexPath animated:true];
+//    
+//    RestaurantModel *forDetail = self.myRestaurants[indexPath.row];
+//    
+//    NSString * selectedUid = self.myRestaurantUids[indexPath.row];
+//    
+//    DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
+//    
+//    detailVC.detail = forDetail;
+//    detailVC.selectedUid = selectedUid;
+//    
+//    
+//    
+//    [self showViewController:detailVC sender:nil];
+//    
+//}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+//-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    return YES;
+//}
+
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
+
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:@"即將刪除你所創建的餐廳" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction * ok =[UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+            //do delete job..
+            
+            NSString * uid = self.myRestaurantUids[indexPath.row];
+            
+            [helper deleteRestaurantByUid:uid done:^(NSError *error, BOOL result) {
+                
+                if (error) {
+                    NSLog(@"刪除出問題了");
+                }else{
+                    NSLog(@"刪除成功");
+                }
+                
+            }];
+            
+            
+            [self.myRestaurants removeObjectAtIndex:indexPath.row];
+            
+            [self.managerTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+        
+        UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alert addAction:ok];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:true completion:nil];
+        
+        
     
-    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    }
     
-    RestaurantModel *forDetail = self.myRestaurants[indexPath.row];
-    
-    NSString * selectedUid = self.myRestaurantUids[indexPath.row];
-    
-    DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
-    
-    detailVC.detail = forDetail;
-    detailVC.selectedUid = selectedUid;
-    
-    
-    
-    [self showViewController:detailVC sender:nil];
     
 }
+
+
+//防止編輯模式 cell縮排
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return false;
+}
+
+
 
 /*
 #pragma mark - Navigation

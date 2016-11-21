@@ -24,6 +24,8 @@
 @import Firebase;
 
 
+typedef void (^Handler)(NSError * error, BOOL result);
+
 @interface Helper : NSObject
 
 
@@ -89,6 +91,10 @@
 
 
 -(void)incrementStarsForRef:(FIRDatabaseReference *)ref;
+
+//for managerViewController delete restaurant
+
+-(void)deleteRestaurantByUid:(NSString*)uid done:(Handler)done;
 
 
 -(FIRDatabaseReference *)getDatabaseRefOfRestaurants;

@@ -12,7 +12,8 @@
 
 @interface RecordsTableViewController ()
 
-@property (nonatomic,strong)NSArray * records;
+
+@property(nonatomic,strong) NSMutableArray * records;
 
 @end
 
@@ -28,7 +29,13 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    _records = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
+    
+    
+    NSArray * tmpArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
+    
+    self.records = [[NSMutableArray alloc]initWithArray:tmpArray];
+    
+    
     NSLog(@"%lu",_records.count);
     [self.tableView reloadData];
 }
@@ -78,6 +85,24 @@
     }
     
     [self showViewController:vc sender:nil];
+    
+    
+}
+
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //1.先砍資料
+    //2.在砍畫面
+    
+    [self.records removeObjectAtIndex:indexPath.row];
+    
+    
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.records forKey:@"recordArray"];
+    
+    [[NSUserDefaults standardUserDefaults]synchronize];
     
     
 }

@@ -14,5 +14,6 @@ target 'Food' do
   pod 'Firebase/Auth'
   pod 'SDWebImage'
   pod 'SVProgressHUD'
-
+  pod 'PSNumberPad'
+  
 end

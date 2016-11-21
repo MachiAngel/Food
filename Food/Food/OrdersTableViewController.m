@@ -11,15 +11,22 @@
 #import "Helper.h"
 #import "OrderModel.h"
 #import "AddMenuViewController.h"
+#import "PasswordView.h"
+#import "SVProgressHUD.h"
 
 
-@interface OrdersTableViewController ()
+@interface OrdersTableViewController ()<PasswordViewDelegate>
 {
     OrderModel * orderManager;
     Helper *helper;
     
     NSMutableArray * ordersArray;
     NSMutableArray * ordersKeyArray;
+    
+    PasswordView *pwView;
+    NSString * userTypePasswordString;
+    
+    NSInteger selectedRow;
 }
 
 @property (nonatomic ,strong)NSString * selectedOrderKeyString;
@@ -31,6 +38,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goCheckPassword) name:@"typePasswordDone" object:nil];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Selected" object:nil];
     
@@ -105,8 +115,15 @@
     cell.createTime.text = createTimeString;
     
     
-    
     cell.orderImageView.image = [UIImage imageNamed:@"order.jpg"];
+    
+    
+    
+    NSString * passwordString = eachOrderDict[@"Password"];
+    
+    if (![passwordString isEqualToString:@""]) {
+        cell.lockImageView.image = [UIImage imageNamed:@"lock.png"];
+    }
     
     
     return cell;
@@ -117,15 +134,70 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     
+    selectedRow = indexPath.row;
+    //----判斷密碼---
     
-    //轉場時需拿到的資料 , 一個是該訂單 key , 一個是該餐廳 uid (才能做品項array)
-    self.selectedOrderKeyString = ordersKeyArray[indexPath.row];
     
-    NSDictionary * eachOrderDict = ordersArray[indexPath.row];
-    _selectedRestaurantString = eachOrderDict[@"SelectedRestaurant"];
+    NSDictionary * eachOrderDictForpassword = ordersArray[indexPath.row];
     
-    //完成時會發通知
-    [helper selectedMenuUsersWith:self.selectedOrderKeyString];
+    NSString * passwordString = eachOrderDictForpassword[@"Password"];
+    
+    NSLog(@"passwordString:%@",passwordString);
+    
+    if ([passwordString isEqualToString:@""]) {
+        //沒密碼
+        
+        //----以下正常登入---
+        //轉場時需拿到的資料 , 一個是該訂單 key , 一個是該餐廳 uid (才能做品項array)
+        self.selectedOrderKeyString = ordersKeyArray[indexPath.row];
+        
+        NSDictionary * eachOrderDict = ordersArray[indexPath.row];
+        _selectedRestaurantString = eachOrderDict[@"SelectedRestaurant"];
+        
+        //完成時會發通知
+        [helper selectedMenuUsersWith:self.selectedOrderKeyString];
+        
+    }else{
+        //有密碼
+        //開啟密碼框時不給點選cell
+        self.tableView.allowsSelection = false;
+        
+        pwView = [[PasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"請输入訂單密碼"];
+        
+        pwView.backgroundColor = [UIColor whiteColor];
+        pwView.layer.borderWidth = 2.0;
+        pwView.layer.borderColor = [UIColor grayColor].CGColor;
+        
+        [self.view addSubview:pwView];
+        
+        pwView.PasswordViewDelegate = self;
+        if (![pwView.TF becomeFirstResponder])
+        {
+            
+            [pwView.TF becomeFirstResponder];
+        }
+        
+    }
+    
+    
+
+    
+    
+   
+    
+    
+    
+    
+    
+//    //----以下正常登入---
+//    //轉場時需拿到的資料 , 一個是該訂單 key , 一個是該餐廳 uid (才能做品項array)
+//    self.selectedOrderKeyString = ordersKeyArray[indexPath.row];
+//    
+//    NSDictionary * eachOrderDict = ordersArray[indexPath.row];
+//    _selectedRestaurantString = eachOrderDict[@"SelectedRestaurant"];
+//    
+//    //完成時會發通知
+//    [helper selectedMenuUsersWith:self.selectedOrderKeyString];
     
     
 }
@@ -158,6 +230,48 @@
 - (BOOL)prefersStatusBarHidden
 {
     return YES;
+}
+
+
+-(void)TXTradePasswordView:(PasswordView *)view WithPasswordString:(NSString *)Password{
+    
+    
+    userTypePasswordString = Password;
+    
+    [self.view endEditing:true];
+    
+    self.tableView.allowsSelection = true;
+    
+    [pwView removeFromSuperview];
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"typePasswordDone" object:nil];
+    
+}
+
+-(void)goCheckPassword{
+    
+    NSDictionary * eachOrderDictForpassword = ordersArray[selectedRow];
+    
+    NSString * passwordString = eachOrderDictForpassword[@"Password"];
+    
+    NSLog(@"passwordString:%@",passwordString);
+    
+    if ([passwordString isEqualToString:userTypePasswordString]) {
+        //要是密碼打對
+        //轉場時需拿到的資料 , 一個是該訂單 key , 一個是該餐廳 uid (才能做品項array)
+        self.selectedOrderKeyString = ordersKeyArray[selectedRow];
+        
+        NSDictionary * eachOrderDict = ordersArray[selectedRow];
+        _selectedRestaurantString = eachOrderDict[@"SelectedRestaurant"];
+        
+        //完成時會發通知
+        [helper selectedMenuUsersWith:self.selectedOrderKeyString];
+
+    }else{
+        [SVProgressHUD showErrorWithStatus:@"密碼錯誤"];
+        
+    }
+    
 }
 
 /*
