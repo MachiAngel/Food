@@ -8,10 +8,14 @@
 
 #import "PersonalAddMenuViewController.h"
 #import "FoodItemsCell.h"
+#import "RecordViewController.h"
 
 @interface PersonalAddMenuViewController ()<FoodItemsCellDelegate>
 {
     NSUInteger totalPriceNumber;
+    
+    //for record
+    NSMutableArray * recordArray;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *restaurantNameLabel;
@@ -22,7 +26,7 @@
 
 //@property(nonatomic,strong) NSMutableArray * foodListArray;
 @property(nonatomic,strong) NSMutableDictionary * foodDict;
-
+@property(nonatomic,strong) NSMutableDictionary * foodDictPrice;
 
 @end
 
@@ -32,15 +36,20 @@
     [super viewDidLoad];
     
     
-    //_foodItemTableView.backgroundView.alpha = 0.33;
+    NSLog(@"Contant:%@",_fooditemsArray);
     
     //---建立food數量model---
     _foodDict = [NSMutableDictionary new];
+    _foodDictPrice = [NSMutableDictionary new];
     
     for (NSDictionary * each in _fooditemsArray) {
         NSString * foodName = each[@"foodName"];
         NSString * countString = @"0";
+        NSString * foodPriceString = each[@"foodPrice"];
+        
         [_foodDict setObject:countString forKey:foodName];
+        [_foodDictPrice setObject:foodPriceString forKey:foodName];
+        
     }
     //--------
     
@@ -71,6 +80,68 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)sendBtnPressed:(UIButton *)sender {
+    
+
+    NSMutableArray * orderArray = [NSMutableArray new];
+    int i = 1;
+    
+    for (NSString *foodName in _foodDict) {
+        //先拿出來判斷 要是0個 不加入點餐字串陣列
+        
+        NSString *foodCount = _foodDict[foodName];
+        
+        if (![foodCount isEqualToString:@"0"]) {
+            //非零的話就計算
+            
+            //個別價格
+            NSString * eachPrice = _foodDictPrice[foodName];
+            int totoal = [foodCount intValue] * [eachPrice intValue];
+            
+            //最後組合字串
+            NSString * finalString = [NSString stringWithFormat:@"%d.%@ X %@ = %d元",i,foodName,foodCount,totoal];
+            
+            [orderArray addObject:finalString];
+            
+            i = i + 1;
+        }
+        
+    }
+    
+    
+    NSString * totalString = [NSString stringWithFormat:@"%lu",totalPriceNumber];
+    
+    
+    NSDictionary * record = @{@"createrName":self.menuCreateInfo[@"Creater"],
+                              @"createTime":self.menuCreateInfo[@"CreateTime"],
+                              @"restaurantName":self.menuCreateInfo[@"ShopName"],
+                              @"restaurantPhone":self.menuCreateInfo[@"ShopPhone"],
+                              @"totalPrice":totalString,
+                              @"orderArray":orderArray};
+    
+    
+    
+    NSArray * tmpRecordArray = [[NSUserDefaults standardUserDefaults]objectForKey:@"recordArray"];
+    
+    if (!tmpRecordArray) {
+        recordArray = [NSMutableArray new];
+    }else{
+        recordArray = [[NSMutableArray alloc]initWithArray:tmpRecordArray];
+    }
+    
+    [recordArray addObject:record];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:recordArray forKey:@"recordArray"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    
+    
+    // go next page
+    
+    RecordViewController * vc = [self.storyboard instantiateViewControllerWithIdentifier:@"RecordViewController"];
+    vc.recordDict = record;
+    
+    [self presentViewController:vc animated:true completion:nil];
+
     
     
 }

@@ -907,7 +907,7 @@
     
     if (self.typeVar == ToThisViewTypeFromSelected){
         //from selected
-        //拿到所有基本
+        //拿到所有基本資料
         NSMutableArray * orderArray = [NSMutableArray new];
         
         NSString * createrNameString = createInfo[@"Creater"];

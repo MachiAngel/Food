@@ -865,18 +865,18 @@
             <objects>
                 <tableViewController storyboardIdentifier="DetailTableViewController" id="5Rx-np-IfV" customClass="DetailTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="SVO-QX-R8X">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="FCw-3W-fTD">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <sections>
                             <tableViewSection headerTitle="餐廳資訊" id="3n4-aL-0Np">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="200" id="3sB-Vi-THq">
-                                        <rect key="frame" x="0.0" y="253" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="194" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3sB-Vi-THq" id="Qya-oZ-fGy">
                                             <frame key="frameInset" width="375" height="199"/>
@@ -951,7 +951,7 @@
                             <tableViewSection id="kNO-Ch-COM">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="240" id="J21-9J-N6e">
-                                        <rect key="frame" x="0.0" y="453" width="375" height="240"/>
+                                        <rect key="frame" x="0.0" y="394" width="375" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J21-9J-N6e" id="QRQ-bj-PN3">
                                             <frame key="frameInset" width="375" height="239"/>
@@ -972,7 +972,7 @@
                             <tableViewSection headerTitle="團體定餐" id="j7r-Sk-1ZE">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="ZbL-6J-Efu">
-                                        <rect key="frame" x="0.0" y="721" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="662" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZbL-6J-Efu" id="7lC-5m-fYV">
                                             <frame key="frameInset" width="375" height="89"/>
@@ -1001,7 +1001,7 @@
                             <tableViewSection headerTitle="個人定餐" id="5md-u6-1fv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="pWH-rW-u0x">
-                                        <rect key="frame" x="0.0" y="839" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="780" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pWH-rW-u0x" id="tEp-A2-l2i">
                                             <frame key="frameInset" width="375" height="89"/>
@@ -1021,6 +1021,49 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="喜愛" id="4fW-Mq-vWO">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="ebX-t9-vPB">
+                                        <rect key="frame" x="0.0" y="898" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ebX-t9-vPB" id="MuC-be-a7P">
+                                            <frame key="frameInset" width="375" height="89"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUM-nC-6TI">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="CFV-YN-umh"/>
+                                                        <constraint firstAttribute="width" constant="50" id="S4K-Rm-VXE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="47"/>
+                                                    <state key="normal" title="★"/>
+                                                    <connections>
+                                                        <action selector="addStarBtnPressed:" destination="5Rx-np-IfV" eventType="touchUpInside" id="G4g-eo-TtD"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZJ-06-CfF">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="4dE-xq-a1K"/>
+                                                        <constraint firstAttribute="width" constant="50" id="rFF-EF-FbN"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <state key="normal" title="導航"/>
+                                                    <connections>
+                                                        <action selector="goGoogleNavigation:" destination="5Rx-np-IfV" eventType="touchUpInside" id="9p6-F9-1hQ"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="yZJ-06-CfF" secondAttribute="trailing" constant="15" id="0Fw-YS-Blv"/>
+                                                <constraint firstItem="WUM-nC-6TI" firstAttribute="centerY" secondItem="MuC-be-a7P" secondAttribute="centerY" id="3Mn-z2-YaI"/>
+                                                <constraint firstItem="WUM-nC-6TI" firstAttribute="centerX" secondItem="MuC-be-a7P" secondAttribute="centerX" id="3P8-vg-Pf4"/>
+                                                <constraint firstItem="yZJ-06-CfF" firstAttribute="top" secondItem="MuC-be-a7P" secondAttribute="topMargin" constant="11" id="UcE-UJ-tzR"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="yZJ-06-CfF" secondAttribute="bottom" constant="12" id="VnA-fe-Our"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="5Rx-np-IfV" id="bYS-uk-iKo"/>
@@ -1028,7 +1071,7 @@
                         </connections>
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="1000"/>
+                    <size key="freeformSize" width="375" height="1300"/>
                     <connections>
                         <outlet property="foodItemsScrollView" destination="CpE-Qm-JXV" id="Rpi-H4-aJI"/>
                         <outlet property="mainImageView" destination="FCw-3W-fTD" id="Tav-Q9-ven"/>
@@ -1036,11 +1079,12 @@
                         <outlet property="restaurantName" destination="fAd-Id-MU5" id="B07-tc-GpF"/>
                         <outlet property="restaurantPhone" destination="oeM-3q-Cbi" id="Cs3-e1-b6s"/>
                         <outlet property="starBtn" destination="daD-4H-XFD" id="MwP-Bk-FCk"/>
+                        <outlet property="starBtn2" destination="WUM-nC-6TI" id="Zkp-6h-V3P"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3iU-PF-UAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2653.5999999999999" y="887.85607196401804"/>
+            <point key="canvasLocation" x="2558" y="878"/>
         </scene>
         <!--Personal Add Menu View Controller-->
         <scene sceneID="f1g-oZ-kwn">
