@@ -216,6 +216,11 @@ static Helper * _helper;
     [mainPicRef putData:mainImageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
         
         
+        if (error) {
+            NSLog(@"why:%@",error.description);
+            return ;
+        }
+        
         //拿到下載字串
         NSString * MainUrlstring = [metadata.downloadURL absoluteString];
         NSDictionary * mainImageDict = @{@"MainImage":MainUrlstring};

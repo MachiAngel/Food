@@ -16,6 +16,7 @@
 #import "AppDelegate.h"
 #import "RestaurantsTableViewController.h"
 #import "PSNumberPad.h"
+#import "PersonalAddMenuViewController.h"
 
 
 @interface DetailTableViewController ()<UITextFieldDelegate>
@@ -28,6 +29,10 @@
     
     UIBarButtonItem * favorBtn;
     BOOL favorBtnIsPressed;
+    
+    //for personal add menu controller
+    
+    NSMutableArray * foodItemsArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
@@ -102,6 +107,8 @@
     [restaurantManager getRestaurantFoodItemArrayWithUid:self.selectedUid handler:^(NSMutableArray *result) {
         
         
+        foodItemsArray = [NSMutableArray new];
+        
         //------------------------------------------
         CGFloat width = 130;
         CGFloat height = 240;
@@ -139,6 +146,14 @@
                 [self.foodItemsScrollView addSubview:view1];
                 
                 
+                NSData * eachimageData = UIImageJPEGRepresentation(eachimage.image, 1);
+                
+                //增加資料給個人點餐
+                NSDictionary * personalFoodItem = @{@"foodName":foodName,@"foodPrice":foodPrice,@"foodImage":eachimageData};
+                
+                [foodItemsArray addObject:personalFoodItem];
+                
+                
             }];
             
             
@@ -153,9 +168,15 @@
     
     
     //-------------------------傳值可解決的區--------------------------------//
-    _restaurantName.text = self.detail.ShopName;
-    _restaurantAddress.text = self.detail.ShopAddress;
-    _restaurantPhone.text = self.detail.ShopPhone;
+    
+    NSString * shopNameString = [NSString stringWithFormat:@"店名:%@",self.detail.ShopName];
+    NSString * shopAddressString = [NSString stringWithFormat:@"地址:%@",self.detail.ShopAddress];
+    NSString * shopPhoneString = [NSString stringWithFormat:@"電話:%@",self.detail.ShopPhone];
+    
+    
+    _restaurantName.text = shopNameString;
+    _restaurantAddress.text = shopAddressString;
+    _restaurantPhone.text = shopPhoneString;
     
     NSURL *mainImageURL = [NSURL URLWithString:self.detail.MainImage];
     
@@ -173,6 +194,27 @@
     
     
 }
+
+
+- (IBAction)goGoogleNavigation:(UIButton *)sender {
+    
+    if ([[UIApplication sharedApplication] canOpenURL:
+         [NSURL URLWithString:@"comgooglemaps://"]]) {
+        
+        NSString *shopAddress = self.detail.ShopAddress;
+        
+        NSString *url = [NSString stringWithFormat:@"comgooglemaps://?daddr=%@&directionsmode=driving",shopAddress];
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]]];
+        
+        
+    } else {
+        NSLog(@"Can't use comgooglemaps://");
+    }
+    
+    
+}
+
+
 
 
 -(void)barButtonPressed{
@@ -363,6 +405,33 @@
 
 - (IBAction)addPersonalMenuBtnPressed:(UIButton *)sender {
     
+    NSString *user = [[NSUserDefaults standardUserDefaults]objectForKey:@"userName"];
+    
+    
+    NSDate * lastTime = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *strDate = [dateFormatter stringFromDate:lastTime];
+    
+    NSDictionary * menu = @{@"Creater":user,
+                            @"ShopName":self.detail.ShopName,
+                            @"ShopPhone":self.detail.ShopPhone,
+                            @"CreateTime":strDate
+                            };
+    
+    //for create info
+    
+    createInfo = menu;
+    
+    
+    UIStoryboard * storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    PersonalAddMenuViewController * addMenuVC = [storyBoard instantiateViewControllerWithIdentifier:@"PersonalAddMenuViewController"];
+    addMenuVC.menuCreateInfo = createInfo;
+    addMenuVC.fooditemsArray = foodItemsArray;
+    
+    [self presentViewController:addMenuVC animated:true completion:nil];
+
     
     
 }

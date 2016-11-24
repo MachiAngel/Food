@@ -10,6 +10,10 @@
 #import "AddShopViewController.h"
 #import "FoodItemTableViewCell.h"
 #import "SVProgressHUD.h"
+#import <CoreLocation/CoreLocation.h>
+@import GoogleMaps;
+@import GooglePlaces;
+@import GooglePlacePicker;
 
 
 @interface AddShopViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
@@ -24,6 +28,10 @@
     //判斷圖片放哪
     NSUInteger photoSavePlace;   // 1 = shop , 2 = foodItem
     NSUInteger photoSave;
+    
+    GMSPlacePicker *_placePicker;
+    CLLocationManager * _locationManager;
+    
 }
 @property (weak, nonatomic) IBOutlet UITableView *fooditemsTableView;
 @property (weak, nonatomic) IBOutlet UIView *AddFoodItemView;
@@ -66,6 +74,13 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goMainView) name:@"doneAddShop" object:nil];
     
     
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+        _locationManager = [CLLocationManager new];
+        [_locationManager requestWhenInUseAuthorization];
+        //[_locationManager startUpdatingLocation];
+        
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,6 +88,46 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)goSeachBtnPressed:(UIButton *)sender {
+    
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(_locationManager.location.coordinate.latitude, _locationManager.location.coordinate.longitude);
+    
+    
+    CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(center.latitude + 0.01, center.longitude + 0.01);
+    CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(center.latitude - 0.01, center.longitude - 0.01);
+
+        
+    GMSCoordinateBounds *viewport = [[GMSCoordinateBounds alloc] initWithCoordinate:northEast coordinate:southWest];
+    
+    GMSPlacePickerConfig *config = [[GMSPlacePickerConfig alloc] initWithViewport:viewport];
+    
+    
+    _placePicker = [[GMSPlacePicker alloc] initWithConfig:config];
+    
+    [_placePicker pickPlaceWithCallback:^(GMSPlace *place, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Pick Place error %@", [error localizedDescription]);
+            return;
+        }
+        
+        if (place != nil) {
+            NSLog(@"Place name %@", place.name);
+            NSLog(@"Place address %@", place.formattedAddress);
+            NSLog(@"Place phone:%@",place.phoneNumber);
+            
+            self.shopNameTextField.text = place.name;
+            self.shopAddressTextField.text = place.formattedAddress;
+            self.shopPhoneTextField.text = place.phoneNumber;
+            
+            
+        } else {
+            NSLog(@"No place selected");
+        }
+    }];
+
+    
+    
+}
 
 - (IBAction)popAddFoodItemViewBtn:(id)sender {
     

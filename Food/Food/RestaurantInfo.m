@@ -66,18 +66,22 @@ static RestaurantInfo* _restaurantManager;
         
         NSDictionary * restaurantInfo = snapshot.value;
         
-        
-        for(NSString * uid in restaurantInfo){
+        if (![restaurantInfo isEqual:[NSNull null]]) {
+            for(NSString * uid in restaurantInfo){
+                
+                NSMutableDictionary * eachRestaurant = restaurantInfo[uid];
+                
+                [restaurantArray addObject:eachRestaurant];
+                
+                [restaurantUidArray addObject:uid];
+            }
+            //when finish for loop , go block
             
-            NSMutableDictionary * eachRestaurant = restaurantInfo[uid];
             
-            [restaurantArray addObject:eachRestaurant];
-            
-            [restaurantUidArray addObject:uid];
         }
-        //when finish for loop , go block
-        done(restaurantArray);
         
+        done(restaurantArray);
+       
     }];
 
 }
@@ -143,14 +147,18 @@ static RestaurantInfo* _restaurantManager;
         
         NSDictionary * restaurantInfo = snapshot.value;
         
-        for(NSString * uid in restaurantInfo){
-            
-            NSDictionary * eachRestaurant = restaurantInfo[uid];
-            
-            if ([myName isEqualToString:eachRestaurant[@"UploadUser"]]) {
-                [myRestaurantArray addObject:eachRestaurant];
-                [myRestaurantUidArray addObject:uid];
+        if (![restaurantInfo isEqual:[NSNull null]]) {
+            for(NSString * uid in restaurantInfo){
+                
+                NSDictionary * eachRestaurant = restaurantInfo[uid];
+                
+                if ([myName isEqualToString:eachRestaurant[@"UploadUser"]]) {
+                    [myRestaurantArray addObject:eachRestaurant];
+                    [myRestaurantUidArray addObject:uid];
+                }
+                
             }
+            
             
         }
         

@@ -51,9 +51,13 @@
 		11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F1A1DAD80AA00C5E4FA /* Assets.xcassets */; };
 		11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F1C1DAD80AA00C5E4FA /* LaunchScreen.storyboard */; };
 		11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F291DAD8D7700C5E4FA /* LoginViewController.m */; };
-		11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F2B1DAD8DC700C5E4FA /* GoogleService-Info.plist */; };
+		11EA492B1DE63661008C8174 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11EA492A1DE63661008C8174 /* CoreLocation.framework */; };
+		11EA492D1DE64467008C8174 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11EA492C1DE64467008C8174 /* GoogleService-Info.plist */; };
 		11EA880C1DE1D705004B39CA /* PasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA880B1DE1D705004B39CA /* PasswordView.m */; };
 		11EA880E1DE2CB9B004B39CA /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 11EA880D1DE2CB9B004B39CA /* lock.png */; };
+		11EA88611DE3089B004B39CA /* PersonalAddMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA88601DE3089B004B39CA /* PersonalAddMenuViewController.m */; };
+		11EA88651DE3143E004B39CA /* FoodItemsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA88631DE3143E004B39CA /* FoodItemsCell.m */; };
+		11EA88661DE3143E004B39CA /* FoodItemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11EA88641DE3143E004B39CA /* FoodItemsCell.xib */; };
 		4B277E86DE33CD5D88D41459 /* Pods_Food.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4C1078F52F3F7618C2BAD1 /* Pods_Food.framework */; };
 /* End PBXBuildFile section */
 
@@ -131,10 +135,16 @@
 		11EA3F1F1DAD80AA00C5E4FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11EA3F281DAD8D7700C5E4FA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		11EA3F291DAD8D7700C5E4FA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		11EA3F2B1DAD8DC700C5E4FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		11EA492A1DE63661008C8174 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		11EA492C1DE64467008C8174 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11EA880A1DE1D705004B39CA /* PasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordView.h; sourceTree = "<group>"; };
 		11EA880B1DE1D705004B39CA /* PasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordView.m; sourceTree = "<group>"; };
 		11EA880D1DE2CB9B004B39CA /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		11EA885F1DE3089B004B39CA /* PersonalAddMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalAddMenuViewController.h; sourceTree = "<group>"; };
+		11EA88601DE3089B004B39CA /* PersonalAddMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalAddMenuViewController.m; sourceTree = "<group>"; };
+		11EA88621DE3143E004B39CA /* FoodItemsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodItemsCell.h; sourceTree = "<group>"; };
+		11EA88631DE3143E004B39CA /* FoodItemsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodItemsCell.m; sourceTree = "<group>"; };
+		11EA88641DE3143E004B39CA /* FoodItemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodItemsCell.xib; sourceTree = "<group>"; };
 		4C4C1078F52F3F7618C2BAD1 /* Pods_Food.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Food.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68E70D16BE6959F608FE67F8 /* Pods-Food.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Food/Pods-Food.debug.xcconfig"; sourceTree = "<group>"; };
 		A6DCB51727CE1C23778B3D7D /* Pods-Food.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Food.release.xcconfig"; path = "Pods/Target Support Files/Pods-Food/Pods-Food.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11EA492B1DE63661008C8174 /* CoreLocation.framework in Frameworks */,
 				113983AD1DB917AD0080AAB5 /* QuartzCore.framework in Frameworks */,
 				11085A661DB3595000C79F44 /* Photos.framework in Frameworks */,
 				4B277E86DE33CD5D88D41459 /* Pods_Food.framework in Frameworks */,
@@ -172,6 +183,8 @@
 				1184CE441DB62576009E2A3E /* DetailTableViewController.m */,
 				1192A88C1DB777460034237F /* AddMenuViewController.h */,
 				1192A88D1DB777460034237F /* AddMenuViewController.m */,
+				11EA885F1DE3089B004B39CA /* PersonalAddMenuViewController.h */,
+				11EA88601DE3089B004B39CA /* PersonalAddMenuViewController.m */,
 				113BFFC41DAEA17E00E2B58D /* OrdersTableViewController.h */,
 				113BFFC51DAEA17E00E2B58D /* OrdersTableViewController.m */,
 				1169C3721DBE723700EBBBFD /* RecordViewController.h */,
@@ -232,6 +245,9 @@
 			children = (
 				110B6AC91DB2447B009CC9F7 /* FoodItemTableViewCell.m */,
 				110B6AC81DB2447B009CC9F7 /* FoodItemTableViewCell.h */,
+				11EA88621DE3143E004B39CA /* FoodItemsCell.h */,
+				11EA88631DE3143E004B39CA /* FoodItemsCell.m */,
+				11EA88641DE3143E004B39CA /* FoodItemsCell.xib */,
 			);
 			name = addRestaurantPageView;
 			sourceTree = "<group>";
@@ -300,8 +316,8 @@
 			isa = PBXGroup;
 			children = (
 				11EA3F1C1DAD80AA00C5E4FA /* LaunchScreen.storyboard */,
-				11EA3F2B1DAD8DC700C5E4FA /* GoogleService-Info.plist */,
 				11EA3F1F1DAD80AA00C5E4FA /* Info.plist */,
+				11EA492C1DE64467008C8174 /* GoogleService-Info.plist */,
 				115812491DBF6AB200C229E1 /* orange.png */,
 				1192A88F1DB77C860034237F /* user1.jpeg */,
 				1179DC591DB3AF640016BF70 /* unknow.png */,
@@ -322,6 +338,7 @@
 		4706E9813EF0A3076F91DCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				11EA492A1DE63661008C8174 /* CoreLocation.framework */,
 				113983AC1DB917AD0080AAB5 /* QuartzCore.framework */,
 				11085A651DB3595000C79F44 /* Photos.framework */,
 				4C4C1078F52F3F7618C2BAD1 /* Pods_Food.framework */,
@@ -345,6 +362,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 11EA3F221DAD80AA00C5E4FA /* Build configuration list for PBXNativeTarget "Food" */;
 			buildPhases = (
+				818594CBA5233E7EC2643D15 /* [CP] Check Pods Manifest.lock */,
 				CE8B3B9E13EF497BC27B3B50 /* [CP] Check Pods Manifest.lock */,
 				404812A9B30A7D1E51DFAA72 /* [CP] Check Pods Manifest.lock */,
 				11EA3F071DAD80AA00C5E4FA /* Sources */,
@@ -413,13 +431,14 @@
 				115CA2BA1DBDDE720027F069 /* progress1.png in Resources */,
 				1169C3711DBE716700EBBBFD /* OrLine.png in Resources */,
 				11EA880E1DE2CB9B004B39CA /* lock.png in Resources */,
+				11EA88661DE3143E004B39CA /* FoodItemsCell.xib in Resources */,
 				1192A8901DB77C860034237F /* user1.jpeg in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
 				113983B21DB92EB20080AAB5 /* order.jpg in Resources */,
-				11EA3F2C1DAD8DC700C5E4FA /* GoogleService-Info.plist in Resources */,
 				115CA2BC1DBDDE720027F069 /* progress2.png in Resources */,
 				11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */,
+				11EA492D1DE64467008C8174 /* GoogleService-Info.plist in Resources */,
 				115CA2BB1DBDDE720027F069 /* progress3.png in Resources */,
 				11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */,
 				115812481DBF49C600C229E1 /* backgroundPhoto.png in Resources */,
@@ -458,6 +477,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		818594CBA5233E7EC2643D15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8231928B122DEB0543C97F48 /* 📦 Copy Pods Resources */ = {
@@ -528,8 +562,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				113983B01DB92CA80080AAB5 /* OrdersTableViewCell.m in Sources */,
+				11EA88651DE3143E004B39CA /* FoodItemsCell.m in Sources */,
 				1184CE451DB62576009E2A3E /* DetailTableViewController.m in Sources */,
 				113BFFC01DAEA0E600E2B58D /* RestaurantsTableViewController.m in Sources */,
+				11EA88611DE3089B004B39CA /* PersonalAddMenuViewController.m in Sources */,
 				11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */,
 				1192A88E1DB777460034237F /* AddMenuViewController.m in Sources */,
 				1192A88B1DB776FE0034237F /* UserCollectionViewCell.m in Sources */,

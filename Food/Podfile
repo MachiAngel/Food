@@ -15,5 +15,8 @@ target 'Food' do
   pod 'SDWebImage'
   pod 'SVProgressHUD'
   pod 'PSNumberPad'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
   
 end
