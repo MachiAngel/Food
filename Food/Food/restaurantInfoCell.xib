@@ -33,7 +33,7 @@
                             <constraint firstAttribute="width" constant="166" id="jL7-ty-wT3"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="18"/>
-                        <color key="textColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.48443746609999999" green="0.98132258650000004" blue="0.60657788420000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上傳者" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naU-y8-0Gu">

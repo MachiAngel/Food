@@ -83,7 +83,13 @@
     [super viewDidLoad];
     
     
-    self.usersCollectionView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"userLine.png"]];
+    
+//    self.orderlistTableView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"blackBG.png"]];
+//    self.orderlistTableView.backgroundView.alpha = 0.3;
+    
+    
+    
+    self.usersCollectionView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"userLine2.png"]];
     
     
     cancelNumber = 1;
@@ -124,7 +130,7 @@
     if (self.typeVar == ToThisViewTypeFromSelected) {
         self.sendOrderBtnView.alpha = 0;
     }else{
-        self.sendOrderBtnView.userInteractionEnabled = false;
+        self.sendOrderBtnView.enabled = false;
         self.sendOrderBtnView.alpha = 0.5;
     }
     
@@ -359,10 +365,10 @@
                 //判斷是否全部按ok的時候
                 if (usersArray.count == statusOkArray.count) {
                     self.sendOrderBtnView.alpha = 1;
-                    self.sendOrderBtnView.userInteractionEnabled = true;
+                    self.sendOrderBtnView.enabled = true;
                 }else{
                     self.sendOrderBtnView.alpha = 0.5;
-                    self.sendOrderBtnView.userInteractionEnabled = false;
+                    self.sendOrderBtnView.enabled = false;
                     
                 }
                 
@@ -478,7 +484,14 @@
     NSString * orderString = eachOrder[@"Order"];
     NSString * userName = eachOrder[@"UserName"];
     
+    
+    cell.backgroundColor = [UIColor clearColor];
+    
     cell.singleOrderLabel.text = [NSString stringWithFormat:@"%@ 點了 %@",userName,orderString];
+    
+    //cell.singleOrderLabel.tintColor = [UIColor whiteColor];
+    
+    
     
     return cell;
 }

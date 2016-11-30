@@ -60,6 +60,19 @@
 		11B16A1F1DEDEC9800F62B4C /* PasswordTX.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A1E1DEDEC9800F62B4C /* PasswordTX.png */; };
 		11B16A231DEE971B00F62B4C /* tabbaricon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A211DEE971B00F62B4C /* tabbaricon2.png */; };
 		11B16A281DEE9AE000F62B4C /* tabbaricon.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A271DEE9AE000F62B4C /* tabbaricon.png */; };
+		11B16A2A1DEEAA3A00F62B4C /* tabbaricon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A291DEEAA3A00F62B4C /* tabbaricon3.png */; };
+		11B16A2C1DEEAC1900F62B4C /* detailIcon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A2B1DEEAC1900F62B4C /* detailIcon1.png */; };
+		11B16A301DEEB4BF00F62B4C /* detailIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A2F1DEEB4BF00F62B4C /* detailIcon2.png */; };
+		11B16A331DEEBE5800F62B4C /* people.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A311DEEBE5800F62B4C /* people.png */; };
+		11B16A341DEEBE5800F62B4C /* people1.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A321DEEBE5800F62B4C /* people1.png */; };
+		11B16A381DEEC55600F62B4C /* riceBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A371DEEC55600F62B4C /* riceBG.png */; };
+		11B16A3B1DEED0DE00F62B4C /* recordBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A3A1DEED0DE00F62B4C /* recordBG.png */; };
+		11B16A401DEEDBDD00F62B4C /* coBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A3F1DEEDBDD00F62B4C /* coBg.png */; };
+		11B16A441DEEED9A00F62B4C /* Btn3.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A431DEEED9A00F62B4C /* Btn3.png */; };
+		11B16A481DEEF48600F62B4C /* blackBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A471DEEF48600F62B4C /* blackBG.png */; };
+		11B16A4E1DEEFE6500F62B4C /* userLine2.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A4D1DEEFE6500F62B4C /* userLine2.png */; };
+		11B16A501DEF023700F62B4C /* coBG2.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A4F1DEF023700F62B4C /* coBG2.png */; };
+		11B16A561DEF16DE00F62B4C /* addBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 11B16A551DEF16DE00F62B4C /* addBtn.png */; };
 		11EA3F101DAD80AA00C5E4FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F0F1DAD80AA00C5E4FA /* main.m */; };
 		11EA3F131DAD80AA00C5E4FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EA3F121DAD80AA00C5E4FA /* AppDelegate.m */; };
 		11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11EA3F171DAD80AA00C5E4FA /* Main.storyboard */; };
@@ -155,6 +168,19 @@
 		11B16A1E1DEDEC9800F62B4C /* PasswordTX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PasswordTX.png; sourceTree = "<group>"; };
 		11B16A211DEE971B00F62B4C /* tabbaricon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbaricon2.png; sourceTree = "<group>"; };
 		11B16A271DEE9AE000F62B4C /* tabbaricon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbaricon.png; sourceTree = "<group>"; };
+		11B16A291DEEAA3A00F62B4C /* tabbaricon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbaricon3.png; sourceTree = "<group>"; };
+		11B16A2B1DEEAC1900F62B4C /* detailIcon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailIcon1.png; sourceTree = "<group>"; };
+		11B16A2F1DEEB4BF00F62B4C /* detailIcon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detailIcon2.png; sourceTree = "<group>"; };
+		11B16A311DEEBE5800F62B4C /* people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people.png; sourceTree = "<group>"; };
+		11B16A321DEEBE5800F62B4C /* people1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people1.png; sourceTree = "<group>"; };
+		11B16A371DEEC55600F62B4C /* riceBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riceBG.png; sourceTree = "<group>"; };
+		11B16A3A1DEED0DE00F62B4C /* recordBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordBG.png; sourceTree = "<group>"; };
+		11B16A3F1DEEDBDD00F62B4C /* coBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coBg.png; sourceTree = "<group>"; };
+		11B16A431DEEED9A00F62B4C /* Btn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Btn3.png; sourceTree = "<group>"; };
+		11B16A471DEEF48600F62B4C /* blackBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBG.png; sourceTree = "<group>"; };
+		11B16A4D1DEEFE6500F62B4C /* userLine2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userLine2.png; sourceTree = "<group>"; };
+		11B16A4F1DEF023700F62B4C /* coBG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coBG2.png; sourceTree = "<group>"; };
+		11B16A551DEF16DE00F62B4C /* addBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addBtn.png; sourceTree = "<group>"; };
 		11EA3F0B1DAD80AA00C5E4FA /* Food.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Food.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11EA3F0F1DAD80AA00C5E4FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11EA3F111DAD80AA00C5E4FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -200,18 +226,23 @@
 		1124A7371DE71D3700461DDC /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				11B16A3C1DEEDA5200F62B4C /* addMenuPage */,
+				11B16A391DEED0CE00F62B4C /* recordPage */,
 				11B16A201DEE970400F62B4C /* TabBaricon */,
 				11B16A1E1DEDEC9800F62B4C /* PasswordTX.png */,
+				11B16A471DEEF48600F62B4C /* blackBG.png */,
 				11B16A051DED7C5200F62B4C /* addMuBtn.png */,
 				112DE2231DEC767E0031C133 /* creatAccBG2.png */,
 				11826BD51DE82CEA00F25120 /* desert.png */,
 				11B16A1A1DEDE29E00F62B4C /* foodBG.png */,
 				11826BD31DE82AFB00F25120 /* backGround.png */,
 				111611A21DE8553600D12AB4 /* userLine.png */,
+				11B16A4D1DEEFE6500F62B4C /* userLine2.png */,
 				111611A41DE85A7200D12AB4 /* newBackground.jpg */,
 				111611A61DE85A8A00D12AB4 /* cool.png */,
 				112DE2211DEC75710031C133 /* Btn.png */,
 				112DE2251DEC770A0031C133 /* Btn2.png */,
+				11B16A431DEEED9A00F62B4C /* Btn3.png */,
 			);
 			name = ui;
 			sourceTree = "<group>";
@@ -329,10 +360,34 @@
 		11B16A201DEE970400F62B4C /* TabBaricon */ = {
 			isa = PBXGroup;
 			children = (
+				11B16A2B1DEEAC1900F62B4C /* detailIcon1.png */,
+				11B16A2F1DEEB4BF00F62B4C /* detailIcon2.png */,
+				11B16A311DEEBE5800F62B4C /* people.png */,
+				11B16A321DEEBE5800F62B4C /* people1.png */,
+				11B16A291DEEAA3A00F62B4C /* tabbaricon3.png */,
 				11B16A211DEE971B00F62B4C /* tabbaricon2.png */,
 				11B16A271DEE9AE000F62B4C /* tabbaricon.png */,
+				11B16A371DEEC55600F62B4C /* riceBG.png */,
 			);
 			name = TabBaricon;
+			sourceTree = "<group>";
+		};
+		11B16A391DEED0CE00F62B4C /* recordPage */ = {
+			isa = PBXGroup;
+			children = (
+				11B16A3A1DEED0DE00F62B4C /* recordBG.png */,
+			);
+			name = recordPage;
+			sourceTree = "<group>";
+		};
+		11B16A3C1DEEDA5200F62B4C /* addMenuPage */ = {
+			isa = PBXGroup;
+			children = (
+				11B16A3F1DEEDBDD00F62B4C /* coBg.png */,
+				11B16A4F1DEF023700F62B4C /* coBG2.png */,
+				11B16A551DEF16DE00F62B4C /* addBtn.png */,
+			);
+			name = addMenuPage;
 			sourceTree = "<group>";
 		};
 		11EA3F021DAD80AA00C5E4FA = {
@@ -488,19 +543,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				1158124F1DBF96F500C229E1 /* cellOrange.png in Resources */,
+				11B16A501DEF023700F62B4C /* coBG2.png in Resources */,
 				1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */,
 				112DE2261DEC770A0031C133 /* Btn2.png in Resources */,
+				11B16A2C1DEEAC1900F62B4C /* detailIcon1.png in Resources */,
 				115CA2BA1DBDDE720027F069 /* progress1.png in Resources */,
+				11B16A4E1DEEFE6500F62B4C /* userLine2.png in Resources */,
 				11B16A0A1DED909E00F62B4C /* whiteLock.png in Resources */,
+				11B16A401DEEDBDD00F62B4C /* coBg.png in Resources */,
 				112DE2241DEC767E0031C133 /* creatAccBG2.png in Resources */,
 				11826BD41DE82AFB00F25120 /* backGround.png in Resources */,
+				11B16A301DEEB4BF00F62B4C /* detailIcon2.png in Resources */,
+				11B16A341DEEBE5800F62B4C /* people1.png in Resources */,
+				11B16A3B1DEED0DE00F62B4C /* recordBG.png in Resources */,
 				1169C3711DBE716700EBBBFD /* OrLine.png in Resources */,
 				11B16A231DEE971B00F62B4C /* tabbaricon2.png in Resources */,
 				112DE2221DEC75710031C133 /* Btn.png in Resources */,
 				11EA880E1DE2CB9B004B39CA /* lock.png in Resources */,
 				11B16A1B1DEDE29E00F62B4C /* foodBG.png in Resources */,
+				11B16A2A1DEEAA3A00F62B4C /* tabbaricon3.png in Resources */,
 				11B16A0C1DED90F400F62B4C /* greenBack.jpg in Resources */,
 				11EA88661DE3143E004B39CA /* FoodItemsCell.xib in Resources */,
+				11B16A481DEEF48600F62B4C /* blackBG.png in Resources */,
 				1192A8901DB77C860034237F /* user1.jpeg in Resources */,
 				11EA3F1E1DAD80AA00C5E4FA /* LaunchScreen.storyboard in Resources */,
 				117C1AAD1DB5208F004AB4F9 /* restaurantInfoCell.xib in Resources */,
@@ -508,12 +572,16 @@
 				113983B21DB92EB20080AAB5 /* order.jpg in Resources */,
 				11B16A1F1DEDEC9800F62B4C /* PasswordTX.png in Resources */,
 				111611A71DE85A8A00D12AB4 /* cool.png in Resources */,
+				11B16A381DEEC55600F62B4C /* riceBG.png in Resources */,
 				115CA2BC1DBDDE720027F069 /* progress2.png in Resources */,
 				11B16A281DEE9AE000F62B4C /* tabbaricon.png in Resources */,
+				11B16A441DEEED9A00F62B4C /* Btn3.png in Resources */,
 				111611A51DE85A7200D12AB4 /* newBackground.jpg in Resources */,
 				11B16A061DED7C5200F62B4C /* addMuBtn.png in Resources */,
+				11B16A561DEF16DE00F62B4C /* addBtn.png in Resources */,
 				11EA3F1B1DAD80AA00C5E4FA /* Assets.xcassets in Resources */,
 				11EA492D1DE64467008C8174 /* GoogleService-Info.plist in Resources */,
+				11B16A331DEEBE5800F62B4C /* people.png in Resources */,
 				115CA2BB1DBDDE720027F069 /* progress3.png in Resources */,
 				11EA3F191DAD80AA00C5E4FA /* Main.storyboard in Resources */,
 				115812481DBF49C600C229E1 /* backgroundPhoto.png in Resources */,

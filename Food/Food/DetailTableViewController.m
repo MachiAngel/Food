@@ -43,7 +43,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *starBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *starBtn2;
+
+@property (strong, nonatomic) IBOutlet UITableView *detailTableView;
 
 @end
 
@@ -53,6 +54,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    self.detailTableView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"riceBG.png"]];
+    
     
     helper = [Helper sharedInstance];
     restaurantManager = [RestaurantInfo sharedInstance];
@@ -171,8 +176,8 @@
     //-------------------------傳值可解決的區--------------------------------//
     
     NSString * shopNameString = [NSString stringWithFormat:@"店名:%@",self.detail.ShopName];
-    NSString * shopAddressString = [NSString stringWithFormat:@"地址:%@",self.detail.ShopAddress];
-    NSString * shopPhoneString = [NSString stringWithFormat:@"電話:%@",self.detail.ShopPhone];
+    NSString * shopAddressString = [NSString stringWithFormat:@"%@",self.detail.ShopAddress];
+    NSString * shopPhoneString = [NSString stringWithFormat:@"%@",self.detail.ShopPhone];
     
     
     _restaurantName.text = shopNameString;
@@ -282,10 +287,17 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    
+    if (section == 0) {
+        return 3;
+    }
+    
+    
     return 1;
 }
 
@@ -296,6 +308,17 @@
     
         
 }
+
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.detailTableView.frame.size.width, 10)];
+//    header.backgroundColor = [UIColor whiteColor];
+//    
+//    return header;
+//}
+
+
+
 - (IBAction)addMenuBtnPressed:(id)sender {
     
     

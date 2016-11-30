@@ -36,7 +36,7 @@
     [super viewDidLoad];
     
     
-    NSLog(@"Contant:%@",_fooditemsArray);
+    //NSLog(@"Contant:%@",_fooditemsArray);
     
     //---建立food數量model---
     _foodDict = [NSMutableDictionary new];
@@ -184,8 +184,13 @@
     NSDictionary * eachInfo = self.fooditemsArray[indexPath.row];
     
     cell.foodItemsdelegate = self;
+    
     cell.foodNameLabel.text = eachInfo[@"foodName"];
-    cell.foodPriceLabel.text = eachInfo[@"foodPrice"];
+    
+    NSString * finalPrice = [NSString stringWithFormat:@"$%@",eachInfo[@"foodPrice"]];
+    cell.foodPriceLabel.text = finalPrice;
+    
+    
     cell.foodImage.image = [UIImage imageWithData:eachInfo[@"foodImage"]];
     
     cell.backgroundView.alpha = 0.33;
@@ -194,6 +199,9 @@
     NSString * key = eachInfo[@"foodName"];
     NSString * currentCount = _foodDict[key];
     cell.countTextField.text = currentCount;
+    
+    
+    cell.backgroundColor = [UIColor clearColor];
     
     
     return cell;
@@ -207,7 +215,7 @@
     //總價自己算自己的
     NSString * foodPriceSting = fooditem[@"foodPrice"];
     totalPriceNumber = totalPriceNumber + [foodPriceSting integerValue];
-    self.totalPriceLabel.text = [NSString stringWithFormat:@"總計:%lu",totalPriceNumber];
+    self.totalPriceLabel.text = [NSString stringWithFormat:@"總計:%lu元",totalPriceNumber];
     
     // 字典存數量  哪個名字先拿到
     NSString * foodNameSting = fooditem[@"foodName"];
@@ -231,7 +239,7 @@
     //總價自己算自己的
     NSString * foodPriceSting = fooditem[@"foodPrice"];
     totalPriceNumber = totalPriceNumber - [foodPriceSting integerValue];
-    self.totalPriceLabel.text = [NSString stringWithFormat:@"總計:%lu",totalPriceNumber];
+    self.totalPriceLabel.text = [NSString stringWithFormat:@"總計:%lu元",totalPriceNumber];
     
     // 字典存數量  名字先拿到
     NSString * foodNameSting = fooditem[@"foodName"];

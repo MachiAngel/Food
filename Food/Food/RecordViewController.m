@@ -51,7 +51,7 @@
         self.ordersTextView.text = [self.ordersTextView.text stringByAppendingFormat:@"%@\n",eachOrderString];
     }
     
-    self.ordersTextView.text = [self.ordersTextView.text stringByAppendingFormat:@"總計:%@元\n",self.recordDict[@"totalPrice"]];
+    self.ordersTextView.text = [self.ordersTextView.text stringByAppendingFormat:@"\n總計:%@元\n",self.recordDict[@"totalPrice"]];
     
     self.ordersTextView.textColor = [UIColor whiteColor];
     self.ordersTextView.font = [UIFont systemFontOfSize:18];

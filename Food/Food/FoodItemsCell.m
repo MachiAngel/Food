@@ -33,8 +33,11 @@
         self.minusBtn.enabled = YES;
         
         NSString * foodName = self.foodNameLabel.text;
-        NSString * foodPrice = self.foodPriceLabel.text;
-        NSDictionary * foodItem = @{@"foodName":foodName,@"foodPrice":foodPrice};
+        //NSString * foodPrice = self.foodPriceLabel.text;
+        
+        NSString * foodPriceOnly = [self.foodPriceLabel.text stringByReplacingOccurrencesOfString:@"$" withString:@""];
+        
+        NSDictionary * foodItem = @{@"foodName":foodName,@"foodPrice":foodPriceOnly};
         
         [self.foodItemsdelegate FoodItemsCellView:self WithPlus:foodItem];
         
@@ -73,8 +76,12 @@
         self.minusBtn.enabled = YES;
         
         NSString * foodName = self.foodNameLabel.text;
-        NSString * foodPrice = self.foodPriceLabel.text;
-        NSDictionary * foodItem = @{@"foodName":foodName,@"foodPrice":foodPrice};
+        //NSString * foodPrice = self.foodPriceLabel.text;
+        
+        NSString * foodPriceOnly = [self.foodPriceLabel.text stringByReplacingOccurrencesOfString:@"$" withString:@""];
+        
+
+        NSDictionary * foodItem = @{@"foodName":foodName,@"foodPrice":foodPriceOnly};
         
         //傳數據出去
         [self.foodItemsdelegate FoodItemsCellView:self WithMinus:foodItem];
