@@ -82,6 +82,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    self.usersCollectionView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"userLine.png"]];
+    
+    
     cancelNumber = 1;
     
     //for create use
@@ -451,6 +455,7 @@
         cell.userImage.layer.borderColor = [UIColor greenColor].CGColor;
     }
     
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
     

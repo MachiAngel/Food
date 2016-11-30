@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *rootScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *lineLabel;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addMenuBtnView;
 
 @end
 
@@ -34,6 +35,13 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.rootScrollView.delegate = self;
     
+    //[button setImage:[[UIImage imageNamed:@"imageName.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    self.addMenuBtnView.image = [[UIImage imageNamed:@"addMuBtn.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    self.addMenuBtnView.customView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    
+    //back鈕別顯示字
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     
 }
@@ -94,10 +102,11 @@
     //只要有偏移量 就取消收尋
     RestaurantsTableViewController *  vc = self.childViewControllers[0];
     vc.searchController.active = false;
+    
     //[vc.searchController.searchBar resignFirstResponder];
     
     
-//    NSLog(@"%lf",scrollView.contentOffset.x);
+    NSLog(@"%lf",scrollView.contentOffset.x);
     self.lineLabel.frame = CGRectMake( scrollView.contentOffset.x / 3
                                       , self.lineLabel.frame.origin.y, self.lineLabel.frame.size.width, self.lineLabel.frame.size.height);
     

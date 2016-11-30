@@ -66,6 +66,8 @@
     
     cell.detailTextLabel.text = [NSString stringWithFormat:@"時間:%@",each[@"createTime"]];
     
+    cell.backgroundColor = [UIColor clearColor];
+    
     return cell;
 }
 

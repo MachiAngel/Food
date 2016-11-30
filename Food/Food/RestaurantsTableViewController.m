@@ -12,6 +12,7 @@
 #import "restaurantInfoCell.h"
 #import "RestaurantModel.h"
 #import "DetailTableViewController.h"
+#import "SVProgressHUD.h"
 
 
 @interface RestaurantsTableViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchResultsUpdating,UISearchBarDelegate>
@@ -25,8 +26,8 @@
 @property (nonatomic, strong) NSArray *restaurantUids;
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
-@property (weak, nonatomic) IBOutlet UIView *tmpView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *tmpAIV;
+
+
 
 
 
@@ -42,6 +43,9 @@
     [self createSearchBar];
     _searchList = [NSMutableArray new];
     _searchUidList = [NSMutableArray new];
+    
+    
+    _myTableView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"foodBG.png"]];
    
     
 }
@@ -72,10 +76,9 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    
-    
-    self.tmpView.alpha = 1;
-    [self.tmpAIV startAnimating];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD show];
+
     
     
     restaurantManager = [RestaurantInfo sharedInstance];
@@ -100,10 +103,7 @@
         //自己array, 已經都是模型
         self.restaurants = [models copy];
         
-        
-        
-        self.tmpView.alpha = 0;
-        [self.tmpAIV stopAnimating];
+        [SVProgressHUD dismiss];
         
         [self.myTableView reloadData];
         
@@ -152,6 +152,8 @@
         cell.tg = tg;
        
     }
+    
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }

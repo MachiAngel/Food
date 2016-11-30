@@ -28,6 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _favoriteTableView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"foodBG.png"]];
+    
 }
 
 
@@ -85,7 +88,7 @@
         // 設置模型數據给cell 重寫set 方法
         cell.tg = tg;
     
-    
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 

@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-  
+  //[[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     
     
 }

@@ -45,6 +45,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goAddMenu) name:@"Selected" object:nil];
     
     
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -122,9 +123,12 @@
     NSString * passwordString = eachOrderDict[@"Password"];
     
     if (![passwordString isEqualToString:@""]) {
-        cell.lockImageView.image = [UIImage imageNamed:@"lock.png"];
+        cell.lockImageView.image = [UIImage imageNamed:@"whiteLock.png"];
+    }else{
+        cell.lockImageView.image = nil;
     }
     
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
@@ -178,14 +182,6 @@
         }
         
     }
-    
-    
-
-    
-    
-   
-    
-    
     
     
     

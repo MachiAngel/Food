@@ -43,6 +43,7 @@
     self.createTimeLabel.text = [NSString stringWithFormat:@"訂單建立時間:%@",self.recordDict[@"createTime"]];
     
     
+    
     NSArray * orderArray = self.recordDict[@"orderArray"];
     for (int i = 0; i < orderArray.count; i++) {
         NSString * eachOrderString = orderArray[i];
@@ -52,7 +53,8 @@
     
     self.ordersTextView.text = [self.ordersTextView.text stringByAppendingFormat:@"總計:%@元\n",self.recordDict[@"totalPrice"]];
     
-    
+    self.ordersTextView.textColor = [UIColor whiteColor];
+    self.ordersTextView.font = [UIFont systemFontOfSize:18];
 }
 
 - (void)didReceiveMemoryWarning {

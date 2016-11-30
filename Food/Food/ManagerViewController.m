@@ -35,6 +35,10 @@
     // Do any additional setup after loading the view.
     
     helper = [Helper sharedInstance];
+    
+    
+     _managerTableView.backgroundView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"foodBG.png"]];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,6 +95,8 @@
     RestaurantModel *tg = self.myRestaurants[indexPath.row];
     // 設置模型數據给cell 重寫set 方法
     cell.tg = tg;
+    
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
