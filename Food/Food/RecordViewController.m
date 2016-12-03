@@ -7,6 +7,7 @@
 //
 
 #import "RecordViewController.h"
+#import "DialView.h"
 
 @interface RecordViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *restaurantNameLabel;
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *shopPhoneLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *leaveBtnView;
+@property (weak, nonatomic) IBOutlet UIButton *dialBtnView;
 
 @end
 
@@ -76,6 +78,41 @@
     
     [vc dismissViewControllerAnimated:YES completion:NULL];
     
+}
+- (IBAction)goDialBtnPressed:(UIButton *)sender {
+    
+    
+    
+    NSArray* nibView = [[NSBundle mainBundle] loadNibNamed:@"DialView" owner:nil options:nil];
+    
+    DialView * dialView = [nibView firstObject];
+    
+    dialView.phoneNumberLabel.text = self.recordDict[@"restaurantPhone"];
+    
+    
+    dialView.transform = CGAffineTransformMakeScale(1.3,1.3);
+    dialView.center = self.view.center;
+    
+    [self.view addSubview:dialView];
+    
+
+    
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        dialView.transform = CGAffineTransformMakeScale(1.0,1.0);
+        
+    } completion:nil];
+    
+    self.dialBtnView.enabled = NO;
+    
+    dialView.dialBlock = ^(NSString *goString){
+        
+        if ([goString isEqualToString:@"go"]) {
+            
+            self.dialBtnView.enabled = YES;
+        }
+    
+    };
 }
 
 /*

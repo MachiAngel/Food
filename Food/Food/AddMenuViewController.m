@@ -68,11 +68,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *chooseOrderBtnView;
 @property (weak, nonatomic) IBOutlet UIButton *okBtnView;
 
-
-
 @property (weak, nonatomic) IBOutlet UITableView *orderlistTableView;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *progressView;
+
 @property (weak, nonatomic) IBOutlet UILabel *showFinishLabel;
 
 @end
@@ -150,7 +148,10 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
+    //[self.usersCollectionView reloadData];
+    
 }
+
 
 -(void)getFoodItems:(ToThisViewType)type{
     
@@ -310,7 +311,7 @@
             
             if ([resultDict isEqual:[NSNull null]]) {
                 NSLog(@"沒用戶了");
-                NSLog(@"沒用戶了");
+                
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"noUser" object:nil];
                 
             }else{
@@ -320,10 +321,10 @@
                     NSDictionary * eachUser = resultDict[userUid];
                    [usersArray addObject:eachUser];
                    
-                    
                 }
                 
                 [self.usersCollectionView reloadData];
+                
                 
             }
             
@@ -374,6 +375,7 @@
                 
                 
                 [self.usersCollectionView reloadData];
+               
                 
             }
             
@@ -431,7 +433,6 @@
 -(void)dealloc{
     NSLog(@"AddmenuController dealloc");
     NSLog(@"AddmenuController dealloc");
-    NSLog(@"AddmenuController dealloc");
 }
 
 #pragma mark - CollectionView Delegate Medthod
@@ -442,11 +443,11 @@
 }
 
 
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     UserCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.userImage.image = [UIImage imageNamed:@"user1.jpeg"];
+    
     
     NSDictionary * each = usersArray[indexPath.row];
     
@@ -457,11 +458,15 @@
     
     if ([status isEqualToString:@"0"]) {
          cell.userImage.layer.borderColor = [UIColor redColor].CGColor;
+        
+        
     }else if ([status isEqualToString:@"1"]){
         cell.userImage.layer.borderColor = [UIColor greenColor].CGColor;
+        
     }
     
     cell.backgroundColor = [UIColor clearColor];
+    
     
     return cell;
     
@@ -501,7 +506,6 @@
 - (IBAction)orderBtnPressed:(id)sender {
     
     _orderLabel.text = @"尚未點餐";
-    self.progressView.image = [UIImage imageNamed:@"progress1"];
     
     //--------------------------------------------------------------//
     
@@ -523,13 +527,13 @@
         
         if ([selectedOrder isEqualToString:@"cancel"]) {
             [view1 removeFromSuperview];
+            
         }else{
             _orderLabel.text = selectedOrder;
             NSLog(@"******%@*******",selectedOrder);
-            UIImage * image2 = [UIImage imageNamed:@"progress2"];
             
-            self.progressView.image = image2;
             cancelNumber = 2;
+            _showFinishLabel.text = @"請確認你的餐點";
             
             [view1 removeFromSuperview];
             
@@ -580,7 +584,7 @@
         }
         
         
-        self.progressView.image = [UIImage imageNamed:@"progress3"];
+       
         
         //小綠人
         NSString * okStatusString = @"1";
@@ -589,8 +593,11 @@
         //按確定後不給點了
         self.chooseOrderBtnView.alpha = 0.5;
         self.chooseOrderBtnView.userInteractionEnabled = false;
+        self.chooseOrderBtnView.enabled = false;
+        
         self.okBtnView.alpha = 0.5;
         self.okBtnView.userInteractionEnabled = false;
+        self.okBtnView.enabled = false;
         
     }
     
@@ -734,12 +741,7 @@
     
 }
 
-
-
-
 - (IBAction)cancelBtn:(id)sender {
-    
-
     
     NSString * cancelStatusString = @"0";
     
@@ -747,6 +749,7 @@
         
     self.okBtnView.alpha = 1;
     self.okBtnView.userInteractionEnabled = true;
+    self.okBtnView.enabled = true;
     
     //取消馬上刪除資料 更新total price
     //利用image判斷重複點擊cancel
@@ -759,7 +762,7 @@
     
     }else if(cancelNumber == 2){
         
-        self.progressView.image = [UIImage imageNamed:@"progress1.png"];
+        
         self.orderLabel.text = @"尚未點餐";
         cancelNumber = 1;
         NSLog(@"第二階段");
@@ -776,7 +779,8 @@
     //按下取消開啟可選擇餐點
     self.chooseOrderBtnView.alpha = 1;
     self.chooseOrderBtnView.userInteractionEnabled = true;
-    self.progressView.image = [UIImage imageNamed:@"progress1.png"];
+    self.chooseOrderBtnView.enabled= true;
+    
     self.orderLabel.text = @"尚未點餐";
     self.showFinishLabel.text = @"";
     

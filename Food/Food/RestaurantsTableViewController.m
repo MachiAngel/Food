@@ -22,17 +22,8 @@
     
 }
 
-@property (nonatomic, strong) NSArray *restaurants;
-@property (nonatomic, strong) NSArray *restaurantUids;
-
-@property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
 
-
-
-
-@property (nonatomic,strong) NSMutableArray * searchList;
-@property (nonatomic,strong) NSMutableArray * searchUidList;
 @end
 
 @implementation RestaurantsTableViewController

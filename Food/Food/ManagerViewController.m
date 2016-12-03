@@ -101,33 +101,16 @@
     return cell;
 }
 
-//
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    
-//    [tableView deselectRowAtIndexPath:indexPath animated:true];
-//    
-//    RestaurantModel *forDetail = self.myRestaurants[indexPath.row];
-//    
-//    NSString * selectedUid = self.myRestaurantUids[indexPath.row];
-//    
-//    DetailTableViewController * detailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailTableViewController"];
-//    
-//    detailVC.detail = forDetail;
-//    detailVC.selectedUid = selectedUid;
-//    
-//    
-//    
-//    [self showViewController:detailVC sender:nil];
-//    
-//}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    
+    
+}
 
 
-//-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//    return YES;
-//}
 
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -150,6 +133,9 @@
                     NSLog(@"刪除出問題了");
                 }else{
                     NSLog(@"刪除成功");
+                    
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"doneDeleteRestaurant" object:nil];
+                    
                 }
                 
             }];

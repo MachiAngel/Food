@@ -60,9 +60,37 @@
         
     }else{
         
-        [SVProgressHUD show];
+        if (self.passwordTextField.text.length < 6) {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:@"密碼長度不足六位數" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction * ok = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
+            
+            [alert addAction:ok];
+            [self presentViewController:alert animated:true completion:nil];
+            
+        }else{
+            
+           
+            
+//            [helper signUpWithEmail:emailString password:passwordString];
+              [helper signUpWithEmail:emailString password:passwordString done:^(NSError *error, BOOL result) {
+                  
+                  
+                  NSString * errorSrting = error.description;
+                  
+                  UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:errorSrting preferredStyle:UIAlertControllerStyleAlert];
+                  
+                  UIAlertAction * ok = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
+                  
+                  [alert addAction:ok];
+                  [self presentViewController:alert animated:true completion:nil];
+
+              }];
+            
+        }
         
-        [helper signUpWithEmail:emailString password:passwordString];
+        
+       
     }
     
     

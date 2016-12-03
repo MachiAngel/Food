@@ -7,6 +7,8 @@
 //
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
+#import "ServerCommunicator.h"
+
 @import Firebase;
 @import GoogleMaps;
 @import GooglePlaces;
@@ -29,6 +31,15 @@
     
     [GMSPlacesClient provideAPIKey:@"AIzaSyDsGNHG-NfwiZygzpE1ddvmM0xAF9LK0ZA"];
     [GMSServices provideAPIKey:@"AIzaSyDsGNHG-NfwiZygzpE1ddvmM0xAF9LK0ZA"];
+    
+    
+    UIUserNotificationType type = UIUserNotificationTypeAlert | UIUserNotificationTypeSound | UIUserNotificationTypeBadge;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type categories:nil];
+    [application registerUserNotificationSettings:settings];
+    
+    // Ask deviceToken from APNS(去要DeviceToken)
+    [application registerForRemoteNotifications];
+    
     
     return YES;
 }
@@ -72,6 +83,51 @@
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation];
 }
+
+
+
+
+//APNS
+
+// 負責傳回deviceToken結果的
+- (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    NSLog(@"DeviceToken: %@",deviceToken.description);
+    // 取代字串 拿到符合我們要的格式
+    // <44928c24 f650074e ee268ffc 47ffcca1 82e2ca7e 68ae29f1 a2849f64 ce4459ec>
+    // ==> 44928c24f650074eee268ffc47ffcca182e2ca7e68ae29f1a2849f64ce4459ec
+    
+    NSString *finalDeviceToken = deviceToken.description;
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@">" withString:@""];
+    finalDeviceToken = [finalDeviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"finalDeviceToken: %@",finalDeviceToken);
+    
+    
+    [[NSUserDefaults standardUserDefaults]setObject:finalDeviceToken forKey:@"deviceToken"];
+    
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    
+    
+    // Update DeviceToken to Server
+//    ServerCommunicator *comm = [ServerCommunicator shareInstance];
+//    
+//    [comm updateDeviceToken:finalDeviceToken
+//                 completion:^(NSError *error, id result) {
+//                     
+//                     if (error) {
+//                         NSLog(@"updateDeviceToken fail : %@",error);
+//                         return ;
+//                     }
+//                     
+//                     NSLog(@"updateDeviceToken OK : %@",[result description]);
+//                     
+//                 }];
+    
+}
+
+
 
 
 @end

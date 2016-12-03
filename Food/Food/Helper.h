@@ -21,6 +21,8 @@
 #define DICT_FOOD_PRICE_KEY  @"FoodPrice"
 #define DICT_FOOD_IMAGE_KEY  @"FoodImage"
 
+
+
 @import Firebase;
 
 
@@ -49,6 +51,11 @@ typedef void (^Handler)(NSError * error, BOOL result);
 
 -(void)signUpWithEmail:(NSString*)email
               password:(NSString*)password;
+
+
+-(void)signUpWithEmail:(NSString*)email
+              password:(NSString*)password done:(Handler)done;
+
 
 
 -(void)signInWithEmail:(NSString *)email

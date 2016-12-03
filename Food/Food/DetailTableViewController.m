@@ -309,62 +309,120 @@
         
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView * header = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.detailTableView.frame.size.width, 10)];
-//    header.backgroundColor = [UIColor whiteColor];
-//    
-//    return header;
-//}
 
+#pragma mark - Alert
 
-
-- (IBAction)addMenuBtnPressed:(id)sender {
-    
+-(void)goAskAlert{
     
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"是否設定密碼" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction * ok = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //user want to set password
         
-        
-            //PSNumberPad * numberPad = [[PSNumberPad alloc] init];
-        
-            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請輸入四位數密碼" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        
-            [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        
-                textField.tag = 1;
-                //textField.enablesReturnKeyAutomatically = true;
-                //textField.returnKeyType = UIReturnKeyDone;
-                //textField.keyboardType = UIKeyboardTypeNumberPad;
-                textField.placeholder = @"四位數密碼";
-                textField.delegate = self;
-                
-                
-        
-            }];
-        
-            [self presentViewController:alert animated:true completion:nil];
-        
+        //[self dismissViewControllerAnimated:true completion:nil];
+        [self goSetPasswordAlert];
         
     }];
     
     
-    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction * cancel = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        //[self dismissViewControllerAnimated:true completion:nil];
         [self prepareInfoWithPassword:nil];
+        
     }];
     
-    [alert addAction:cancel];
+    
     [alert addAction:ok];
+    [alert addAction:cancel];
     
     [self presentViewController:alert animated:true completion:nil];
     
-    
-    
+}
 
+
+
+-(void)wrongPasswordAlert{
+    
+    UIAlertController * wrongPasswordAlert = [UIAlertController alertControllerWithTitle:@"錯誤" message:@"密碼格式錯誤" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * okBtn = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        //[self dismissViewControllerAnimated:true completion:nil];
+        [self goSetPasswordAlert];
+        
+    }];
+    
+    [wrongPasswordAlert addAction:okBtn];
+    
+    [self presentViewController:wrongPasswordAlert animated:true completion:nil];
+}
+
+
+
+-(void)goSetPasswordAlert{
+    //user want to set password
     
     
+    //PSNumberPad * numberPad = [[PSNumberPad alloc] init];
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"請輸入四位數密碼" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        
+        
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.tag = 1;
+        textField.placeholder = @"四位數密碼";
+        textField.delegate = self;
+        
+        
+        
+    }];
+    
+    UIAlertAction * okAction = [UIAlertAction actionWithTitle:@"確定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        // get pass word
+        NSString *input = alert.textFields[0].text;
+        
+        NSLog(@"input: %@",input);
+        
+        if (input.length == 4) {
+            
+            
+            [self prepareInfoWithPassword:input];
+            NSLog(@"正確");
+            
+        }else{
+            
+            NSLog(@"不正確,需跳提示");
+            
+            //[self dismissViewControllerAnimated:true completion:nil];
+            [self wrongPasswordAlert];
+        }
+        
+       
+
+        
+        
+    }];
+    
+    UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alert addAction:okAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:true completion:nil];
+    
+    
+}
+
+
+#pragma mark - BUTTON PRESSED
+
+- (IBAction)addMenuBtnPressed:(id)sender {
+    
+    [self goAskAlert];
     
 }
 
@@ -558,23 +616,29 @@
     // Pass the selected object to the new view controller.
 }
 */
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    if (textField.tag == 1) {
-        
-        //get password
-        NSString * userPassword = textField.text;
-        
-        [self prepareInfoWithPassword:userPassword];
-        
-        
-        [self dismissViewControllerAnimated:true completion:nil];
-        
-        
-    }
-    
-    
-    
-    
-}
+
+
+//-(void)passwordTextFieldPressed{
+//    
+//    
+//    [self.view endEditing:true];
+//    
+//}
+
+//-(void)textFieldDidEndEditing:(UITextField *)textField{
+//    
+//    if (textField.tag == 1) {
+//        
+//        //get password
+//        NSString * userPassword = textField.text;
+//        
+//        [self prepareInfoWithPassword:userPassword];
+//        
+//        
+//        [self dismissViewControllerAnimated:true completion:nil];
+//        
+//        
+//    }
+//    
+//}
 @end

@@ -10,6 +10,7 @@
 #import "Helper.h"
 #import "AppDelegate.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "SVProgressHUD.h"
 
 
 static Helper * _helper;
@@ -81,6 +82,8 @@ static Helper * _helper;
         if (error) {
             //可以讓使用者知道為何失敗
             NSLog(@"%@",error);
+            
+            
             return ;
         }else{
             
@@ -96,6 +99,50 @@ static Helper * _helper;
     }];
     
 }
+
+-(void)signUpWithEmail:(NSString*)email
+              password:(NSString*)password done:(Handler)done{
+    
+    [[FIRAuth auth]createUserWithEmail:email password:password completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
+        
+        if (error) {
+            //可以讓使用者知道為何失敗
+            NSLog(@"%@",error);
+            
+            done(error,nil);
+            
+            
+            return ;
+        }else{
+            
+             [SVProgressHUD show];
+            
+            NSDictionary * userInfo = @{@"Email":email,@"Password":password};
+            
+            [self uploadUserData:userInfo];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"createAcc" object:nil];
+            
+        }
+        
+        
+        
+    }];
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 
 //FB登入
 -(void)loginWithCredential:(NSString *)loginCredential{

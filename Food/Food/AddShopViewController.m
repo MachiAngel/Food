@@ -11,6 +11,7 @@
 #import "FoodItemTableViewCell.h"
 #import "SVProgressHUD.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ServerCommunicator.h"
 @import GoogleMaps;
 @import GooglePlaces;
 @import GooglePlacePicker;
@@ -81,7 +82,27 @@
         
     }
     
+    
+    //for number pad
+    UIToolbar* keyboardToolbar = [[UIToolbar alloc] init];
+    [keyboardToolbar sizeToFit];
+    UIBarButtonItem *flexBarButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                      target:nil action:nil];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                      target:self action:@selector(foodItemPriceTextFieldPressed)];
+    keyboardToolbar.items = @[flexBarButton, doneBarButton];
+    self.foodItemPriceTextField.inputAccessoryView = keyboardToolbar;
+    
 }
+
+-(void)foodItemPriceTextFieldPressed{
+    
+    [self.foodItemPriceTextField resignFirstResponder];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -247,6 +268,22 @@
         
         [helper uploadFoodItemsImageToStorage:foodItems child:uniqueId];
         
+        
+        //發推撥
+        
+        NSString * pushString = [NSString stringWithFormat:@"%@新增了%@這家店!快去查看吧!",userName,shopName];
+        
+        [[ServerCommunicator shareInstance]sendBulletinMessage:pushString completion:^(NSError *error, id result) {
+            
+            if (error) {
+                NSLog(@"error: %@",error.description);
+            }else{
+                NSLog(@"result:%@",result);
+            }
+            
+            
+        }];
+        
     }
     
 }
@@ -349,20 +386,20 @@
     
     photoSavePlace = 2;
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please choose image source:" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"上傳照片" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self launchImagePickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
         
     }];
-    UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *library = [UIAlertAction actionWithTitle:@"從相簿中選擇" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         [self launchImagePickerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     [alert addAction:camera];
     [alert addAction:library];
@@ -387,7 +424,9 @@
     }
     
     
-    if ([UIImagePickerController isSourceTypeAvailable:soureceType] == false) { //check sourceType is existence?
+    if ([UIImagePickerController isSourceTypeAvailable:soureceType] == false) {
+        
+        //check sourceType is existence?
         NSLog(@"Invalid Source Type.");
         return;
     }

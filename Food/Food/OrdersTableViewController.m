@@ -165,6 +165,7 @@
         //有密碼
         //開啟密碼框時不給點選cell
         self.tableView.allowsSelection = false;
+        [self.tableView setContentOffset:CGPointZero animated:YES];
         
         pwView = [[PasswordView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH, 200) WithTitle:@"請输入訂單密碼"];
         

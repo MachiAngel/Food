@@ -11,6 +11,7 @@
 #import "Helper.h"
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
+#import "ServerCommunicator.h"
 
 @interface LoginViewController ()< FBSDKLoginButtonDelegate,UITextFieldDelegate>
 {
@@ -53,7 +54,7 @@
     //直接登入成功的通知
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goMainView) name:@"singInDone" object:nil];
     
-
+    
     
     
 }

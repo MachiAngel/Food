@@ -11,15 +11,18 @@
 @implementation UserCollectionViewCell
 
 
--(UIImageView *)userImage{
-    
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self layoutIfNeeded];
+   
     _userImage.layer.borderWidth = 1.5;
     
     _userImage.layer.cornerRadius = _userImage.frame.size.width / 2 ;
     
-    _userImage.clipsToBounds = true;
+    _userImage.image = [UIImage imageNamed:@"user1.jpeg"];
     
-    return _userImage;
 }
+
+
 
 @end
