@@ -7,7 +7,7 @@
 //
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate.h"
-#import "ServerCommunicator.h"
+//#import "ServerCommunicator.h"
 
 @import Firebase;
 @import GoogleMaps;

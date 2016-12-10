@@ -108,8 +108,8 @@ static Helper * _helper;
         if (error) {
             //可以讓使用者知道為何失敗
             NSLog(@"%@",error);
-            
-            done(error,nil);
+    
+            done(error,0);
             
             
             return ;

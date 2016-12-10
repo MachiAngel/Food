@@ -36,6 +36,7 @@
 		1158124D1DBF7A2100C229E1 /* CreateAccViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1158124C1DBF7A2100C229E1 /* CreateAccViewController.m */; };
 		1169C3711DBE716700EBBBFD /* OrLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 1169C3701DBE716700EBBBFD /* OrLine.png */; };
 		1169C3741DBE723700EBBBFD /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1169C3731DBE723700EBBBFD /* RecordViewController.m */; };
+		116C63CF1DF931A600A4CAF5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 116C63CE1DF931A600A4CAF5 /* Reachability.m */; };
 		1179DC5A1DB3AF640016BF70 /* unknow.png in Resources */ = {isa = PBXBuildFile; fileRef = 1179DC591DB3AF640016BF70 /* unknow.png */; };
 		117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */; };
 		117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117C1AAA1DB5208F004AB4F9 /* restaurantInfoCell.m */; };
@@ -138,6 +139,8 @@
 		1169C3701DBE716700EBBBFD /* OrLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrLine.png; sourceTree = "<group>"; };
 		1169C3721DBE723700EBBBFD /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
 		1169C3731DBE723700EBBBFD /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
+		116C63CD1DF931A600A4CAF5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		116C63CE1DF931A600A4CAF5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1179DC591DB3AF640016BF70 /* unknow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknow.png; sourceTree = "<group>"; };
 		117C1AA61DB506F7004AB4F9 /* RestaurantInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantInfo.h; sourceTree = "<group>"; };
 		117C1AA71DB506F7004AB4F9 /* RestaurantInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantInfo.m; sourceTree = "<group>"; };
@@ -288,6 +291,8 @@
 			children = (
 				113BFFE21DAEA74000E2B58D /* Helper.h */,
 				113BFFE31DAEA74000E2B58D /* Helper.m */,
+				116C63CD1DF931A600A4CAF5 /* Reachability.h */,
+				116C63CE1DF931A600A4CAF5 /* Reachability.m */,
 				117C1AB41DB5219A004AB4F9 /* NJGlobal.h */,
 				117C1AB11DB52190004AB4F9 /* RestaurantModel.h */,
 				117C1AB21DB52190004AB4F9 /* RestaurantModel.m */,
@@ -768,6 +773,7 @@
 				11EA3F2A1DAD8D7700C5E4FA /* LoginViewController.m in Sources */,
 				117C1AA81DB506F7004AB4F9 /* RestaurantInfo.m in Sources */,
 				119F88E81DD55B3E00EEC927 /* ViewController.m in Sources */,
+				116C63CF1DF931A600A4CAF5 /* Reachability.m in Sources */,
 				117C1AAC1DB5208F004AB4F9 /* restaurantInfoCell.m in Sources */,
 				114C765F1DBB961600E3D584 /* orderListTableViewCell.m in Sources */,
 				110B6AC71DB241FB009CC9F7 /* AddShopViewController.m in Sources */,
@@ -892,6 +898,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Food/Food.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LPH4JQ7PG5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -912,6 +919,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Food/Food.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LPH4JQ7PG5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

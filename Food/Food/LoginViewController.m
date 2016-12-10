@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
 #import "ServerCommunicator.h"
+#import "Reachability.h"
 
 @interface LoginViewController ()< FBSDKLoginButtonDelegate,UITextFieldDelegate>
 {
@@ -109,13 +110,55 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)emailLoginBtn:(id)sender {
     
-        
-    NSString * emailString = self.emailTextField.text;
-    NSString * passwordString = self.passwordTextField.text;
     
-    [helper signInWithEmail:emailString password:passwordString];
+    NetworkStatus netStatus=[[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    
+    switch (netStatus) {
+        case NotReachable:
+        {
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"網路狀況" message:@"偵測網路異常，請開啟網路後再繼續執行" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction * ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
+            
+            [alert addAction:ok];
+            [self presentViewController:alert animated:true completion:nil];
+        
+        
+        }
+            break;
+        case ReachableViaWiFi:
+        {
+            NSString * emailString = self.emailTextField.text;
+            NSString * passwordString = self.passwordTextField.text;
+            
+            [helper signInWithEmail:emailString password:passwordString];
+            
+            
+        }
+            
+            
+            break;
+        case ReachableViaWWAN:
+        {
+            NSString * emailString = self.emailTextField.text;
+            NSString * passwordString = self.passwordTextField.text;
+            
+            [helper signInWithEmail:emailString password:passwordString];
+            
+            
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
+
+    
+        
+   
     
     
 }

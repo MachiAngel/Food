@@ -76,9 +76,9 @@
               [helper signUpWithEmail:emailString password:passwordString done:^(NSError *error, BOOL result) {
                   
                   
-                  NSString * errorSrting = error.description;
+                  //NSString * errorSrting = error.description;
                   
-                  UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:errorSrting preferredStyle:UIAlertControllerStyleAlert];
+                  UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"提醒" message:@"email格式錯誤" preferredStyle:UIAlertControllerStyleAlert];
                   
                   UIAlertAction * ok = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:nil];
                   

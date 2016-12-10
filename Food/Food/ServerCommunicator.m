@@ -20,9 +20,7 @@
 static ServerCommunicator *_singletonCommunicator = nil;
 
 @implementation ServerCommunicator
-{
-    UITableView *_tableView;
-}
+
 
 
 + (instancetype) shareInstance{
